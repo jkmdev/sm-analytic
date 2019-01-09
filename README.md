@@ -54,7 +54,7 @@ Run `ng test` from root to run front-end tests.
 
 TBD
 
-We could probably use this [guide](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/index?view=aspnetcore-2.2) for deploying and hosting this sort of application. Or maybe [this one](https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-webapp-using-vs?view=aspnetcore-2.2) for publishing to Azure?
+We could probably use this [guide](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/index?view=aspnetcore-2.2) for deploying and hosting this sort of application. And/or maybe [this one](https://docs.microsoft.com/en-us/aspnet/core/tutorials/publish-to-azure-webapp-using-vs?view=aspnetcore-2.2) for publishing to Azure?
 
 The process might be something like:
 
@@ -62,7 +62,7 @@ The process might be something like:
 2. Set up an appropriate process manager on the VM (I think we have Nginx right now, but we might need to switch to IIS or Windows Service)
 3. Copy the output of `dotnet publish` to the VM/server.
 
-We might want to automate or deployments, so that we don't need to assign a single person to it. IMO it'd be ideal if we deployed every time our master branch was updated. We might be able to use Travis CI for this...? Or maybe Azure?
+We might want to automate our deployments, so that we don't need to assign a single person to it. IMO it'd be ideal if we deployed every time our master branch was updated. We might be able to use Travis CI for this...? Or maybe Azure? Somehow.
 
 
 ## Built With
