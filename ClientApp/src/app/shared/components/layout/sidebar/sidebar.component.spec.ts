@@ -25,15 +25,9 @@ describe('SidebarComponent', () => {
   });
 
   it('should display all links', () => {
-    let options = [
-      'Overview',
-      'Sentiment',
-      'Trends',
-      'Followers'
-    ];
     fixture.detectChanges();
-    var option = fixture.debugElement.queryAll(By.css('.option'));
-    expect(option.length).toEqual(options.length);
+    var options = fixture.debugElement.queryAll(By.css('.option'));
+    expect(options.length).toEqual(component.options.length);
   });    
 
   it('should trigger function when link is clicked', () => {   

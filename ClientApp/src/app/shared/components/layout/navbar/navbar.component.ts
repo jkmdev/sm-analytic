@@ -9,6 +9,8 @@ export class NavbarComponent implements OnInit {
 
   constructor() { }
 
+  appTitle: string = "Social Media Analytics";
+
   ngOnInit() {
   }
 

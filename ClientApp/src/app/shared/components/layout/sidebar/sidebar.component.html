@@ -1,7 +1,10 @@
-<p>
-  sidebar works!
-</p>
-
-<div class="options">
-    <div class="option" *ngFor="let option of options">{{option}}</div>
+<div class="side-nav">
+    <div 
+        class="option" 
+        (click)="generatePage()" 
+        *ngFor="let option of options">
+            <a routerLink="/sentiment" routerLinkActive="active">
+                {{option}}
+            </a>
+    </div>
 </div>
