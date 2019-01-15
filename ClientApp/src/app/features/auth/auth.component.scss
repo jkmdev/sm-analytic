@@ -5,6 +5,15 @@
     .image {
         width: 50%;
         height: 100%;
-        border: 1px solid black;
+        background-color: cyan;
+        padding: 10px;
     }
+
+    .content {
+        width: 50%;
+        height: 100%;
+        background-color: lightgray;
+        padding: 200px;
+    }
+    
 }

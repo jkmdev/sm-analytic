@@ -1,5 +1,16 @@
 .dashboard {
-    border: 1px solid black;
+
+    background-color: beige;
     padding: 0px;
     height: 100%;
+    display: flex;
+
+    .sidebar {
+        flex: 1;
+    }
+
+    .content {
+        flex: 4;
+    }
+
 }
