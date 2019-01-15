@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { AuthModule } from './features/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -18,11 +19,10 @@ import { AppComponent } from './app.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot([
-    ]),
+    AppRoutingModule,
     SharedModule,
     DashboardModule,
-    AppRoutingModule
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

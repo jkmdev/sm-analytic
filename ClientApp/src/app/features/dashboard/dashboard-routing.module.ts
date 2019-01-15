@@ -7,11 +7,11 @@ import { TrendComponent } from './pages/trend/trend.component';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'dashboard'
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'full',
+  //   redirectTo: 'dashboard'
+  // },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -33,7 +33,7 @@ const routes: Routes = [
           component: FollowerComponent
         }
     ]
-}
+  }
 ];
 
 @NgModule({
