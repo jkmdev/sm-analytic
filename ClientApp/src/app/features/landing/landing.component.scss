@@ -1,0 +1,38 @@
+.landing {
+
+    height: 100%;
+    background-color: lightcyan;
+
+    .nav {
+        background-color: black;
+        height: 60px;
+    }
+
+    .content {
+
+        display: flex;
+        flex-direction: column;
+
+        .image {
+            background-color: lightblue;
+            height: 500px;
+        }
+
+        .description {
+
+            display: flex;
+            justify-content: space-around;
+            padding: 50px;
+            height: 100%;
+
+            .card {
+                background-color: white;
+                margin: 20px;
+                height: 200px;
+            }
+
+        }
+
+    }
+
+}

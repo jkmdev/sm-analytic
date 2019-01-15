@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
 import { AuthModule } from './features/auth/auth.module';
 import { AppRoutingModule } from './app-routing.module';
+import { LandingModule } from './features/landing/landing.module';
 
 import { AppComponent } from './app.component';
 
@@ -23,6 +24,7 @@ import { AppComponent } from './app.component';
     SharedModule,
     DashboardModule,
     AuthModule,
+    LandingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
