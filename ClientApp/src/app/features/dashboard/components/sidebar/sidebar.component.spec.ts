@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import {Router} from "@angular/router";
 
 import { SidebarComponent } from './sidebar.component';
 
@@ -7,8 +8,15 @@ describe('SidebarComponent', () => {
   let component: SidebarComponent;
   let fixture: ComponentFixture<SidebarComponent>;
 
+  class MockRouter {
+    navigate = jasmine.createSpy('navigate');
+  }
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      providers: [
+        {provide: Router, useClass: MockRouter}
+      ],
       declarations: [ SidebarComponent ]
     })
     .compileComponents();
