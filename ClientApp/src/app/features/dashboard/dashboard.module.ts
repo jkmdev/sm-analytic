@@ -10,6 +10,9 @@ import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { OverviewComponent } from './pages/overview/overview.component';
 import { DashboardComponent } from './dashboard.component';
 
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,7 +24,9 @@ import { DashboardComponent } from './dashboard.component';
     TrendComponent, 
     SentimentComponent, 
     OverviewComponent, 
-    DashboardComponent
+    DashboardComponent,
+    SidebarComponent,
+    NavbarComponent
   ], 
   exports: [
     DashboardComponent

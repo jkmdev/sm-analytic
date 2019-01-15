@@ -1,0 +1,9 @@
+<div class="side-nav">
+    <div 
+        class="option" 
+        *ngFor="let option of options">
+            <p (click)="gotoDashboardPage(option.path)">
+                {{option.title}}
+            </p>
+    </div>
+</div>

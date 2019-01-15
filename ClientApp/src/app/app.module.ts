@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './features/dashboard/dashboard.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
@@ -20,7 +21,8 @@ import { AppComponent } from './app.component';
     RouterModule.forRoot([
     ]),
     SharedModule,
-    DashboardModule
+    DashboardModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

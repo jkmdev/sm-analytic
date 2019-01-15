@@ -32,11 +32,11 @@ describe('SidebarComponent', () => {
 
   it('should trigger function when link is clicked', () => {   
 
-    spyOn(component, 'generatePage');
+    spyOn(component, 'gotoDashboardPage');
     let li = fixture.debugElement.query(By.css('.option'));
     li.triggerEventHandler('click', null);
     fixture.whenStable().then(() => {
-      expect(component.generatePage).toHaveBeenCalled();
+      expect(component.gotoDashboardPage).toHaveBeenCalled();
     });
   });
 

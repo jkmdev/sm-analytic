@@ -4,12 +4,36 @@ import { OverviewComponent } from './pages/overview/overview.component';
 import { SentimentComponent } from './pages/sentiment/sentiment.component';
 import { FollowerComponent } from './pages/follower/follower.component';
 import { TrendComponent } from './pages/trend/trend.component';
+import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
-  { path: '', component: OverviewComponent },
-  { path: 'sentiment', component: SentimentComponent },
-  { path: 'followers', component: FollowerComponent },
-  { path: 'tend', component: TrendComponent }
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'dashboard'
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    children: [
+        {
+          path: '',
+          component: OverviewComponent
+        },
+        {
+          path: 'trend',
+          component: TrendComponent
+        },
+        {
+          path: 'sentiment',
+          component: SentimentComponent
+        },
+        {
+          path: 'follower',
+          component: FollowerComponent
+        }
+    ]
+}
 ];
 
 @NgModule({
