@@ -20,30 +20,20 @@ What things you need to install the software and how to install them:
 
 ### Running App Locally
 
-To run a local version of the project:
+Build the project, either through Visual Studio or by running:
 
 ```
-cd ClientApp
-npm install
-npm start
-```
-Then visit `localhost:4200` to view and interact with the application.
-
-### Adding new npm packages
-
-```
-cd ClientApp
-npm install --save <package_name>
+cd sm-analytic/sm-analytic
+dotnet build
 ```
 
-### Running ng commands 
-
-Used when generating new components, modules, etc.
+After the project is built, run:
 
 ```
-cd ClientApp
-ng <command-name>
+dotnet run
 ```
+
+And go to `localhost:5000` in your browser.
 
 ## Running the tests
 
