@@ -39,7 +39,7 @@ And go to `localhost:5000` in your browser.
 
 Run `ng test` from root to run front-end tests.
 
-## Viewing documentation
+<!--## Viewing documentation
 
 Written documentation can be found in the wiki.
 To create generated documentation for angular:
@@ -56,7 +56,7 @@ To view this newly generated documentation, run:
 compodoc -p src/tsconfig.app.json -s
 ```
 
-Then view `localhost:/8080` in your browser.
+Then view `localhost:/8080` in your browser.-->
 
 ## Deployment
 
