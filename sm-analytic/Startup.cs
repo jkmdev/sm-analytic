@@ -28,7 +28,7 @@ namespace sm_analytic
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.Configure<IISServerOptions>(options =>
+            services.Configure<IISOptions>(options =>
             {
                 options.AutomaticAuthentication = false;
             });
