@@ -1,5 +1,13 @@
 .page {
-    background-color: orange;
     height: 100%;
-    padding: 10px;
+    padding: 25px 50px 20px 50px;
+
+    hr {
+        border-top: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .charts {
+        margin-bottom: 25px;
+    }
+
 }

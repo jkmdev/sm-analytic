@@ -12,6 +12,8 @@ import { DashboardComponent } from './dashboard.component';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { BarComponent } from './components/charts/bar/bar.component';
+import { UserInfoComponent } from './components/user-info/user-info.component';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     OverviewComponent, 
     DashboardComponent,
     SidebarComponent,
-    NavbarComponent
+    NavbarComponent,
+    BarComponent,
+    UserInfoComponent
   ], 
   exports: [
     DashboardComponent
