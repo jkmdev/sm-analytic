@@ -1,22 +1,32 @@
 
 <div class="landing">
 
-  <div class="nav">
-    <button class="button" (click)="login()">LOGIN</button>
-    <button class="button" (click)="register()">REGISTER</button>
-  </div>
+  <app-navbar></app-navbar>
 
-  <div class="content">
-    <div class="image">
-      IMAGE
+  <div class="container-fluid content">
+    <div class="row ">
+      <img src="../../../assets/img/tmp.jpg" class="image" alt="image">
     </div>
-    <div class="description">
-        <div class="card">
-          lorem ipsum
+    <div class="row description">
+
+      <div class="col-sm info">
+        <app-info-card 
+          image="../../../assets/img/tmp.jpg">
+        </app-info-card>
+      </div>
+
+      <div class="col-sm info">
+        <app-info-card 
+          image="../../../assets/img/tmp.jpg">
+        </app-info-card>
+      </div>
+
+        <div class="col-sm info">
+          <app-info-card 
+            image="../../../assets/img/tmp.jpg">
+          </app-info-card>
         </div>
-        <div class="card">
-          lorem ipsum
-        </div>
+  
     </div>
   </div>
 
