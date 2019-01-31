@@ -1,9 +1,10 @@
 .dashboard {
 
-    background-color: beige;
+    background-color:#E8E8E8;
     padding: 0px;
     height: 100%;
     display: flex;
+    z-index: 0;
 
     .sidebar {
         flex: 1;

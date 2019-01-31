@@ -1,7 +1,25 @@
 <div class="login">
+  <h1>Social Media Analytics</h1>
+  <h5>Welcome back! Please login to your account.</h5>
   <div class="form">
-    login works!
+    <div class="input">
+        <h6>Username:</h6>
+        <input type="text">
+    </div>
+    <div class="input">
+        <h6>Password:</h6>
+        <input type="text">
+    </div>
+
+    <div class="inline">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+        </div>
+        <label class="forgot-password-link" (click)="resetPassword()">Forgot Password</label>
+      </div>
+      
   </div>
-  <button class="button" (click)="login()">LOGIN</button>
-  <button class="button" (click)="resetPassword()">FORGOT PASSWORD</button>
+
+  <button type="button" class="btn btn-primary" (click)="login()">LOGIN</button>
 </div>

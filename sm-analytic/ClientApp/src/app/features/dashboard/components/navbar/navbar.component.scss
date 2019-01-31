@@ -1,7 +1,30 @@
 .nav {
 
-    padding-left: 10px;
-    padding-bottom: 10px;
-    background-color: bisque;
+    background-color: white;
+    display: flex;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+
+    .logo {
+        flex: 1;
+        height: 50px;
+        object-fit: cover;
+    }
+
+    .links {
+
+        flex: 4;
+        display: flex;
+        justify-content: flex-end;
+
+        h6 {
+            margin: 15px 15px 10px 10px;
+
+            &:hover {
+                color: grey;
+            }
+
+        }
+
+    }
     
 }

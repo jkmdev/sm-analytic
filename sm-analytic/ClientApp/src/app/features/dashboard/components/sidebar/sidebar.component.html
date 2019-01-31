@@ -1,8 +1,9 @@
 <div class="side-nav">
+    <app-user-info></app-user-info>
     <div 
         class="option" 
         (click)="gotoDashboardPage(option.path)"
         *ngFor="let option of options">
-            <h4>{{option.title}}</h4>
+            <h6>{{option.title}}</h6>
     </div>
 </div>

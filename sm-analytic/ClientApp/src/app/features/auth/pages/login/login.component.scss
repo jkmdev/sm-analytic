@@ -1,4 +1,40 @@
 .login {
     background-color: white;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .form {
+        padding-top: 50px;
+    }
+
+    .input {
+        display: flex;
+        margin-bottom: 40px;
+        h6 {
+            width: 300px;
+        }
+        input {
+            width: 100%;
+        }
+    }
+
+    .inline {
+        width: 100%;
+        display: flex;
+        .form-check {
+            width: 50%;
+        }
+        .forgot-password-link {
+            width: 50%;
+            text-align: right;
+        }
+    }
+
+    button {
+        margin-top: 30px;
+    }
+
 }
