@@ -35,10 +35,6 @@ dotnet run
 
 And go to `localhost:5000` in your browser.
 
-## Running the tests
-
-Run `ng test` from root to run front-end tests.
-
 <!--## Viewing documentation
 
 Written documentation can be found in the wiki.
@@ -78,7 +74,7 @@ We might want to automate our deployments, so that we don't need to assign a sin
 
 * [.NET Core](https://dotnet.microsoft.com/download) - backend framework
 * [Angular](https://angular.io/) - frontend framework
-* [Bootstrap 3](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - css framework
+* [Bootstrap 4](https://getbootstrap.com/docs/4.0/getting-started/introduction/) - css framework
 
 More should be added here later.
 
