@@ -34,7 +34,7 @@ namespace sm_analytic.Controllers
         public string TwitterAuth()
         {
 
-            authorizeApp();
+            authorizeApp(); 
 
             var appCreds = new ConsumerCredentials(
                 consumerKey,
@@ -44,7 +44,9 @@ namespace sm_analytic.Controllers
             var redirectURL = "https://127.0.0.1:5001/dashboard";
             _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
 
-            return _authenticationContext.AuthorizationURL;
+            var test = _authenticationContext.AuthorizationURL;
+
+            return test;
            
         }
 

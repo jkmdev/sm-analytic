@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SharedModule } from '../../shared/shared.module'
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FollowerComponent } from './pages/follower/follower.component';
 import { TrendComponent } from './pages/trend/trend.component';
@@ -14,6 +12,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { BarComponent } from './components/charts/bar/bar.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+
+import { SharedModule } from '../../shared/shared.module';
+import { ApiService } from '../../shared/services/api.service';
 
 @NgModule({
   imports: [
@@ -31,7 +32,10 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
     NavbarComponent,
     BarComponent,
     UserInfoComponent
-  ], 
+  ],
+  providers: [
+    ApiService
+  ],
   exports: [
     DashboardComponent
   ]
