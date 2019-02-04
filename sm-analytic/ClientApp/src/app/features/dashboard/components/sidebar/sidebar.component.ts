@@ -19,6 +19,13 @@ export class SidebarComponent implements OnInit {
   ];
   
   ngOnInit() {
+
+    var queryParams = window.location.search;
+
+    if (queryParams) {
+      this.authorizeUser(queryParams.substr(1));
+    }
+
   }
 
   gotoDashboardPage(path) {
@@ -28,12 +35,28 @@ export class SidebarComponent implements OnInit {
   twitterAuth() {
     this.apiService.get('TwitterAuth')
       .subscribe(
-        val => {
-          console.log(val)
-          window.location.href = val;
-        },
+        val => window.location.href = val,
         error => console.log(error)
       );
   }
 
+  authorizeUser(queryParams) {
+
+    var args = queryParams.split("&");
+    var req = {};
+
+    args.forEach((arg) => {
+      var argPair = arg.split("=");
+      req[argPair[0]] = argPair[1];
+    });
+
+    console.log(req);
+
+    this.apiService.post('ValidateTwitterAuth')
+      .subscribe(
+        val => console.log(val),
+        error => console.log(error)
+      );
+
+  }
 }

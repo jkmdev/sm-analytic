@@ -44,10 +44,24 @@ namespace sm_analytic.Controllers
             var redirectURL = "https://127.0.0.1:5001/dashboard";
             _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
 
-            var test = _authenticationContext.AuthorizationURL;
-
-            return test;
+            return _authenticationContext.AuthorizationURL;
            
+        }
+
+        /*
+         * Return user info 
+         */
+        [Route("~/api/ValidateTwitterAuth")]
+        [HttpPost]
+        public string ValidateTwitterAuth([FromBody] Credentials credentials)
+        {
+            // Create the user credentials
+            var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
+
+            // Do whatever you want with the user now!
+            //ViewBag.User = Tweetinvi.User.GetAuthenticatedUser(userCreds);
+            //return View();
+            return "ayaya";
         }
 
         private void authorizeApp()
@@ -63,6 +77,13 @@ namespace sm_analytic.Controllers
                 accessToken,
                 accessTokenSecret
             );
+        }
+
+        public class Credentials
+        {
+            public string authorization_id { get; set; }
+            public string oauth_token { get; set; }
+            public string oauth_verifier { get; set; }
         }
     }
 }

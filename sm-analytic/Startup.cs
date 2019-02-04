@@ -35,6 +35,8 @@ namespace sm_analytic
                 options.AutomaticAuthentication = false;
             });
 
+            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -74,6 +76,10 @@ namespace sm_analytic
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            app.UseCors(builder =>
+                builder.WithOrigins("https://127.0.0.1:5001")
+                .AllowAnyHeader());
         }
     }
 }
