@@ -30,7 +30,7 @@ namespace sm_analytic
 
             services.Configure<IISOptions>(options =>
             {
-                options.AutomaticAuthentication = false;
+                options.AutomaticAuthentication = true;
             });
 
         }
@@ -49,7 +49,7 @@ namespace sm_analytic
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
