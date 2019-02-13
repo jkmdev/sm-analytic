@@ -35,7 +35,14 @@ namespace sm_analytic
                 options.AutomaticAuthentication = true;
             });
 
-            services.AddCors();
+            // services.AddCors();
+            services.AddCors(o => o.AddPolicy("AllowMyOrigin", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
 
         }
 
@@ -77,9 +84,6 @@ namespace sm_analytic
                 }
             });
 
-            app.UseCors(builder =>
-                builder.WithOrigins("http://127.0.0.1:5000")
-                .AllowAnyHeader());
         }
     }
 }

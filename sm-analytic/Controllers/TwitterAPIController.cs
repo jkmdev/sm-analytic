@@ -9,12 +9,14 @@ using System.Security.Claims;
 using System.Net.Http;
 using System.Diagnostics;
 using Tweetinvi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace sm_analytic.Controllers
 {
 
     //[Route("api/[controller]")]
     [ApiController]
+    [EnableCors("AllowMyOrigin")]
     public class TwitterAPIController : ControllerBase
     {
 
@@ -87,3 +89,5 @@ namespace sm_analytic.Controllers
         }
     }
 }
+
+
