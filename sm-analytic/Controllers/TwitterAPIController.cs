@@ -41,7 +41,7 @@ namespace sm_analytic.Controllers
                 consumerSecret
             );
 
-            var redirectURL = "https://127.0.0.1:5001/dashboard";
+            var redirectURL = "http://127.0.0.1:5000/dashboard";
             _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
 
             return _authenticationContext.AuthorizationURL;
@@ -53,10 +53,10 @@ namespace sm_analytic.Controllers
          */
         [Route("~/api/ValidateTwitterAuth")]
         [HttpPost]
-        public string ValidateTwitterAuth([FromBody] Credentials credentials)
+        public string ValidateTwitterAuth(Credentials credentials)
         {
             // Create the user credentials
-            var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
+            // var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
 
             // Do whatever you want with the user now!
             //ViewBag.User = Tweetinvi.User.GetAuthenticatedUser(userCreds);

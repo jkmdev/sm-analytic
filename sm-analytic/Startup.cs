@@ -78,7 +78,7 @@ namespace sm_analytic
             });
 
             app.UseCors(builder =>
-                builder.WithOrigins("https://127.0.0.1:5001")
+                builder.WithOrigins("http://127.0.0.1:5000")
                 .AllowAnyHeader());
         }
     }
