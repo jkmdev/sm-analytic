@@ -9,7 +9,12 @@ import { ApiService } from '../../../../shared/services/api.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(private router: Router, private apiService: ApiService) { }
+
+  userInfo: Object = {
+    userName: "userName",
+    profileImageUrl: ""
+  };
 
   options : Object[] = [
     { 'title':'Overview', 'path':'dashboard/' },
@@ -52,8 +57,14 @@ export class SidebarComponent implements OnInit {
     
     this.apiService.post('ValidateTwitterAuth', requestBody)
       .subscribe(
-        val => console.log(val),
-        error => console.log(error)
+        val => {
+          console.log(val)
+          this.userInfo.userName = val.name;
+          this.userInfo.profileImageUrl = val.profileImageUrl;
+        },
+        error => {
+          console.log(error)
+        }
       );
 
   }

@@ -1,5 +1,5 @@
 <div class="side-nav">
-    <app-user-info></app-user-info>
+    <app-user-info [profileImageUrl]=userInfo.profileImageUrl [userName]=userInfo.userName></app-user-info>
     <div 
         class="option" 
         (click)="gotoDashboardPage(option.path)"
