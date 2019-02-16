@@ -43,16 +43,14 @@ export class SidebarComponent implements OnInit {
   authorizeUser(queryParams) {
 
     var args = queryParams.split("&");
-    var req = {};
+    var requestBody = {};
 
     args.forEach((arg) => {
       var argPair = arg.split("=");
-      req[argPair[0]] = argPair[1];
+      requestBody[argPair[0]] = argPair[1];
     });
-
-    console.log(req);
-
-    this.apiService.post('ValidateTwitterAuth')
+    
+    this.apiService.post('ValidateTwitterAuth', requestBody)
       .subscribe(
         val => console.log(val),
         error => console.log(error)

@@ -1,30 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tweetinvi;
-using System.Security.Claims;
-using System.Net.Http;
-using System.Diagnostics;
 using Tweetinvi.Models;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace sm_analytic.Controllers
 {
 
-    //[Route("api/[controller]")]
     [ApiController]
     [EnableCors("AllowMyOrigin")]
     public class TwitterAPIController : ControllerBase
     {
 
-        private IAuthenticationContext _authenticationContext;
+        private IMemoryCache _cache;
+
         private string consumerKey;
         private string consumerSecret;
         private string accessToken;
         private string accessTokenSecret;
+
+        public TwitterAPIController(IMemoryCache memoryCache)
+        {
+            _cache = memoryCache;
+        }
 
         /*
          * Function authenticates our application to user Twitter API
@@ -44,7 +43,8 @@ namespace sm_analytic.Controllers
             );
 
             var redirectURL = "http://127.0.0.1:5000/dashboard";
-            _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
+            IAuthenticationContext _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
+            _cache.Set("_authContext", _authenticationContext);
 
             return _authenticationContext.AuthorizationURL;
            
@@ -55,15 +55,24 @@ namespace sm_analytic.Controllers
          */
         [Route("~/api/ValidateTwitterAuth")]
         [HttpPost]
-        public string ValidateTwitterAuth(Credentials credentials)
+        public ObjectResult ValidateTwitterAuth([FromBody] Credentials credentials)
         {
-            // Create the user credentials
-            // var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
 
-            // Do whatever you want with the user now!
-            //ViewBag.User = Tweetinvi.User.GetAuthenticatedUser(userCreds);
-            //return View();
-            return "ayaya";
+            IAuthenticationContext _authenticationContext;
+            _cache.TryGetValue("_authContext", out _authenticationContext);
+
+            try
+            {
+                var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
+                var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+            
         }
 
         private void authorizeApp()

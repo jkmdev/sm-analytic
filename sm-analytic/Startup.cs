@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace sm_analytic
 {
@@ -22,6 +23,8 @@ namespace sm_analytic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMemoryCache();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory
@@ -35,7 +38,6 @@ namespace sm_analytic
                 options.AutomaticAuthentication = true;
             });
 
-            // services.AddCors();
             services.AddCors(o => o.AddPolicy("AllowMyOrigin", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -43,6 +45,9 @@ namespace sm_analytic
                        .AllowAnyHeader();
             }));
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(1);
+            });
 
         }
 
@@ -60,9 +65,9 @@ namespace sm_analytic
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
