@@ -11,7 +11,7 @@ export class SidebarComponent implements OnInit {
 
   constructor(private router: Router, private apiService: ApiService) { }
 
-  userInfo: Object = {
+  userInfo = {
     userName: "userName",
     profileImageUrl: ""
   };

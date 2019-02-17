@@ -10,17 +10,19 @@ import { DashboardComponent } from './dashboard.component';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BarComponent } from './components/charts/bar/bar.component';
+import { BarComponent } from './components/charts/bar-chart/bar-chart.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    SharedModule
+    SharedModule,
+    ChartsModule
   ],
   declarations: [
     FollowerComponent, 
