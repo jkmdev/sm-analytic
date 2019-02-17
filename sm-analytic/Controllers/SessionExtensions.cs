@@ -3,6 +3,10 @@ using Newtonsoft.Json;
 
 namespace sm_analytic.Controllers
 {
+    /*
+     * Class that lets us expand the existed ASP.NET Core sessions
+     * Allows us to store class instances in sessions, instead of just strings
+     */
     public static class SessionExtensions {
         public static void SetObject(this ISession session, string key, object value)
         {

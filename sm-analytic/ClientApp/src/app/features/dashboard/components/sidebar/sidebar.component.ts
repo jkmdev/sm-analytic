@@ -22,7 +22,11 @@ export class SidebarComponent implements OnInit {
     { 'title':'Trends', 'path':'dashboard/trend' },
     { 'title':'Followers', 'path':'dashboard/follower' },
   ];
-  
+
+  /*
+   * This function checks if there are Twitter auth parameters in the url
+   * If so, it attempt to authorize a user with said credentials
+   */
   ngOnInit() {
 
     var queryParams = window.location.search;
@@ -33,10 +37,19 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  /*
+   * This component controls the routing to the various dashboard pages
+   * This function handles the page redirection
+   */
   gotoDashboardPage(path) {
     this.router.navigate([path]);
   }
 
+  /*
+   * Sends request to 'TwitterAuth' endpoint in our API
+   * which returns a url that this function will redirect to
+   * so that the user can authorize our app to use their credentials
+   */
   twitterAuth() {
     this.apiService.get('TwitterAuth')
       .subscribe(
@@ -45,6 +58,12 @@ export class SidebarComponent implements OnInit {
       );
   }
 
+  /* 
+   * After the user authorizes our app to use their Twitter account
+   * this function will run and send a new request to our .NET API at
+   * the 'ValidateTwitterAuth' endpoint, and returns the user's Twitter info
+   * if they've successfully been authenticated
+   */
   authorizeUser(queryParams) {
 
     var args = queryParams.split("&");
@@ -68,4 +87,5 @@ export class SidebarComponent implements OnInit {
       );
 
   }
+
 }

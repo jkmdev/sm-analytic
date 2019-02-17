@@ -8,6 +8,10 @@ using Microsoft.Extensions.Caching.Memory;
 namespace sm_analytic.Controllers
 {
 
+    /*
+     * This controller takes care of the Twitter authentication process
+     * For both our application and individual users
+     */ 
     [ApiController]
     [EnableCors("AllowMyOrigin")]
     public class TwitterAPIController : ControllerBase
@@ -15,11 +19,11 @@ namespace sm_analytic.Controllers
 
         private IMemoryCache _cache;
 
-        private string consumerKey;
-        private string consumerSecret;
-        private string accessToken;
-        private string accessTokenSecret;
-
+        /*
+         * Creates cache to store authentication data 
+         * This makes it so that the same authentication data
+         * can be stored and shared between requests
+         */
         public TwitterAPIController(IMemoryCache memoryCache)
         {
             _cache = memoryCache;
@@ -28,21 +32,22 @@ namespace sm_analytic.Controllers
         /*
          * Function authenticates our application to user Twitter API
          * Also begins the user authentication process
-         * and gets URL for user to be redirected to
+         * and gets URL for login page that user needs to be redirected to
+         * This URL gets returned to the front end
          */
         [Route("~/api/TwitterAuth")]
         [HttpGet]
         public string TwitterAuth()
         {
 
-            authorizeApp(); 
+            AuthorizeOurApp(); 
 
             var appCreds = new ConsumerCredentials(
-                consumerKey,
-                consumerSecret
+                Environment.GetEnvironmentVariable("CONSUMER_KEY"),
+                Environment.GetEnvironmentVariable("CONSUMER_SECRET")
             );
 
-            var redirectURL = "http://127.0.0.1:5000/dashboard";
+            var redirectURL = "http://127.0.0.1:5000/dashboard"; //this will need to change according to dev or prod environments!
             IAuthenticationContext _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
             _cache.Set("_authContext", _authenticationContext);
 
@@ -50,8 +55,11 @@ namespace sm_analytic.Controllers
            
         }
 
-        /*
-         * Return user info 
+        /* After the user logins in/authorises our app through the 
+         * redirected url, their credentials get passed to this function
+         * This function authenticates the user
+         * Returns user info after successful authentication
+         * Returns an error otherwise
          */
         [Route("~/api/ValidateTwitterAuth")]
         [HttpPost]
@@ -75,21 +83,24 @@ namespace sm_analytic.Controllers
             
         }
 
-        private void authorizeApp()
+        /*
+         * Function that authorizes our app to use Twitter API vs an individual user
+         * Uses credentials stored in environment variables 
+         */
+        private void AuthorizeOurApp()
         {
-            consumerKey = Environment.GetEnvironmentVariable("CONSUMER_KEY");
-            consumerSecret = Environment.GetEnvironmentVariable("CONSUMER_SECRET");
-            accessToken = Environment.GetEnvironmentVariable("ACCESS_TOKEN");
-            accessTokenSecret = Environment.GetEnvironmentVariable("ACCESS_TOKEN_SECRET");
-
             Auth.SetUserCredentials(
-                consumerKey,
-                consumerSecret,
-                accessToken,
-                accessTokenSecret
+                Environment.GetEnvironmentVariable("CONSUMER_KEY"),
+                Environment.GetEnvironmentVariable("CONSUMER_SECRET"),
+                Environment.GetEnvironmentVariable("ACCESS_TOKEN"),
+                Environment.GetEnvironmentVariable("ACCESS_TOKEN_SECRET")
             );
         }
 
+        /*
+         * Model for the user credentials passed into
+         * ValidateTwitterAuth()
+         */
         public class Credentials
         {
             public string authorization_id { get; set; }
