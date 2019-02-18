@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sm_analytic.Models;
 
 namespace sm_analytic
 {
@@ -20,6 +23,8 @@ namespace sm_analytic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer()
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // In production, the Angular files will be served from this directory
@@ -32,6 +37,18 @@ namespace sm_analytic
             {
                 options.AutomaticAuthentication = false;
             });
+
+            //Getting context data from DB
+            var connection = @"DefaultConnection";/////////////////////////////////////////////////////////
+            //services.AddDbContext<DataDbContext>(options => 
+            //                                        options.UseSqlServer(connection, i =>
+            //                                            i.MigrationsAssembly("InitialAssembly"))
+            //    );
+
+            services.AddDbContext<DataDbContext>(options => options.UseSqlServer(
+                                                            Configuration.GetConnectionString("DefaultConnection")/*, i => i.MigrationsAssembly("InitialAssembly")*/));
+
+
 
         }
 
