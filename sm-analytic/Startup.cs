@@ -57,12 +57,14 @@ namespace sm_analytic
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
             }
             else
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
             }
 
             app.UseStaticFiles();

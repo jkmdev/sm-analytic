@@ -47,7 +47,7 @@ namespace sm_analytic.Controllers
                 Environment.GetEnvironmentVariable("CONSUMER_SECRET")
             );
 
-            var redirectURL = "http://127.0.0.1:5000/dashboard"; //this will need to change according to dev or prod environments!
+            var redirectURL = Environment.GetEnvironmentVariable("redirectURL");
             IAuthenticationContext _authenticationContext = AuthFlow.InitAuthentication(appCreds, redirectURL);
             _cache.Set("_authContext", _authenticationContext);
 
