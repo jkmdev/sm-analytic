@@ -62,9 +62,11 @@ namespace sm_analytic
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                // app.UseDeveloperExceptionPage();
                 Environment.SetEnvironmentVariable("redirectURL", "http://myvmlab.senecacollege.ca:6448/dashboard");
+
+                // app.UseHsts(); don't know what this is for, leaving it just in case
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
 
             app.UseStaticFiles();
@@ -85,10 +87,12 @@ namespace sm_analytic
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                spa.UseAngularCliServer(npmScript: "start");
+
+                // if (env.IsDevelopment())
+                // {
+                //     spa.UseAngularCliServer(npmScript: "start");
+                // }
             });
 
         }
