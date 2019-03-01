@@ -7,16 +7,11 @@ namespace sm_analytic
     {
         public static void Main(string[] args)
         {
-            var config = new ConfigurationBuilder()  
-                .AddCommandLine(args)
-                .Build();
-
-            CreateWebHostBuilder(args, config).Build().Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args, ConfigurationBuilder config) =>
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseConfiguration(config)
                 .UseStartup<Startup>();
     }
 }
