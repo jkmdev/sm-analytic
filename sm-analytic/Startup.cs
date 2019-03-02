@@ -87,10 +87,13 @@ namespace sm_analytic
 
                 spa.Options.SourcePath = "ClientApp";
 
+                // spa.UseAngularCliServer(npmScript: "start");
+
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
                 }
+                
             });
 
         }
