@@ -1,20 +1,5 @@
-.card {
+@import 'src/styles';
 
-  //height: 250px;
-
-  .card-body {
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    h6 {
-      text-align: center;
-    }
-
-    .chart-container {
-      width: 20vw;
-    }
-
-  }
+.bar-chart {
+  @extend %card-body;
 }

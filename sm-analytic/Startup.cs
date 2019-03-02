@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
@@ -87,12 +84,10 @@ namespace sm_analytic
 
                 spa.Options.SourcePath = "ClientApp";
 
-                // spa.UseAngularCliServer(npmScript: "start");
-
-                // if (env.IsDevelopment())
-                // {
-                //    spa.UseAngularCliServer(npmScript: "start");
-                // }
+                if (env.IsDevelopment())
+                {
+                   spa.UseAngularCliServer(npmScript: "start");
+                }
 
             });
 

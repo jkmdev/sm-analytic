@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+// BASE
+
 html, body {
     height: 100%;
 }
@@ -14,4 +16,22 @@ h2 {
 
 h3 {
     
+}
+
+// COMMON
+
+%card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: white;
+
+  h6 {
+    text-align: center;
+  }
+
+  .chart-container {
+    width: 20vw;
+  }
 }

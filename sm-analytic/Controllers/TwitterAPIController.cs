@@ -83,6 +83,28 @@ namespace sm_analytic.Controllers
             
         }
 
+        [Route("~/api/GetSocialEngagementData")]
+        [HttpPost]
+        public ObjectResult GetSocialEngagementData([FromBody] Credentials credentials)
+        {
+
+            IAuthenticationContext _authenticationContext;
+            _cache.TryGetValue("_authContext", out _authenticationContext);
+
+            try
+            {
+                var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
+                var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+
+        }
+
         /*
          * Function that authorizes our app to use Twitter API vs an individual user
          * Uses credentials stored in environment variables 

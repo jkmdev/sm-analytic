@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
 
   userInfo = {
     userName: "userName",
-    profileImageUrl: ""
+    profileImageUrl: "../../../../assets/img/tmp.jpg"
   };
 
   options : Object[] = [

@@ -16,6 +16,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
 import { ChartsModule } from 'ng2-charts';
+import { LineAreaChartComponent } from './components/charts/line-area-chart/line-area-chart.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ChartsModule } from 'ng2-charts';
     SidebarComponent,
     NavbarComponent,
     BarComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    LineAreaChartComponent
   ],
   providers: [
     ApiService
