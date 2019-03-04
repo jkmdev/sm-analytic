@@ -8,19 +8,12 @@ using System.Web;
 
 namespace sm_analytic.Models
 {
-    [Table("Account")]
-
     public partial class Account
     {
         public Account()
         {
-            DOB = DateTime.Now.AddYears(-30);
-            RequestTracker = new RequestTracker();
             //IdentityCustomModel = new IdentityCustomModel();
         }
-
-        [DataType(DataType.Date)]
-        public DateTime DOB { get; set; }
 
         public int Id { get; set; }
 
@@ -28,23 +21,7 @@ namespace sm_analytic.Models
         
         public IdentityCustomModel IdentityCustomModel { get; set; } //Nav property
 
-        public virtual RequestTracker RequestTracker { get; set; }
-    }
-
-    [Table("RequestTracker")]
-
-    public partial class RequestTracker
-    {
-        public RequestTracker()
-        {
-            LastRequest = DateTime.Now;
-            //Account = new Account();
-        }
-
-        //PK and FK
-        [Key]
-        public int AccountId { get; set; }
-
+        //Request Tracking part of the acc
         [Range(0, 250)]
         public int SearchRegularNum { get; set; }
 
@@ -59,7 +36,27 @@ namespace sm_analytic.Models
 
         public DateTime LastRequest { get; set; }
 
-        public virtual Account Account { get; set; }
+        //public virtual RequestTracker RequestTracker { get; set; }
+
     }
+
+    //[Table("RequestTracker")]
+
+    //public partial class RequestTracker
+    //{
+    //    public RequestTracker()
+    //    {
+    //        LastRequest = DateTime.Now;
+    //        //Account = new Account();
+    //    }
+
+    //    //PK and FK
+    //    [Key]
+    //    public int AccountId { get; set; }
+
+
+
+    //    public virtual Account Account { get; set; }
+    //}
 
 }

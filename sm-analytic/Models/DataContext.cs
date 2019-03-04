@@ -8,9 +8,9 @@ namespace sm_analytic.Models
         public DataDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {}
 
-        public virtual DbSet<RequestTracker> RequestTrackers { get; set; }
+        //public virtual DbSet<RequestTracker> RequestTrackers { get; set; }
 
-        public virtual DbSet<Account>        Accounts { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,10 +21,9 @@ namespace sm_analytic.Models
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Account>()
-                .HasOne(i => i.RequestTracker)
-                .WithOne(i => i.Account)
-                .IsRequired(true);
+            //modelBuilder.Entity<Account>()
+            //    .HasOne(i => i.IdentityCustomModel)
+            //    .IsRequired(true);
 
             //modelBuilder.Entity<RequestTracker>()
             //    .HasOne(i => i.Account)

@@ -10,30 +10,30 @@ namespace sm_analytic.Models
     {
         public IdentityCustomModel()
         {
-            LastLoginDate = DateTime.Today;
-            //DOB = DateTime.Now.AddYears(-30);
-            //RequestTracker = new RequestTracker();
+            LastLoginDate        = DateTime.Today;
+            DOB                  = DateTime.Now.AddYears(-30);
+            //TwoFactorEnabled     = false;
+            //EmailConfirmed       = false;
+            //PhoneNumberConfirmed = false;
+            //LockoutEnabled       = true;
+            //LockoutEnd           = DateTimeOffset.Now.AddYears(10); // To be lifted after account confirmation
         }
 
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
 
-        //public long? TwitterId { get; set; }
-
-        //public string PictureUrl { get; set; }
-
         public DateTime LastLoginDate { get; set; }
 
         public string SecondaryPassword { get; set; }
+
+        public DateTime DOB { get; set; }
 
         //public int Id { get; set; }
 
         //public string Email { get; set; }
 
         //public string RoleName { get; set; }
-
-        //public DateTime DOB { get; set; }
 
         //public string Password { get; set; }
 

@@ -38,25 +38,25 @@ namespace sm_analytic.Models
         public string PasswordConfirm { get; set; }
     }
 
-    public class AccountBase : AccountAdd
-    {
-        public int Id { get; set; }
+    //public class AccountBase : AccountAdd
+    //{
+    //    public int Id { get; set; }
 
-        [DisplayName("Last Login Date")]
-        public DateTime LastLoginDate { get; set; }
+    //    [DisplayName("Last Login Date")]
+    //    public DateTime LastLoginDate { get; set; }
 
-        [DisplayName("Role Name")]
-        [Required, StringLength(40)]
-        public string RoleName { get; set; }
+    //    [DisplayName("Role Name")]
+    //    [Required, StringLength(40)]
+    //    public string RoleName { get; set; }
 
-        [DisplayName("Previously Used Password")]
-        [Required, StringLength(100)]
-        public string SecondaryPassword { get; set; }
+    //    [DisplayName("Previously Used Password")]
+    //    [Required, StringLength(100)]
+    //    public string SecondaryPassword { get; set; }
 
-        [DisplayName("Has the Account Been Confirmed?")]
-        [Required]
-        public bool IsValid { get; set; }
-    }
+    //    [DisplayName("Has the Account Been Confirmed?")]
+    //    [Required]
+    //    public bool IsValid { get; set; }
+    //}
 
     public class AccountEditEmail
     {

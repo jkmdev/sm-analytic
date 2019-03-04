@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using AutoMapper;
+using System.Web.Http.ModelBinding;
+using Microsoft.AspNetCore.Identity;
 
 namespace sm_analytic.Models
 {
@@ -12,35 +14,37 @@ namespace sm_analytic.Models
     {
         private readonly DataDbContext _context;
 
-        private readonly MapperConfiguration config;
-        private readonly IMapper mapper;
+        private readonly MapperConfiguration _config;
+        private readonly IMapper _mapper;
 
         public Manager(DataDbContext context)
         {
             _context = context;
 
-            config = new MapperConfiguration(cfg =>
+            _config = new MapperConfiguration(cfg =>
             {
                 //Defining the maps here
 
-                cfg.CreateMap<Models.Account, Models.AccountBase>()
-                .ForMember(ab => ab.IsValid, map => map.MapFrom(a => a.IdentityCustomModel.EmailConfirmed))
-                .ForMember(ab => ab.Password, map => map.MapFrom(a => a.IdentityCustomModel.PasswordHash))
-                .ForMember(ab => ab.Email, map => map.MapFrom(a => a.IdentityCustomModel.UserName))
-                ;
+                //cfg.CreateMap<Models.Account, Models.AccountBase>()
+                //.ForMember(ab => ab.IsValid, map => map.MapFrom(a => a.IdentityCustomModel.EmailConfirmed))
+                //.ForMember(ab => ab.Password, map => map.MapFrom(a => a.IdentityCustomModel.PasswordHash))
+                //.ForMember(ab => ab.Email, map => map.MapFrom(a => a.IdentityCustomModel.UserName))
+                //;
 
-                cfg.CreateMap<Models.AccountAdd, Models.Account>()
-                //.ForMember(a => a, map => map.MapFrom(aa => aa))
+                cfg.CreateMap<Models.AccountAdd, Models.IdentityCustomModel>()
+                .ForMember(icm => icm.UserName, map => map.MapFrom(aa => aa.Email))
+                .ForMember(icm => icm.DOB, map => map.MapFrom(aa => DateTime.Parse(aa.DOB)))
                 ;
 
             });
 
-            mapper = config.CreateMapper();
-
-
+            _mapper = _config.CreateMapper();
         }
 
-
+        public IdentityCustomModel identityGetMapped(AccountAdd newAccount)
+        {
+            return _mapper.Map<AccountAdd, IdentityCustomModel>(newAccount);
+        }
 
         //********************  Static Helpers  ********************\\
 
@@ -144,7 +148,27 @@ namespace sm_analytic.Models
                 RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
         }
 
-        public AccountBase
+        /// <summary>
+        /// Helper class for adding an error(s) to model state.
+        /// </summary>
+        public static class Errors
+        {
+            public static ModelStateDictionary AddErrorsToModelState(IdentityResult identityResult, ModelStateDictionary modelState)
+            {
+                foreach (var e in identityResult.Errors)
+                {
+                    modelState.AddModelError(e.Code, e.Description);
+                }
+
+                return modelState;
+            }
+
+            public static ModelStateDictionary AddErrorToModelState(string code, string description, ModelStateDictionary modelState)
+            {
+                modelState.AddModelError(code, description);
+                return modelState;
+            }
+        }
 
 
 

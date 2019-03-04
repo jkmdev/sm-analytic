@@ -38,18 +38,8 @@ namespace sm_analytic
                 options.AutomaticAuthentication = false;
             });
 
-            //Getting context data from DB
-            var connection = @"DefaultConnection";/////////////////////////////////////////////////////////
-            //services.AddDbContext<DataDbContext>(options => 
-            //                                        options.UseSqlServer(connection, i =>
-            //                                            i.MigrationsAssembly("InitialAssembly"))
-            //    );
-
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(
                                                             Configuration.GetConnectionString("DefaultConnection")/*, i => i.MigrationsAssembly("InitialAssembly")*/));
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
