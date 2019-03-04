@@ -1,13 +1,14 @@
 <div class="side-nav">
-    <app-user-info [profileImageUrl]=userInfo.profileImageUrl [userName]=userInfo.userName></app-user-info>
-    <div 
-        class="option" 
-        (click)="gotoDashboardPage(option.path)"
-        *ngFor="let option of options">
-            <h6>{{option.title}}</h6>
-    </div>
-
-    <div>
-      <button (click)="twitterAuth()" type="button" class="btn btn-warning">Login With Twitter</button>
-    </div>
+  <app-user-info></app-user-info>
+  <div class="option"
+       (click)="gotoDashboardPage(option.path)"
+       *ngFor="let option of options">
+    <h6>{{option.title}}</h6>
+  </div>
+  <div>
+    <button (click)="twitterAuth()" type="button" class="btn btn-warning">Authorize Twitter</button>
+  </div>
+  <div>
+    <button (click)="clearSession()" type="button" class="btn btn-danger">Clear Session</button>
+  </div>
 </div>

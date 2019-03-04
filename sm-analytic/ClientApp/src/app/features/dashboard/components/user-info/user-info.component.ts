@@ -7,13 +7,22 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class UserInfoComponent implements OnInit {
 
-  @Input() userName: string;
-  @Input() profileImageUrl: string;
+  userName: string;
+  profileImageUrl: string;
 
   constructor() {
+    this.userName = 'userName';
+    this.profileImageUrl = "../../../../assets/img/tmp.jpg";
   }
 
   ngOnInit() {
+      var userInSession = localStorage.getItem('user');
+      var user = JSON.parse(userInSession);
+      if (user) {
+        if (user.name) this.userName = user.name;
+        if (user.profileImageUrl) this.profileImageUrl = user.profileImageUrl400x400;
+      }
+      
   }
 
 }

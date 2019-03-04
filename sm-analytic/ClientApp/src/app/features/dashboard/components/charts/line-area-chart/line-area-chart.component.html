@@ -1,11 +1,11 @@
 <div class="line-area-chart">
-  <h6>Title</h6>
+  <h6>{{title}}</h6>
   <div class="chart-container">
     <canvas baseChart aspectRatio=4
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType"></canvas>
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend"
+            [chartType]="chartType"></canvas>
   </div>
 </div>

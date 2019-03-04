@@ -17,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
 import { ChartsModule } from 'ng2-charts';
 import { LineAreaChartComponent } from './components/charts/line-area-chart/line-area-chart.component';
+import { EngagementService } from 'app/shared/services/engagement.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { LineAreaChartComponent } from './components/charts/line-area-chart/line
     LineAreaChartComponent
   ],
   providers: [
-    ApiService
+    ApiService,
+    EngagementService
   ],
   exports: [
     DashboardComponent

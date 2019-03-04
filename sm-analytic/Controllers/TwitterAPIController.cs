@@ -73,7 +73,10 @@ namespace sm_analytic.Controllers
             {
                 var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
                 var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
-                return Ok(user);
+                // long userId = < YOUR_USER_ID >;
+                // user.GetContributors
+                var test = user.GetUserTimeline();
+                return Ok(test);
             }
             catch (Exception ex)
             {

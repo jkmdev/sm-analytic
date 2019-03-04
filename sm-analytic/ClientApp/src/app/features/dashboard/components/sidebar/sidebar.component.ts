@@ -78,14 +78,18 @@ export class SidebarComponent implements OnInit {
       .subscribe(
         val => {
           console.log(val)
-          this.userInfo.userName = val.name;
-          this.userInfo.profileImageUrl = val.profileImageUrl;
+          localStorage.setItem('user', JSON.stringify(val));
         },
         error => {
           console.log(error)
         }
       );
 
+  }
+
+  clearSession() {
+    localStorage.setItem('user', null);
+    window.location.reload();
   }
 
 }
