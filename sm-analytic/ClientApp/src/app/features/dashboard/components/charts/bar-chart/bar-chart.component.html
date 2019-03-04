@@ -1,12 +1,12 @@
 <div class="bar-chart">
-    <h6>Title</h6>
-    <div class="chart-container">
-      <canvas baseChart aspectRatio=4
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType">
-      </canvas>
-    </div>
+  <h5>{{title}}</h5>
+  <h6>{{subTitle}}</h6>
+  <div class="chart-container">
+    <canvas baseChart aspectRatio=4
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend"
+            [chartType]="chartType"></canvas>
   </div>
+</div>

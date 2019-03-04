@@ -9,9 +9,27 @@
     </div>
 
     <div class="row charts">
-      <app-bar-chart class="col-md"></app-bar-chart>
-      <app-line-area-chart class="col-md"></app-line-area-chart>
+
+      <div class="col-md-8">
+      </div>
+
+      <div class="col-md-4">
+
+        <app-line-area-chart [title]="engagementByHourData.title"
+                             [subTitle]="engagementByHourData.subTitle"
+                             [chartLabels]="engagementByHourData.chartLabels"
+                             [chartData]="engagementByHourData.chartData">
+        </app-line-area-chart>
+
+        <app-bar-chart [title]="engagementByDayData.title"
+                       [subTitle]="engagementByDayData.subTitle"
+                       [chartLabels]="engagementByDayData.chartLabels"
+                       [chartData]="engagementByDayData.chartData">
+        </app-bar-chart>
+
+      </div>
+
     </div>
 
   </div>
-  </div>
+</div>

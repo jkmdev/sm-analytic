@@ -6,13 +6,17 @@ export class EngagementService {
   constructor() { }
 
   calcEngagementByHour(tweets) {
-    var daysInWeek = 7;
-    return this.calcEngagement(tweets, daysInWeek, this.getDay);
+    var daysInWeek = 24;
+    return this.calcEngagement(tweets, daysInWeek, this.getHour);
   }
 
   calcEngagementByDay(tweets) {
-    var hoursInDay = 24;
+    var hoursInDay = 7;
     return this.calcEngagement(tweets, hoursInDay, this.getDay);
+  }
+
+  calcEngagementTotal(tweets) {
+    return this.calcEngagement(tweets, 0, x => 0);
   }
 
   // returns whole number integer indicating hour of day
@@ -66,6 +70,11 @@ export class EngagementService {
 
   }
 
-
-
 }
+
+  //TODO: implement below function
+
+  /* calcEngagementByWeek(tweets) {
+    var hoursInDay = 24;
+    return this.calcEngagement(tweets, hoursInDay, this.getDay);
+  } */
