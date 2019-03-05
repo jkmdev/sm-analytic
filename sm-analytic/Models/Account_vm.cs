@@ -38,6 +38,19 @@ namespace sm_analytic.Models
         public string PasswordConfirm { get; set; }
     }
 
+    public class AccountLogin
+    {
+        [DisplayName("Email")]
+        [Required, StringLength(50)]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [DisplayName("Password")]
+        [Required, StringLength(20), MinLength(6)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+    }
+
     //public class AccountBase : AccountAdd
     //{
     //    public int Id { get; set; }

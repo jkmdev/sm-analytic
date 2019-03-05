@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using sm_analytic.Controllers;
 using sm_analytic.Models;
 using System;
 using System.Text;
@@ -37,6 +38,8 @@ namespace sm_analytic
             //Dependency Injection to 
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(
                                                             Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddSingleton<IJwtManager, JwtManager>();
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));
