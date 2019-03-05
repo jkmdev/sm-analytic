@@ -33,7 +33,7 @@ namespace sm_analytic.Models
 
                 cfg.CreateMap<Models.AccountAdd, Models.IdentityCustomModel>()
                 .ForMember(icm => icm.UserName, map => map.MapFrom(aa => aa.Email))
-                .ForMember(icm => icm.DOB, map => map.MapFrom(aa => DateTime.Parse(aa.DOB)))
+                //.ForMember(icm => icm.DOB, map => map.MapFrom(aa => DateTime.Parse(aa.DOB)))
                 ;
 
             });
@@ -41,7 +41,7 @@ namespace sm_analytic.Models
             _mapper = _config.CreateMapper();
         }
 
-        public IdentityCustomModel identityGetMapped(AccountAdd newAccount)
+        public IdentityCustomModel IdentityGetMapped(AccountAdd newAccount)
         {
             return _mapper.Map<AccountAdd, IdentityCustomModel>(newAccount);
         }
@@ -168,6 +168,13 @@ namespace sm_analytic.Models
                 modelState.AddModelError(code, description);
                 return modelState;
             }
+        }
+
+        public static class JwtClaimHelper
+        {
+            public static string ClaimIdentifierRole  = "SMA_ClaimIdentifierRole",
+                                 ClaimIdentifierId    = "SMA_ClaimIdentifierId",
+                                 ClaimValue           = "SMA_ClaimValue";
         }
 
 
