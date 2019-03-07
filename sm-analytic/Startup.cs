@@ -17,6 +17,7 @@ using sm_analytic.Models;
 using System;
 using System.Text;
 
+
 namespace sm_analytic
 {
     public class Startup
@@ -125,9 +126,9 @@ namespace sm_analytic
                 options.AutomaticAuthentication = true;
             });
 
-            services.AddCors(o => o.AddPolicy("AllowMyOrigin", builder =>
+            services.AddCors(o => o.AddPolicy("AllowMyOrigin", i =>
             {
-                builder.AllowAnyOrigin()
+                      i.AllowAnyOrigin()
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
@@ -174,16 +175,14 @@ namespace sm_analytic
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath     = "ClientApp";
-
-                //Changed the StartUp timeout, since I was getting a timeout error upon a build every now and then
                 spa.Options.StartupTimeout = new TimeSpan(0, 1, 30);
 
-                // spa.UseAngularCliServer(npmScript: "start");
+                //spa.UseAngularCliServer(npmScript: "start");
 
-                // if (env.IsDevelopment())
-                // {
-                //    spa.UseAngularCliServer(npmScript: "start");
-                // }
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
 
             });
 
