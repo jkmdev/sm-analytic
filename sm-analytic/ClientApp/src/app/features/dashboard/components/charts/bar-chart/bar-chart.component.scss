@@ -1,0 +1,20 @@
+.card {
+
+  //height: 250px;
+
+  .card-body {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h6 {
+      text-align: center;
+    }
+
+    .chart-container {
+      width: 20vw;
+    }
+
+  }
+}

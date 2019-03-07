@@ -17,7 +17,6 @@ using sm_analytic.Models;
 using System;
 using System.Text;
 
-
 namespace sm_analytic
 {
     public class Startup
