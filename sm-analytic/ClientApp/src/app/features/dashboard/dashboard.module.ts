@@ -16,6 +16,8 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
 import { ChartsModule } from 'ng2-charts';
+import { FaqComponent } from './pages/faq/faq.component';
+
 
 @NgModule({
   imports: [
@@ -33,7 +35,8 @@ import { ChartsModule } from 'ng2-charts';
     SidebarComponent,
     NavbarComponent,
     BarComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    FaqComponent
   ],
   providers: [
     ApiService
