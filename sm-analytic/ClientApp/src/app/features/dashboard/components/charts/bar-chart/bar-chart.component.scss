@@ -2,4 +2,9 @@
 
 .bar-chart {
   @extend %card-body;
+
+  .chart-container {
+    width: 45vw;
+  }
+
 }

@@ -29,20 +29,18 @@ export class FollowerComponent implements OnInit {
 
   drawEngagementByHour() {
 
-    var tmp = {};
+    var chartLabels = {};
 
     for (var i = 0; i < 24; i++) {
-      tmp[i] = `${i}:00`;
+      chartLabels[i] = `${i}:00`;
     }
 
     var chartData = this.tweets ? this.engagementService.calcEngagementByHour(this.tweets) : {};
 
-    console.log(chartData);
-
     this.engagementByHourData = {
       'title': "Posting Times vs. Engagement (Hourly)",
-      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has.",
-      'chartLabels': Object.values(tmp),
+      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has for a given hour.",
+      'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };
 
@@ -50,7 +48,7 @@ export class FollowerComponent implements OnInit {
 
   drawEngagementByDay() {
 
-    var tmp = {
+    var chartLabels = {
       0: "Monday",
       1: "Tuesday",
       2: "Wednesday",
@@ -64,8 +62,8 @@ export class FollowerComponent implements OnInit {
 
     this.engagementByDayData = {
       'title': "Posting Times vs. Engagement (Daily)",
-      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has.",
-      'chartLabels': Object.values(tmp),
+      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has for a given day.",
+      'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };
 

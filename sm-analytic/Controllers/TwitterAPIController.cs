@@ -4,6 +4,12 @@ using Tweetinvi;
 using Tweetinvi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Caching.Memory;
+using Tweetinvi.Models.DTO;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
 namespace sm_analytic.Controllers
 {
@@ -18,15 +24,17 @@ namespace sm_analytic.Controllers
     {
 
         private IMemoryCache _cache;
+        private readonly IHttpClientFactory _clientFactory;
 
         /*
          * Creates cache to store authentication data 
          * This makes it so that the same authentication data
          * can be stored and shared between requests
          */
-        public TwitterAPIController(IMemoryCache memoryCache)
+        public TwitterAPIController(IMemoryCache memoryCache, IHttpClientFactory clientFactory)
         {
             _cache = memoryCache;
+            _clientFactory = clientFactory;
         }
 
         /*
@@ -63,26 +71,69 @@ namespace sm_analytic.Controllers
          */
         [Route("~/api/ValidateTwitterAuth")]
         [HttpPost]
-        public ObjectResult ValidateTwitterAuth([FromBody] Credentials credentials)
+        public async Task<HttpContent> ValidateTwitterAuthAsync([FromBody] Credentials credentials)
         {
+
 
             IAuthenticationContext _authenticationContext;
             _cache.TryGetValue("_authContext", out _authenticationContext);
 
-            try
-            {
+
                 var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
                 var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
                 // long userId = < YOUR_USER_ID >;
                 // user.GetContributors
                 var test = user.GetUserTimeline();
-                return Ok(test);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Something went wrong: {ex}");
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
+
+                var creds = Auth.SetApplicationOnlyCredentials(
+                    Environment.GetEnvironmentVariable("CONSUMER_KEY"),
+                    Environment.GetEnvironmentVariable("CONSUMER_SECRET"),
+                    true
+                );
+
+                var bearerToken = creds.ApplicationOnlyBearerToken;
+
+                // You can sort of do this “manually” -Using the Search API, 
+                // look for any tweet that’s with to:DanielCHood as a query for example, 
+                // having your own tweet ids, count the replies to them 
+                // using in_reply_to_status_id fields of the search results. Or rely 
+                // on your User Stream https://dev.twitter.com/streaming/userstreams#replies 
+
+                // 1. Us premium api to search tweets, return those instead
+
+                // return Ok(test); // returns all relevant data at this stage
+
+                // return Ok(TwitterAccessor.ExecuteGETQuery<IUserDTO>("https://api.twitter.com/1.1/users/show.json?screen_name=tweetinviapi"));
+
+                // JsonObject jsonObj = new JsonObject();
+                // jsonObj["content_one"] = JsonValue.CreateNumberValue(600);
+                // jsonObj["content_two"] = JsonValue.CreateStringValue("my content value");
+
+                // Create the IHttpContent
+                // IHttpContent jsonContent = new HttpJsonContent(jsonObj);
+
+                // var request = new HttpRequestMessage(System.Net.Http.HttpMethod.Post,
+                //    "https://api.twitter.com/1.1/tweets/search/30day/sandboxSearchMonthly.json");
+
+                // request.Headers.Add("authorization", "Bearer " + bearerToken);
+                // request.Headers.Add("content-type", "application/json");
+                // request.Content = new StringContent("{\"query\":\"from:TwitterDev lang:en\"}", Encoding.UTF8, "application/json");
+
+
+                // "query":"from:TwitterDev lang:en"
+
+                var client = _clientFactory.CreateClient();
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", bearerToken);
+
+                var uri = "https://api.twitter.com/1.1/tweets/search/30day/sandboxSearchMonthly.json";
+                var query = "{\"query\":\"from:TwitterDev lang:en\"}";
+
+                var response = await client.PostAsync(uri, new StringContent(query, Encoding.UTF8, "application/json"));
+
+                return response.Content;
+                // return Ok(response);
+
+            
             
         }
 
@@ -107,6 +158,8 @@ namespace sm_analytic.Controllers
             }
 
         }
+
+ 
 
         /*
          * Function that authorizes our app to use Twitter API vs an individual user

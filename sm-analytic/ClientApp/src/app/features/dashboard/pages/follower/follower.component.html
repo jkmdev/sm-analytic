@@ -11,6 +11,13 @@
     <div class="row charts">
 
       <div class="col-md-8">
+
+        <app-bar-chart [title]="engagementByDayData.title"
+                       [subTitle]="engagementByDayData.subTitle"
+                       [chartLabels]="engagementByDayData.chartLabels"
+                       [chartData]="engagementByDayData.chartData">
+        </app-bar-chart>
+
       </div>
 
       <div class="col-md-4">
@@ -21,11 +28,11 @@
                              [chartData]="engagementByHourData.chartData">
         </app-line-area-chart>
 
-        <app-bar-chart [title]="engagementByDayData.title"
-                       [subTitle]="engagementByDayData.subTitle"
-                       [chartLabels]="engagementByDayData.chartLabels"
-                       [chartData]="engagementByDayData.chartData">
-        </app-bar-chart>
+        <app-line-area-chart [title]="engagementByHourData.title"
+                             [subTitle]="engagementByHourData.subTitle"
+                             [chartLabels]="engagementByHourData.chartLabels"
+                             [chartData]="engagementByHourData.chartData">
+        </app-line-area-chart>
 
       </div>
 

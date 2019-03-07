@@ -11,20 +11,22 @@ export class BarComponent implements OnInit {
   @Input() subTitle: string;
   @Input() chartLabels: Array<String>;
   @Input() chartData: Array<Object>;
+  @Input() chartOptions: Object;
 
   chartType: string;
-  chartLegend: boolean;
-  chartOptions: Object;
 
   constructor() { }
 
   ngOnInit() {
 
     this.chartType = "bar";
-    this.chartLegend = true;
     this.chartOptions = {
       scaleShowVerticalLines: false,
-      responsive: true
+      responsive: true,
+      legend: {
+        display: true,
+        position: 'left'
+      }
     };
 
   }

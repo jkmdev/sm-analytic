@@ -21,6 +21,7 @@ h3 {
 // COMMON
 
 %card-body {
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +33,4 @@ h3 {
     color: gray;
   }
 
-  .chart-container {
-    width: 20vw;
-  }
 }

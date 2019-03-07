@@ -46,6 +46,8 @@ namespace sm_analytic
                 options.IdleTimeout = TimeSpan.FromMinutes(1);
             });
 
+            services.AddHttpClient();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
