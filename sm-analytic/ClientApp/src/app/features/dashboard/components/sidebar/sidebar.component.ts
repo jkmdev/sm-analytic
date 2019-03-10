@@ -26,8 +26,13 @@ export class SidebarComponent implements OnInit {
     { 'title':'Followers', 'path':'dashboard/follower' },
   ];
 
-  twitterAuth = this.twitterDataService.twitterAuth;
-  clearSession = this.twitterDataService.clearSession;
+  twitterAuth() {
+    this.twitterDataService.twitterAuth();
+  }
+
+  clearSession() {
+    this.twitterDataService.clearSession();
+  }
 
   /*
    * This function checks if there are Twitter auth parameters in the url

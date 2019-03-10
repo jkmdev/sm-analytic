@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'app/shared/services/api.service';
-
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class TwitterDataService {
@@ -13,7 +13,13 @@ export class TwitterDataService {
   // clear: when user logs out? 
     // resets all data
 
-  constructor(private apiService: ApiService) { }
+  tweets;
+  public userData;
+  public updated = new Subject<void>();
+
+  constructor(private apiService: ApiService) {
+    console.log(this.apiService);
+  }
 
     /*
    * Sends request to 'TwitterAuth' endpoint in our API
@@ -38,30 +44,39 @@ export class TwitterDataService {
 
     var queryParams = window.location.search;
 
-    var args = queryParams.split("&");
-    var requestBody = {};
+    if (queryParams) {
 
-    args.forEach((arg) => {
-      var argPair = arg.split("=");
-      requestBody[argPair[0]] = argPair[1];
-    });
+      var args = queryParams.split("&");
+      var requestBody = {};
 
-    this.apiService.post('ValidateTwitterAuth', requestBody)
-      .subscribe(
-        val => {
-          console.log(val)
-          localStorage.setItem('user', JSON.stringify(val));
-          // init twitterauth object TwitterData.init(val);
-        },
-        error => {
-          console.log(error)
-        }
+      args.forEach((arg) => {
+        var argPair = arg.split("=");
+        requestBody[argPair[0]] = argPair[1];
+      });
+
+      this.apiService.post('ValidateTwitterAuth', requestBody)
+        .subscribe(
+          val => {
+            this.userData = val[0].value;
+            this.tweets = val[1].value;
+            this.updated.next();
+          },
+          error => {
+            console.log(error)
+          }
       );
+
+      // window.location.href = window.location.href.replace(queryParams, "");
+
+    }
+
+
 
   }
 
   clearSession() {
-    localStorage.setItem('user', null);
+    this.userData = {};
+    this.tweets = [];
     window.location.reload();
   }
 

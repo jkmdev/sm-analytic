@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-user-info',
@@ -9,20 +11,23 @@ export class UserInfoComponent implements OnInit {
 
   userName: string;
   profileImageUrl: string;
+  private twitterDataUpdateRef: Subscription = null;
 
-  constructor() {
+  constructor(private twitterDataService: TwitterDataService) {
     this.userName = 'userName';
     this.profileImageUrl = "../../../../assets/img/tmp.jpg";
   }
 
   ngOnInit() {
-      var userInSession = localStorage.getItem('user');
-      var user = JSON.parse(userInSession);
-      if (user) {
-        if (user.name) this.userName = user.name;
-        if (user.profileImageUrl) this.profileImageUrl = user.profileImageUrl400x400;
-      }
-      
+    this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
+      var userData = this.twitterDataService.userData;
+      if (userData.name) this.userName = userData.name;
+      if (userData.profileImageUrl) this.profileImageUrl = userData.profileImageUrl400x400;
+    });
+  }
+
+  ngOnDestroy() {
+    this.twitterDataUpdateRef.unsubscribe();
   }
 
 }
