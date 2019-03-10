@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { ApiService } from '../../../../shared/services/api.service';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +9,10 @@ import { ApiService } from '../../../../shared/services/api.service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  constructor(
+    private router: Router,
+    private twitterDataService: TwitterDataService
+  ) { }
 
   userInfo = {
     userName: "userName",
@@ -23,18 +26,15 @@ export class SidebarComponent implements OnInit {
     { 'title':'Followers', 'path':'dashboard/follower' },
   ];
 
+  twitterAuth = this.twitterDataService.twitterAuth;
+  clearSession = this.twitterDataService.clearSession;
+
   /*
    * This function checks if there are Twitter auth parameters in the url
    * If so, it attempt to authorize a user with said credentials
    */
   ngOnInit() {
-
-    var queryParams = window.location.search;
-
-    if (queryParams) {
-      this.authorizeUser(queryParams.substr(1));
-    }
-
+    this.twitterDataService.authorizeUser();
   }
 
   /*
@@ -43,53 +43,6 @@ export class SidebarComponent implements OnInit {
    */
   gotoDashboardPage(path) {
     this.router.navigate([path]);
-  }
-
-  /*
-   * Sends request to 'TwitterAuth' endpoint in our API
-   * which returns a url that this function will redirect to
-   * so that the user can authorize our app to use their credentials
-   */
-  twitterAuth() {
-    this.apiService.get('TwitterAuth')
-      .subscribe(
-        val => window.location.href = val,
-        error => console.log(error)
-      );
-  }
-
-  /* 
-   * After the user authorizes our app to use their Twitter account
-   * this function will run and send a new request to our .NET API at
-   * the 'ValidateTwitterAuth' endpoint, and returns the user's Twitter info
-   * if they've successfully been authenticated
-   */
-  authorizeUser(queryParams) {
-
-    var args = queryParams.split("&");
-    var requestBody = {};
-
-    args.forEach((arg) => {
-      var argPair = arg.split("=");
-      requestBody[argPair[0]] = argPair[1];
-    });
-    
-    this.apiService.post('ValidateTwitterAuth', requestBody)
-      .subscribe(
-        val => {
-          console.log(val)
-          localStorage.setItem('user', JSON.stringify(val));
-        },
-        error => {
-          console.log(error)
-        }
-      );
-
-  }
-
-  clearSession() {
-    localStorage.setItem('user', null);
-    window.location.reload();
   }
 
 }
