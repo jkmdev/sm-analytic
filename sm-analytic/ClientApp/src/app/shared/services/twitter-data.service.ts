@@ -19,13 +19,7 @@ export class TwitterDataService {
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit() {
-    /* console.log("hmmmmmmmmmmmmmmmmmmmm");
-    this.userData = localStorage.getItem('userData');
-    this.tweets = localStorage.getItem('tweets');
-    console.log(this.userData);
-    this.updated.next(); */
-  }
+  ngOnInit() {}
 
     /*
    * Sends request to 'TwitterAuth' endpoint in our API

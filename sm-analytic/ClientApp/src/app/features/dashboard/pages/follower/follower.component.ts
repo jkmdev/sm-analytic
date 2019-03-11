@@ -10,11 +10,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class FollowerComponent implements OnInit {
 
-  // create base chart and extend from it
-  // init empty chart if data is null
-  // figure out how to persist data in session
-  // 
-
   tweets: object;
   engagementByHourData: object;
   engagementByDayData: object;

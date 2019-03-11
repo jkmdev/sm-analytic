@@ -1,11 +1,13 @@
 <div class="bar-chart">
-  <h5>{{title}}</h5>
-  <h6>{{subTitle}}</h6>
-  <div *ngIf="hasData" class="chart-container">
-    <canvas baseChart aspectRatio=4
-            [datasets]="chartData"
-            [labels]="chartLabels"
-            [options]="chartOptions"
-            [chartType]="chartType"></canvas>
+  <div *ngIf="hasData">
+    <h5>{{title}}</h5>
+    <h6>{{subTitle}}</h6>
+    <div class="chart-container">
+      <canvas baseChart aspectRatio=4
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [chartType]="chartType"></canvas>
+    </div>
   </div>
 </div>

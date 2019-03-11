@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from "@angular/router";
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
@@ -7,7 +7,7 @@ import { TwitterDataService } from 'app/shared/services/twitter-data.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   constructor(
     private router: Router,
@@ -28,18 +28,6 @@ export class SidebarComponent implements OnInit {
 
   twitterAuth() {
     this.twitterDataService.twitterAuth();
-  }
-
-  clearSession() {
-    this.twitterDataService.clearSession();
-  }
-
-  /*
-   * This function checks if there are Twitter auth parameters in the url
-   * If so, it attempt to authorize a user with said credentials
-   */
-  ngOnInit() {
-    this.twitterDataService.authorizeUser();
   }
 
   /*
