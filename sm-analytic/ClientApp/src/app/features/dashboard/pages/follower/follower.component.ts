@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EngagementService } from 'app/shared/services/engagement.service';
-
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-follower',
@@ -12,18 +13,24 @@ export class FollowerComponent implements OnInit {
   tweets: object;
   engagementByHourData: object;
   engagementByDayData: object;
+  private twitterDataUpdateRef: Subscription = null;
 
-  constructor(private engagementService: EngagementService) { }
+  constructor(
+    private engagementService: EngagementService,
+    private twitterDataService: TwitterDataService
+  ) { }
 
   ngOnInit() {
 
-    var userInSession = localStorage.getItem('user');
-    this.tweets = JSON.parse(userInSession);
-
-    console.log(this.tweets);
-
+    this.tweets = this.twitterDataService.tweets;
     this.drawEngagementByHour();
     this.drawEngagementByDay();
+
+    this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
+      this.tweets = this.twitterDataService.tweets;
+      this.drawEngagementByHour();
+      this.drawEngagementByDay();
+    });
   
   }
 

@@ -19,6 +19,7 @@ import { ChartsModule } from 'ng2-charts';
 import { LineAreaChartComponent } from './components/charts/line-area-chart/line-area-chart.component';
 import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { BaseChartComponent } from './components/charts/base-chart/base-chart.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { TwitterDataService } from 'app/shared/services/twitter-data.service';
     NavbarComponent,
     BarComponent,
     UserInfoComponent,
-    LineAreaChartComponent
+    LineAreaChartComponent,
+    BaseChartComponent,
   ],
   providers: [
     ApiService,

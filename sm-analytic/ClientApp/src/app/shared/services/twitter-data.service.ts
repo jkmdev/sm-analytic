@@ -17,8 +17,14 @@ export class TwitterDataService {
   public userData;
   public updated = new Subject<void>();
 
-  constructor(private apiService: ApiService) {
-    console.log(this.apiService);
+  constructor(private apiService: ApiService) { }
+
+  ngOnInit() {
+    /* console.log("hmmmmmmmmmmmmmmmmmmmm");
+    this.userData = localStorage.getItem('userData');
+    this.tweets = localStorage.getItem('tweets');
+    console.log(this.userData);
+    this.updated.next(); */
   }
 
     /*
@@ -60,17 +66,15 @@ export class TwitterDataService {
             this.userData = val[0].value;
             this.tweets = val[1].value;
             this.updated.next();
+            localStorage.setItem('userData', JSON.stringify(this.userData));
+            localStorage.setItem('tweets', JSON.stringify(this.tweets));
           },
           error => {
             console.log(error)
           }
-      );
-
-      // window.location.href = window.location.href.replace(queryParams, "");
+        );
 
     }
-
-
 
   }
 
