@@ -7,6 +7,7 @@ export class TwitterDataService {
 
   public tweets;
   public userData;
+  public followers;
   public updated = new Subject<void>();
 
   constructor(private apiService: ApiService) { }
@@ -48,9 +49,11 @@ export class TwitterDataService {
 
       this.apiService.post('ValidateTwitterAuth', requestBody)
         .subscribe(
-          val => {
+        val => {
+          console.log(val);
             this.userData = val[0].value;
             this.tweets = val[1].value;
+            this.followers = val[2].value;
             this.updated.next();
             localStorage.setItem('userData', JSON.stringify(this.userData));
             localStorage.setItem('tweets', JSON.stringify(this.tweets));
@@ -67,6 +70,7 @@ export class TwitterDataService {
   clearSession() {
     this.userData = {};
     this.tweets = [];
+    this.followers = [];
     window.location.reload();
   }
 

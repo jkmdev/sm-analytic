@@ -21,6 +21,7 @@ import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { BaseChartComponent } from './components/charts/base-chart/base-chart.component';
 import { StarChartComponent } from './components/charts/star-chart/star-chart.component';
+import { FaqComponent } from './pages/faq/faq.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { StarChartComponent } from './components/charts/star-chart/star-chart.co
     LineAreaChartComponent,
     BaseChartComponent,
     StarChartComponent,
+    FaqComponent
   ],
   providers: [
     ApiService,
@@ -54,3 +56,4 @@ import { StarChartComponent } from './components/charts/star-chart/star-chart.co
   ]
 })
 export class DashboardModule { }
+

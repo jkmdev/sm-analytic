@@ -84,12 +84,13 @@ namespace sm_analytic.Controllers
                 var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
                 var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
 
-                ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
-
                 ObjectResult userInfo = new ObjectResult(user);
+                ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
+                ObjectResult followers = new ObjectResult(user.GetFollowers());
                 IEnumerable<ObjectResult> results = new List<ObjectResult>() {
                     userInfo,
-                    tweetTimeline
+                    tweetTimeline,
+                    followers
                 };
 
                 return Ok(results);
