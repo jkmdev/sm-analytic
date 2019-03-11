@@ -10,10 +10,10 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class FollowerComponent implements OnInit {
 
-  tweets: object;
-  engagementByHourData: object;
-  engagementByDayData: object;
-  engagementTotal: object;
+  tweets: any;
+  engagementByHourData: any;
+  engagementByDayData: any;
+  engagementTotal: any;
   private twitterDataUpdateRef: Subscription = null;
 
   constructor(

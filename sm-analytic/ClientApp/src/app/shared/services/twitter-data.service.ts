@@ -50,7 +50,7 @@ export class TwitterDataService {
       this.apiService.post('ValidateTwitterAuth', requestBody)
         .subscribe(
         val => {
-          console.log(val);
+            console.log(val);
             this.userData = val[0].value;
             this.tweets = val[1].value;
             this.followers = val[2].value;
