@@ -89,10 +89,10 @@ namespace sm_analytic
 
                 // spa.UseAngularCliServer(npmScript: "start");
 
-                //if (env.IsDevelopment())
-                //{
-                //    spa.UseAngularCliServer(npmScript: "start");
-                //}
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
             });
         }
     }
