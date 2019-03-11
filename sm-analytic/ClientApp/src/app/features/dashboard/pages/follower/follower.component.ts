@@ -13,6 +13,7 @@ export class FollowerComponent implements OnInit {
   tweets: object;
   engagementByHourData: object;
   engagementByDayData: object;
+  engagementTotal: object;
   private twitterDataUpdateRef: Subscription = null;
 
   constructor(
@@ -22,16 +23,19 @@ export class FollowerComponent implements OnInit {
 
   ngOnInit() {
 
+    this.drawCharts();
+
+    this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
+      this.drawCharts();
+    });
+  
+  }
+
+  drawCharts() {
     this.tweets = this.twitterDataService.tweets;
     this.drawEngagementByHour();
     this.drawEngagementByDay();
-
-    this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
-      this.tweets = this.twitterDataService.tweets;
-      this.drawEngagementByHour();
-      this.drawEngagementByDay();
-    });
-  
+    this.drawEngagementTotal();
   }
 
   drawEngagementByHour() {
@@ -70,6 +74,27 @@ export class FollowerComponent implements OnInit {
     this.engagementByDayData = {
       'title': "Posting Times vs. Engagement (Daily)",
       'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has for a given day.",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
+  drawEngagementTotal() {
+
+    var chartLabels = {
+      0: "Tweets",
+      1: "Retweets",
+      2: "Doot"
+    };
+
+    var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : {};
+
+    console.log(chartData);
+
+    this.engagementTotal = {
+      'title': "Total Engagement",
+      'subTitle': "",
       'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };

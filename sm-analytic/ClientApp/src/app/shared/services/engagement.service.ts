@@ -33,8 +33,8 @@ export class EngagementService {
 
     var engagementData = [
       { data: [], label: 'Tweets' },
-      { data: [], label: 'Quotes' },
-      { data: [], label: 'Replies' },
+      // { data: [], label: 'Quotes' },
+      // { data: [], label: 'Replies' },
       { data: [], label: 'Retweets' }
     ];
 
@@ -53,10 +53,10 @@ export class EngagementService {
         switch (type.label) {
           case 'Tweets': type.data[timeTweeted] += tweet.favoriteCount;
             break;
-          case 'Quotes': type.data[timeTweeted] += tweet.quoteCount;
-            break;
-          case 'Replies': type.data[timeTweeted] += tweet.replyCount;
-            break;
+          // case 'Quotes': type.data[timeTweeted] += tweet.quoteCount;
+          //   break;
+          // case 'Replies': type.data[timeTweeted] += tweet.replyCount;
+          //   break;
           case 'Retweets': type.data[timeTweeted] += tweet.retweetCount;
             break;
           default: break;

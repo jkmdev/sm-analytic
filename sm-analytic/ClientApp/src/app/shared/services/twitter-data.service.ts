@@ -5,15 +5,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TwitterDataService {
 
-  // init: when user signs in, stores twitter data
-    // logs in user
-    // parses return object
-    // stores data
-      // tweets, userinfo, followers, timeline 
-  // clear: when user logs out? 
-    // resets all data
-
-  tweets;
+  public tweets;
   public userData;
   public updated = new Subject<void>();
 

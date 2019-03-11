@@ -20,6 +20,7 @@ import { LineAreaChartComponent } from './components/charts/line-area-chart/line
 import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { BaseChartComponent } from './components/charts/base-chart/base-chart.component';
+import { StarChartComponent } from './components/charts/star-chart/star-chart.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { BaseChartComponent } from './components/charts/base-chart/base-chart.co
     UserInfoComponent,
     LineAreaChartComponent,
     BaseChartComponent,
+    StarChartComponent,
   ],
   providers: [
     ApiService,
