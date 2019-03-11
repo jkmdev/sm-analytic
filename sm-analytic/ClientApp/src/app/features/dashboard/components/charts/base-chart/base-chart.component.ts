@@ -1,29 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 @Component({
   selector: 'base-chart',
   template: ''
 })
-export class BaseChartComponent implements OnInit {
+export class BaseChartComponent {
 
-  @Input() title: string;
-  @Input() subTitle: string;
-  @Input() chartLabels: Array<String>;
-  @Input() chartData: Array<Object>;
+  @Input() title: string = '';
+  @Input() subTitle: string = '';
+  @Input() chartLabels: Array<String> = [];
+  @Input() chartData: Array<Object> = [];
 
-  chartType: string;
-  chartLegend: boolean;
-  chartOptions: Object;
+  chartType: string = '';
+  chartLegend: boolean = true;
+  chartOptions: Object = {};
 
-  constructor() { }
+  hasData: boolean = false;
 
-  ngOnInit() {
+  constructor(private twitterDataService: TwitterDataService) {
 
-    this.chartLegend = true;
     this.chartOptions = {
       scaleShowVerticalLines: false,
       responsive: true
     };
+
+    if (this.twitterDataService.userData) {
+      this.hasData = true;
+    }
 
   }
 

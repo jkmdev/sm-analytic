@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BaseChartComponent } from '../base-chart/base-chart.component';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 @Component({
   selector: 'app-line-area-chart',
@@ -8,8 +9,8 @@ import { BaseChartComponent } from '../base-chart/base-chart.component';
 })
 export class LineAreaChartComponent extends BaseChartComponent implements OnInit {
 
-  constructor() {
-    super();
+  constructor(twitterDataService: TwitterDataService) {
+    super(twitterDataService);
   }
 
   ngOnInit() {
