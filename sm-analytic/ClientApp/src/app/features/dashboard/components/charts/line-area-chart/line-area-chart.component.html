@@ -1,4 +1,4 @@
-<div class="bar-chart">
+<div class="line-area-chart">
   <div *ngIf="hasData">
     <h5>{{title}}</h5>
     <h6>{{subTitle}}</h6>
@@ -7,7 +7,8 @@
               [datasets]="chartData"
               [labels]="chartLabels"
               [options]="chartOptions"
+              [legend]="chartLegend"
               [chartType]="chartType"></canvas>
     </div>
   </div>
-</div>
+ </div>

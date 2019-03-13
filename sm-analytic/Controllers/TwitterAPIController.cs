@@ -4,6 +4,13 @@ using Tweetinvi;
 using Tweetinvi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Caching.Memory;
+using Tweetinvi.Models.DTO;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace sm_analytic.Controllers
 {
@@ -18,15 +25,17 @@ namespace sm_analytic.Controllers
     {
 
         private IMemoryCache _cache;
+        private readonly IHttpClientFactory _clientFactory;
 
         /*
          * Creates cache to store authentication data 
          * This makes it so that the same authentication data
          * can be stored and shared between requests
          */
-        public TwitterAPIController(IMemoryCache memoryCache)
+        public TwitterAPIController(IMemoryCache memoryCache, IHttpClientFactory clientFactory)
         {
             _cache = memoryCache;
+            _clientFactory = clientFactory;
         }
 
         /*
@@ -66,6 +75,39 @@ namespace sm_analytic.Controllers
         public ObjectResult ValidateTwitterAuth([FromBody] Credentials credentials)
         {
 
+
+            IAuthenticationContext _authenticationContext;
+            _cache.TryGetValue("_authContext", out _authenticationContext);
+
+            try
+            {
+                var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
+                var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
+
+                ObjectResult userInfo = new ObjectResult(user);
+                ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
+                ObjectResult followers = new ObjectResult(user.GetFollowers());
+                IEnumerable<ObjectResult> results = new List<ObjectResult>() {
+                    userInfo,
+                    tweetTimeline,
+                    followers
+                };
+
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Something went wrong: {ex}");
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
+
+        [Route("~/api/GetSocialEngagementData")]
+        [HttpPost]
+        public ObjectResult GetSocialEngagementData([FromBody] Credentials credentials)
+        {
+
             IAuthenticationContext _authenticationContext;
             _cache.TryGetValue("_authContext", out _authenticationContext);
 
@@ -80,9 +122,10 @@ namespace sm_analytic.Controllers
                 Console.WriteLine($"Something went wrong: {ex}");
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
-            
+
         }
 
+ 
         /*
          * Function that authorizes our app to use Twitter API vs an individual user
          * Uses credentials stored in environment variables 

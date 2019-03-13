@@ -1,0 +1,10 @@
+@import 'src/styles';
+
+.line-area-chart {
+  @extend %card-body;
+
+  .chart-container {
+    width: 22vw;
+  }
+
+}
