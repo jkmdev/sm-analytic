@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EngagementService } from 'app/shared/services/engagement.service';
+import { FollowersService } from 'app/shared/services/followers.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -18,7 +19,8 @@ export class FollowerComponent implements OnInit {
 
   constructor(
     private engagementService: EngagementService,
-    private twitterDataService: TwitterDataService
+    private twitterDataService: TwitterDataService,
+    private followersService: FollowersService
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class FollowerComponent implements OnInit {
     this.drawEngagementByHour();
     this.drawEngagementByDay();
     this.drawEngagementTotal();
+    this.followersService.joinedAt(this.twitterDataService.followers);
   }
 
   drawEngagementByHour() {
