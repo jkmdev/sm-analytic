@@ -32,5 +32,19 @@
 
     </div>
 
+    <div class="row charts">
+
+      <div class="col-md-12">
+
+        <app-bar-chart [title]="engagementByDayData.title"
+                       [subTitle]="engagementByDayData.subTitle"
+                       [chartLabels]="engagementByDayData.chartLabels"
+                       [chartData]="engagementByDayData.chartData">
+        </app-bar-chart>
+
+      </div>
+
+    </div>
+
   </div>
 </div>
