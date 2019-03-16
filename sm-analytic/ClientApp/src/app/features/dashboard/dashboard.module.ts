@@ -32,10 +32,10 @@ import { FaqComponent } from './pages/faq/faq.component';
     ChartsModule
   ],
   declarations: [
-    FollowerComponent, 
-    TrendComponent, 
-    SentimentComponent, 
-    OverviewComponent, 
+    FollowerComponent,
+    TrendComponent,
+    SentimentComponent,
+    OverviewComponent,
     DashboardComponent,
     SidebarComponent,
     NavbarComponent,
@@ -56,4 +56,3 @@ import { FaqComponent } from './pages/faq/faq.component';
   ]
 })
 export class DashboardModule { }
-
