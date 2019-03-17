@@ -82,13 +82,11 @@ namespace sm_analytic.Controllers
                 ObjectResult userInfo = new ObjectResult(user);
                 ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
                 ObjectResult followers = new ObjectResult(user.GetFollowers());
-                ObjectResult mentions = new ObjectResult(user.GetMentionsTimeline());
 
                 IEnumerable<ObjectResult> results = new List<ObjectResult>() {
                     userInfo,
                     tweetTimeline,
-                    followers,
-                    mentions
+                    followers
                 };
 
                 return Ok(results);

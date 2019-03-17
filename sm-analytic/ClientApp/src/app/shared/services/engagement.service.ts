@@ -48,8 +48,6 @@ export class EngagementService {
 
       var timeTweeted: number = getTime(tweet.createdAt);
 
-      console.log(timeTweeted);
-
       engagementData.forEach((type) => {
 
         switch (type.label) {
@@ -90,10 +88,3 @@ export class EngagementService {
   }
 
 }
-
-  //TODO: implement below function
-
-  /* calcEngagementByWeek(tweets) {
-    var hoursInDay = 24;
-    return this.calcEngagement(tweets, hoursInDay, this.getDay);
-  } */

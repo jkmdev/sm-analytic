@@ -52,7 +52,16 @@ export class FollowerComponent implements OnInit {
       chartLabels[i] = `${i}:00`;
     }
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementByHour(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementByHour(this.tweets) : [];
+
+    /*chartData.forEach((entry : any) => {
+      entry.fillColor = "rgba(151,249,190,0.5)",
+      entry.strokeColor = "rgba(255,255,255,1)",
+      entry.pointColor = "rgba(220,220,220,1)",
+      entry.pointStrokeColor = "#fff"
+    });
+
+    console.log(chartData);*/
 
     this.engagementByHourData = {
       'title': "Posting Times vs. Engagement (Hourly)",
@@ -75,7 +84,7 @@ export class FollowerComponent implements OnInit {
       6: "Sunday"
     };
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementByDay(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementByDay(this.tweets) : [];
 
     this.engagementByDayData = {
       'title': "Posting Times vs. Engagement (Daily)",
@@ -93,7 +102,7 @@ export class FollowerComponent implements OnInit {
       1: "Retweets"
     };
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : [];
 
     console.log(chartData);
 
