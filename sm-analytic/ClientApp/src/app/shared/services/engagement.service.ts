@@ -80,16 +80,16 @@ export class EngagementService {
       data: [0, 0]
     }];
 
-    if (!tweet.retweetedTweet) {
+    tweets.forEach((tweet) => {
 
-      tweets.forEach((tweet) => {
+      if (!tweet.retweetedTweet) {
 
         engagementData[0].data[0] += tweet.favoriteCount;
         engagementData[0].data[1] += tweet.retweetCount;
 
-      });
+      }
 
-    }
+    });
 
     return engagementData;
 

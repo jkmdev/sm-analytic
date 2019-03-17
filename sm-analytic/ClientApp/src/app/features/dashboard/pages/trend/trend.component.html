@@ -1,11 +1,29 @@
 <div class="page">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md">
-            <h2>Trends</h2>
-            <hr>
-        </div>  
-      </div>  
+  <div class="container-fluid">
+
+    <div class="row">
+      <div class="col-md">
+        <h2>Trends</h2>
+        <hr>
+      </div>
     </div>
+
+    <div class="row charts">
+
+      <div class="col-md-6">
+        <app-base-chart [title]="mostCommonUserHashtags.title"
+                        [subTitle]="mostCommonUserHashtags.subTitle"
+                        [chartLabels]="mostCommonUserHashtags.chartLabels"
+                        [chartData]="mostCommonUserHashtags.chartData"
+                        [chartType]="'doughnut'">
+        </app-base-chart>
+      </div>
+
+      <div class="col-md-4">
+
+      </div>
+
+    </div>
+
   </div>
-    
+  </div>
