@@ -7,6 +7,7 @@ import { TrendComponent } from './pages/trend/trend.component';
 import { DashboardComponent } from './dashboard.component';
 import { FaqComponent } from './pages/faq/faq.component';
 import { HelpComponent } from './pages/help/help.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'help',
         component: HelpComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
       }
     ]
   }

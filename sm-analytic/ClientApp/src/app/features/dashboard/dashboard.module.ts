@@ -26,6 +26,7 @@ import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { HashtagService } from 'app/shared/services/hashtag.service';
 import { HelpComponent } from './pages/help/help.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { HelpComponent } from './pages/help/help.component';
     BaseChartComponent,
     StarChartComponent,
     FaqComponent,
-    HelpComponent
+    HelpComponent,
+    ProfileComponent
   ],
   providers: [
     ApiService,
