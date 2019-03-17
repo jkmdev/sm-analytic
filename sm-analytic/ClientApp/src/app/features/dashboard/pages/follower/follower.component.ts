@@ -111,28 +111,17 @@ export class FollowerComponent implements OnInit {
 
   drawFollowerJoinedAt() {
 
+    const yearsFromCurrent = 8;
+    const currentYear = new Date().getFullYear();
+
     var chartData = [];
-    var chartLabels = {
-      0: "2009",
-      1: "2010",
-      2: "2011",
-      3: "2012",
-      4: "2013",
-      5: "2014",
-      6: "2015",
-      7: "2016",
-      8: "2017",
-      9: "2018",
-      10: "2019",
-      11: "2020"
-    };
+    var chartLabels = {};
 
     if (this.followers) {
       chartData = this.followersService.joinedAt(this.followers);
-      console.log(chartData);
-      /*chartData.forEach((entry, index) => {
-        chartLabels[index] = entry.label;
-      });*/
+      chartData[0].data.forEach((entry, index) => {
+        chartLabels[index] = (currentYear - yearsFromCurrent) + index;
+      });
     }
 
     this.followerJoinedAt = {
@@ -142,17 +131,6 @@ export class FollowerComponent implements OnInit {
       'chartData': chartData
     };
 
-    // console.log(this.followerJoinedAt);
-
   }
-
-  yearsToArray(years) {
-    var arr = [];
-    years.forEach((year) => {
-      arr.push(year.data)
-    });
-    return arr;
-  }
-
 
 }

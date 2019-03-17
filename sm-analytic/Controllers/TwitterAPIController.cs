@@ -4,14 +4,8 @@ using Tweetinvi;
 using Tweetinvi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Caching.Memory;
-using Tweetinvi.Models.DTO;
 using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using Tweetinvi.Parameters;
 
 namespace sm_analytic.Controllers
 {

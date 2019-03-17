@@ -14,10 +14,10 @@ export class FollowersService {
     if (!followers) return [];
 
     var data = [];
-    const yearsFromCurrent = 12;
+    const yearsFromCurrent = 8;
     const currentYear = new Date().getFullYear();
 
-    for (var year = currentYear; year > (currentYear - yearsFromCurrent); year--) {
+    for (var year = (currentYear - yearsFromCurrent); year <= currentYear; year++) {
       data.push(
         { data: [0], label: year.toString()}
       );
