@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 @Component({
-  selector: 'base-chart',
-  template: ''
+  selector: 'app-base-chart',
+  templateUrl: './base-chart.component.html'
 })
 export class BaseChartComponent {
 
@@ -11,10 +11,9 @@ export class BaseChartComponent {
   @Input() subTitle: string = '';
   @Input() chartLabels: Array<String> = [];
   @Input() chartData: Array<Object> = [];
-
-  chartType: string = '';
-  chartLegend: boolean = true;
-  chartOptions: Object = {};
+  @Input() chartLegend: boolean = true;
+  @Input() chartType: string = '';
+  @Input() chartOptions: Object = {};
 
   hasData: boolean = false;
 

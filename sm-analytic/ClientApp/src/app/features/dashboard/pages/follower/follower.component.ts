@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EngagementService } from 'app/shared/services/engagement.service';
+import { FollowersService } from 'app/shared/services/followers.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -11,14 +12,17 @@ import { Subscription } from 'rxjs/Subscription';
 export class FollowerComponent implements OnInit {
 
   tweets: any;
+  followers: any;
   engagementByHourData: any;
   engagementByDayData: any;
   engagementTotal: any;
+  followerJoinedAt: any;
   private twitterDataUpdateRef: Subscription = null;
 
   constructor(
     private engagementService: EngagementService,
-    private twitterDataService: TwitterDataService
+    private twitterDataService: TwitterDataService,
+    private followersService: FollowersService
   ) { }
 
   ngOnInit() {
@@ -33,9 +37,11 @@ export class FollowerComponent implements OnInit {
 
   drawCharts() {
     this.tweets = this.twitterDataService.tweets;
+    this.followers = this.twitterDataService.followers;
     this.drawEngagementByHour();
     this.drawEngagementByDay();
     this.drawEngagementTotal();
+    this.drawFollowerJoinedAt();
   }
 
   drawEngagementByHour() {
@@ -46,7 +52,16 @@ export class FollowerComponent implements OnInit {
       chartLabels[i] = `${i}:00`;
     }
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementByHour(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementByHour(this.tweets) : [];
+
+    /*chartData.forEach((entry : any) => {
+      entry.fillColor = "rgba(151,249,190,0.5)",
+      entry.strokeColor = "rgba(255,255,255,1)",
+      entry.pointColor = "rgba(220,220,220,1)",
+      entry.pointStrokeColor = "#fff"
+    });
+
+    console.log(chartData);*/
 
     this.engagementByHourData = {
       'title': "Posting Times vs. Engagement (Hourly)",
@@ -69,7 +84,7 @@ export class FollowerComponent implements OnInit {
       6: "Sunday"
     };
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementByDay(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementByDay(this.tweets) : [];
 
     this.engagementByDayData = {
       'title': "Posting Times vs. Engagement (Daily)",
@@ -84,17 +99,40 @@ export class FollowerComponent implements OnInit {
 
     var chartLabels = {
       0: "Tweets",
-      1: "Retweets",
-      2: "Doot"
+      1: "Retweets"
     };
 
-    var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : {};
+    var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : [];
 
     console.log(chartData);
 
     this.engagementTotal = {
       'title': "Total Engagement",
       'subTitle': "",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
+  drawFollowerJoinedAt() {
+
+    const yearsFromCurrent = 8;
+    const currentYear = new Date().getFullYear();
+
+    var chartData = [];
+    var chartLabels = {};
+
+    if (this.followers) {
+      chartData = this.followersService.joinedAt(this.followers);
+      chartData[0].data.forEach((entry, index) => {
+        chartLabels[index] = (currentYear - yearsFromCurrent) + index;
+      });
+    }
+
+    this.followerJoinedAt = {
+      'title': "When Your Followers Joined Twitter",
+      'subTitle': "Shows given year a follower joined the Twitter site",
       'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };

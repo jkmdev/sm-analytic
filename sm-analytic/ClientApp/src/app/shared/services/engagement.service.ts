@@ -16,7 +16,7 @@ export class EngagementService {
   }
 
   calcEngagementTotal(tweets) {
-    return this.calcEngagement(tweets, 0, x => 0);
+    return this.calcTotals(tweets);
   }
 
   // returns whole number integer indicating hour of day
@@ -70,11 +70,21 @@ export class EngagementService {
 
   }
 
+  calcTotals(tweets) {
+
+    var engagementData = [{
+      data: [0, 0]
+    }];
+
+    tweets.forEach((tweet) => {
+
+      engagementData[0].data[0] += tweet.favoriteCount;
+      engagementData[0].data[1] += tweet.retweetCount;
+
+    });
+
+    return engagementData;
+
+  }
+
 }
-
-  //TODO: implement below function
-
-  /* calcEngagementByWeek(tweets) {
-    var hoursInDay = 24;
-    return this.calcEngagement(tweets, hoursInDay, this.getDay);
-  } */

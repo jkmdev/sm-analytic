@@ -4,12 +4,7 @@ using Tweetinvi;
 using Tweetinvi.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Caching.Memory;
-using Tweetinvi.Models.DTO;
 using System.Net.Http;
-using Newtonsoft.Json;
-using System.Text;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
 using System.Collections.Generic;
 
 namespace sm_analytic.Controllers
@@ -87,6 +82,7 @@ namespace sm_analytic.Controllers
                 ObjectResult userInfo = new ObjectResult(user);
                 ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
                 ObjectResult followers = new ObjectResult(user.GetFollowers());
+
                 IEnumerable<ObjectResult> results = new List<ObjectResult>() {
                     userInfo,
                     tweetTimeline,
@@ -101,30 +97,6 @@ namespace sm_analytic.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
-
-
-        [Route("~/api/GetSocialEngagementData")]
-        [HttpPost]
-        public ObjectResult GetSocialEngagementData([FromBody] Credentials credentials)
-        {
-
-            IAuthenticationContext _authenticationContext;
-            _cache.TryGetValue("_authContext", out _authenticationContext);
-
-            try
-            {
-                var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
-                var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Something went wrong: {ex}");
-                return StatusCode(500, "Internal server error: " + ex.Message);
-            }
-
-        }
-
  
         /*
          * Function that authorizes our app to use Twitter API vs an individual user
@@ -154,3 +126,7 @@ namespace sm_analytic.Controllers
 }
 
 
+// get followers
+// get all their tweets
+// find in_response_to matching original id
+// getTweetReplies ... returns iterable of tweets
