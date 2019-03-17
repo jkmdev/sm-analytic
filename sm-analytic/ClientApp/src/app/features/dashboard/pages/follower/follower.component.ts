@@ -104,8 +104,6 @@ export class FollowerComponent implements OnInit {
 
     var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : [];
 
-    console.log(chartData);
-
     this.engagementTotal = {
       'title': "Total Engagement",
       'subTitle': "",
@@ -136,6 +134,8 @@ export class FollowerComponent implements OnInit {
       'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };
+
+    console.log(this.followerJoinedAt);
 
   }
 

@@ -36,54 +36,22 @@ export class TrendComponent implements OnInit {
 
   drawMostCommonUserHashtags() {
 
-    var chartLabels = {
-      0: "Test",
-      1: "Woo"
-    };
+    var hashtags = this.tweets ? this.hashtagService.hashtagCount(this.tweets) : {};
 
-    var hashtags = {};
-
-    if (this.tweets) {
-
-      this.tweets.forEach((tweet) => {
-        if (!tweet.retweetedTweet) {
-
-          tweet.hashtags.forEach((hashtag) => {
-
-            console.log(hashtag);
-            console.log(hashtag.text);
-
-            if (hashtags.hasOwnProperty(hashtag.text)) {
-              hashtags[hashtag.text] += 0;
-            } else {
-              hashtags[hashtag.text] = 1;
-            }
-
-          });
-
-        }
-      });
-
-    }
-
-    var data = [];
-
-    data = Object.values(hashtags);
+    var keys = Object.keys(hashtags);
 
     var chartData = [{
-      data: data
+      data: Object.values(hashtags)
     }];
-
-    console.log(hashtags);
-
-    // var chartData = this.tweets ? this.engagementService.calcEngagementByDay(this.tweets) : [];
 
     this.mostCommonUserHashtags = {
       'title': "Most Common Hashtags from User",
-      'subTitle': "Shows the most commonly used hashtags by this user.",
-      'chartLabels': Object.values(chartLabels),
+      'subTitle': "Compares most used hashtags.",
+      'chartLabels': Object.keys(hashtags),
       'chartData': chartData
     };
+
+    console.log(this.mostCommonUserHashtags);
 
   }
 
