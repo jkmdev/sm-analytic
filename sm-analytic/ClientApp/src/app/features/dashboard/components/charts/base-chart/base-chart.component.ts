@@ -2,8 +2,8 @@ import { Component, Input } from '@angular/core';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 @Component({
-  selector: 'base-chart',
-  template: ''
+  selector: 'app-base-chart',
+  templateUrl: './base-chart.component.html'
 })
 export class BaseChartComponent {
 

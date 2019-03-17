@@ -84,21 +84,18 @@ export class FollowerComponent implements OnInit {
       'chartData': chartData
     };
 
-    console.log(this.engagementByDayData);
-
   }
 
   drawEngagementTotal() {
 
     var chartLabels = {
       0: "Tweets",
-      1: "Retweets",
-      2: "Doot"
+      1: "Retweets"
     };
 
     var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : {};
 
-    // console.log(chartData);
+    console.log(chartData);
 
     this.engagementTotal = {
       'title': "Total Engagement",
