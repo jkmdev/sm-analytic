@@ -19,21 +19,21 @@ export class FollowersService {
 
     for (var year = currentYear; year > (currentYear - yearsFromCurrent); year--) {
       data.push(
-        { data: 0, label: year}
+        { data: [0], label: year.toString()}
       );
     }
-
-    console.log(followers);
 
     followers.forEach((follower) => {
       data.forEach((entry) => {
         if (this.getYear(follower.createdAt) == entry.label) {
-          entry.data++;
+          entry.data[0]++;
         }
       });
     });
 
-    return data;
+    return [{
+      data: this.yearsToArray(data), label: "Years"
+    }];
 
   }
 
@@ -41,6 +41,14 @@ export class FollowersService {
     return new Date(
       Date.parse(dateString)
     ).getFullYear()
+  }
+
+  yearsToArray(years) {
+    var arr = [];
+    years.forEach((year) => {
+      arr.push(year.data)
+    });
+    return arr;
   }
 
 }

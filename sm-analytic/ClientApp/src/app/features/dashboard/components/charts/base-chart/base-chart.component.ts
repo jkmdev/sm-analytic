@@ -11,10 +11,9 @@ export class BaseChartComponent {
   @Input() subTitle: string = '';
   @Input() chartLabels: Array<String> = [];
   @Input() chartData: Array<Object> = [];
-
-  chartType: string = '';
-  chartLegend: boolean = true;
-  chartOptions: Object = {};
+  @Input() chartLegend: boolean = true;
+  @Input() chartType: string = '';
+  @Input() chartOptions: Object = {};
 
   hasData: boolean = false;
 

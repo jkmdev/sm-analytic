@@ -12,9 +12,11 @@ import { Subscription } from 'rxjs/Subscription';
 export class FollowerComponent implements OnInit {
 
   tweets: any;
+  followers: any;
   engagementByHourData: any;
   engagementByDayData: any;
   engagementTotal: any;
+  followerJoinedAt: any;
   private twitterDataUpdateRef: Subscription = null;
 
   constructor(
@@ -35,10 +37,11 @@ export class FollowerComponent implements OnInit {
 
   drawCharts() {
     this.tweets = this.twitterDataService.tweets;
+    this.followers = this.twitterDataService.followers;
     this.drawEngagementByHour();
     this.drawEngagementByDay();
     this.drawEngagementTotal();
-    this.followersService.joinedAt(this.twitterDataService.followers);
+    this.drawFollowerJoinedAt();
   }
 
   drawEngagementByHour() {
@@ -81,6 +84,8 @@ export class FollowerComponent implements OnInit {
       'chartData': chartData
     };
 
+    console.log(this.engagementByDayData);
+
   }
 
   drawEngagementTotal() {
@@ -93,7 +98,7 @@ export class FollowerComponent implements OnInit {
 
     var chartData = this.tweets ? this.engagementService.calcEngagementTotal(this.tweets) : {};
 
-    console.log(chartData);
+    // console.log(chartData);
 
     this.engagementTotal = {
       'title': "Total Engagement",
@@ -103,5 +108,51 @@ export class FollowerComponent implements OnInit {
     };
 
   }
+
+  drawFollowerJoinedAt() {
+
+    var chartData = [];
+    var chartLabels = {
+      0: "2009",
+      1: "2010",
+      2: "2011",
+      3: "2012",
+      4: "2013",
+      5: "2014",
+      6: "2015",
+      7: "2016",
+      8: "2017",
+      9: "2018",
+      10: "2019",
+      11: "2020"
+    };
+
+    if (this.followers) {
+      chartData = this.followersService.joinedAt(this.followers);
+      console.log(chartData);
+      /*chartData.forEach((entry, index) => {
+        chartLabels[index] = entry.label;
+      });*/
+    }
+
+    this.followerJoinedAt = {
+      'title': "When Your Followers Joined Twitter",
+      'subTitle': "Shows given year a follower joined the Twitter site",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+    // console.log(this.followerJoinedAt);
+
+  }
+
+  yearsToArray(years) {
+    var arr = [];
+    years.forEach((year) => {
+      arr.push(year.data)
+    });
+    return arr;
+  }
+
 
 }
