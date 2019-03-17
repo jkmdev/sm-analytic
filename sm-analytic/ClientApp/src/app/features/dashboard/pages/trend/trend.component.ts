@@ -55,4 +55,8 @@ export class TrendComponent implements OnInit {
 
   }
 
+  // count of posts done with that hashtag
+
+
+
 }

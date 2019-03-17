@@ -29,4 +29,30 @@ export class HashtagService {
 
   }
 
+  allHashtagsUsed(tweets) {
+
+    var hashtags = [];
+
+    tweets.forEach((tweet) => {
+      if (!tweet.retweetedTweet) {
+        tweet.hashtags.forEach((hashtag) => {
+          if (hashtags.indexOf(hashtag.text) === -1) {
+            hashtags.push(hashtag.text);
+          }
+        });
+
+      }
+    });
+
+    return hashtags;
+
+  }
+
+  postsWithHashtag(tweets) {
+
+    var hashtags = this.allHashtagsUsed(tweets);
+
+
+  }
+
 }

@@ -97,7 +97,7 @@ namespace sm_analytic.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
- 
+
         /*
          * Function that authorizes our app to use Twitter API vs an individual user
          * Uses credentials stored in environment variables 
