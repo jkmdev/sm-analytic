@@ -5,4 +5,11 @@
   hr {
     border-top: 2px solid rgba(0, 0, 0, 0.1);
   }
+
+  ul {
+    list-style-type: none;
+    li {
+      padding: 10px 0px 10px 0px;
+    }
+  }
 }
