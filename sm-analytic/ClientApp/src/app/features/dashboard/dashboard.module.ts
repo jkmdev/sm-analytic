@@ -25,6 +25,7 @@ import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { HashtagService } from 'app/shared/services/hashtag.service';
+import { HelpComponent } from './pages/help/help.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { HashtagService } from 'app/shared/services/hashtag.service';
     LineAreaChartComponent,
     BaseChartComponent,
     StarChartComponent,
-    FaqComponent
+    FaqComponent,
+    HelpComponent
   ],
   providers: [
     ApiService,
