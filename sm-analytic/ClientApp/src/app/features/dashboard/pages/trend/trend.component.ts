@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HashtagService } from 'app/shared/services/hashtag.service';
 
 @Component({
   selector: 'app-trend',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrendComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private hashtagService: HashtagService
+  ) { }
 
   ngOnInit() {
   }

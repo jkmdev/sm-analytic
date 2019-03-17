@@ -17,12 +17,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
 import { ChartsModule } from 'ng2-charts';
 import { LineAreaChartComponent } from './components/charts/line-area-chart/line-area-chart.component';
-import { EngagementService } from 'app/shared/services/engagement.service';
-import { TwitterDataService } from 'app/shared/services/twitter-data.service';
-import { FollowersService } from 'app/shared/services/followers.service';
 import { BaseChartComponent } from './components/charts/base-chart/base-chart.component';
 import { StarChartComponent } from './components/charts/star-chart/star-chart.component';
 import { FaqComponent } from './pages/faq/faq.component';
+
+import { EngagementService } from 'app/shared/services/engagement.service';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { FollowersService } from 'app/shared/services/followers.service';
+import { HashtagService } from 'app/shared/services/hashtag.service';
 
 
 @NgModule({
@@ -51,7 +53,8 @@ import { FaqComponent } from './pages/faq/faq.component';
     ApiService,
     EngagementService,
     TwitterDataService,
-    FollowersService
+    FollowersService,
+    HashtagService
   ],
   exports: [
     DashboardComponent

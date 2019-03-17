@@ -48,21 +48,25 @@ export class EngagementService {
 
       var timeTweeted: number = getTime(tweet.createdAt);
 
-      engagementData.forEach((type) => {
+      if (!tweet.retweetedTweet) {
 
-        switch (type.label) {
-          case 'Tweets': type.data[timeTweeted] += tweet.favoriteCount;
-            break;
-          // case 'Quotes': type.data[timeTweeted] += tweet.quoteCount;
-          //   break;
-          // case 'Replies': type.data[timeTweeted] += tweet.replyCount;
-          //   break;
-          case 'Retweets': type.data[timeTweeted] += tweet.retweetCount;
-            break;
-          default: break;
-        }
+        engagementData.forEach((type) => {
 
-      });
+          switch (type.label) {
+            case 'Tweets': type.data[timeTweeted] += tweet.favoriteCount;
+              break;
+            // case 'Quotes': type.data[timeTweeted] += tweet.quoteCount;
+            //   break;
+            // case 'Replies': type.data[timeTweeted] += tweet.replyCount;
+            //   break;
+            case 'Retweets': type.data[timeTweeted] += tweet.retweetCount;
+              break;
+            default: break;
+          }
+
+        });
+
+      }
 
     });
 
@@ -76,12 +80,16 @@ export class EngagementService {
       data: [0, 0]
     }];
 
-    tweets.forEach((tweet) => {
+    if (!tweet.retweetedTweet) {
 
-      engagementData[0].data[0] += tweet.favoriteCount;
-      engagementData[0].data[1] += tweet.retweetCount;
+      tweets.forEach((tweet) => {
 
-    });
+        engagementData[0].data[0] += tweet.favoriteCount;
+        engagementData[0].data[1] += tweet.retweetCount;
+
+      });
+
+    }
 
     return engagementData;
 
