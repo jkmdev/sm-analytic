@@ -11,12 +11,43 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card shadow-sm border-0">
-          <div class="card-header">
+
+          <div class="card-header bg-transparent text-center">
             <h5>You can edit your profile in this section.</h5>
             <h6>Please make sure to save your changes before leaving.</h6>
           </div>
-          <div class="card-body">
-            <button type="button" class="btn btn-primary btn-block" (click)="updateUser()">SAVE</button>
+
+          <div class="card-body form">
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">First Name</span>
+              </div>
+              <input type="text" class="form-control">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Last Name</span>
+              </div>
+              <input type="text" class="form-control">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Email</span>
+              </div>
+              <input type="text" class="form-control">
+            </div>
+
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Date of Birth</span>
+              </div>
+              <input type="text" class="form-control">
+            </div>
+
+            <button type="button" class="btn btn-primary" (click)="updateUser()">SAVE</button>
           </div>
         </div>
       </div>

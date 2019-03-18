@@ -7,20 +7,19 @@
   color: white;
 
   h6 {
-    padding: 10px;
-    border-radius: 5px;
+    padding: 5px;
 
     &:hover {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
     }
   }
 
   .btn-container {
     display: flex;
     justify-content: center;
-    button {
-      margin-top: 100px;
-    }
 
+    button {
+      margin-bottom: 50px;
+    }
   }
 }
