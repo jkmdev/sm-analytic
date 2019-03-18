@@ -2,7 +2,9 @@ using AutoMapper;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -11,16 +13,19 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using sm_analytic.Controllers;
 using sm_analytic.Models;
 using System;
+using System.Net;
 using System.Text;
 
 namespace sm_analytic
 {
     public class Startup
     {
+        static IHostingEnvironment _configureEnv;
         private readonly SymmetricSecurityKey _signKey 
             = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Manager.HashPasswordSHA256("@Per1Astera6Ad1Astra8SMAnalytic@")));
 
@@ -38,9 +43,10 @@ namespace sm_analytic
 
             //Dependency Injection to 
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(
-                                                            Configuration.GetConnectionString("DefaultConnection")));
+                                                            Configuration.GetConnectionString("DefaultConnection")/*, i => i.MigrationsAssembly("initialDB")*/));
 
             services.AddSingleton<IJwtManager, JwtManager>();
+            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));
@@ -49,8 +55,9 @@ namespace sm_analytic
             services.Configure<JwtIssuerProps>(props =>
             {
                 props.Issuer             = jwtAppSettingProps[nameof(JwtIssuerProps.Issuer)];
-                props.Audience           = jwtAppSettingProps[nameof(JwtIssuerProps.Audience)];
+                props.Audience           = Environment.GetEnvironmentVariable("baseURL");
                 props.SigningCredentials = new SigningCredentials(_signKey, SecurityAlgorithms.HmacSha256);
+                
             });
 
             
@@ -60,7 +67,7 @@ namespace sm_analytic
                 ValidIssuer              = jwtAppSettingProps[nameof(JwtIssuerProps.Issuer)],
 
                 ValidateAudience         = true,
-                ValidAudience            = jwtAppSettingProps[nameof(JwtIssuerProps.Audience)],
+                ValidAudience            = Environment.GetEnvironmentVariable("baseURL"),
 
                 ValidateIssuerSigningKey = true,
                 IssuerSigningKey         = _signKey,
@@ -139,27 +146,53 @@ namespace sm_analytic
             
         }
 
+
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            _configureEnv = env;
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
+                Environment.SetEnvironmentVariable("baseURL", "http://127.0.0.1:5000/");
+                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/landing");
             }
             else
             {
                 app.UseExceptionHandler("/Error");
-                // app.UseDeveloperExceptionPage();
-                Environment.SetEnvironmentVariable("redirectURL", "http://myvmlab.senecacollege.ca:6448/dashboard");
+                Environment.SetEnvironmentVariable("baseURL", "http://myvmlab.senecacollege.ca:6448/");
+                Environment.SetEnvironmentVariable("redirectURL", "http://myvmlab.senecacollege.ca:6448/landing");
 
                 // app.UseHsts(); don't know what this is for, leaving it just in case
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
 
+            //Adds "Access-Control-Allow-Origin" header to the requester of unknown origin (otherwise, raises annoing CORP exception) 
+            app.UseExceptionHandler(builder =>
+            {
+                builder.Run(async item =>
+                {
+                    item.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                    item.Response.Headers.Add("Access-Control-Allow-Credentials", "true");
+                    item.Response.StatusCode = (int)HttpStatusCode.InternalServerError; /*HTTP 500*/
+
+                    if (item.Features.Get<IExceptionHandlerFeature>() != null)
+                    {
+                        item.Response.Headers.Add("Application-Error", item.Features.Get<IExceptionHandlerFeature>().Error.Message);
+                        item.Response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
+                        await item.Response.WriteAsync(item.Features.Get<IExceptionHandlerFeature>().Error.Message).ConfigureAwait(false);
+                    }
+                });
+            });
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
             app.UseSession();
+            app.UseAuthentication();
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
@@ -185,6 +218,7 @@ namespace sm_analytic
 
             });
 
+            
         }
     }
 }

@@ -2,14 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { ApiService } from '../../../../shared/services/api.service';
 
+import { DashboardUser } from '../../../../shared/models/dashboard-user';
+import { DashboardService } from '../../dashboard.service';
+import { UserInfoComponent } from '../user-info/user-info.component';
+import { UserService } from '../../../../shared/services/user.service';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
+
 export class SidebarComponent implements OnInit {
 
-  constructor(private router: Router, private apiService: ApiService) { }
+  dashboardUser: DashboardUser;
+
+  constructor(private router: Router, private apiService: ApiService, private dashboardService: DashboardService) { }
 
   userInfo = {
     userName: "userName",
@@ -35,6 +43,17 @@ export class SidebarComponent implements OnInit {
       this.authorizeUser(queryParams.substr(1));
     }
 
+    this.dashboardService.getAuthDetails()
+      .subscribe((dU: DashboardUser) =>
+      {
+        this.dashboardUser = dU;
+        console.log(dU);
+        console.log(this.dashboardUser.Email);
+      },
+      error => { console.log('EYY');});
+
+    // console.log(this.dashboardUser);
+    // this.userInfo.userName = this.dashboardUser.Email;
   }
 
   /*

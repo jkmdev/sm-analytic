@@ -1,25 +1,32 @@
 <div class="login">
   <h1>Social Media Analytics</h1>
-  <h5>Welcome back! Please login to your account.</h5>
-  <div class="form">
+
+  <div *ngIf="newUser" class="alert alert-success" role="alert">
+    <strong>The account has been created!</strong>
+  </div>
+
+  <h5>Please login to your account.</h5>
+
+  <form #f="ngForm" novalidate (ngSubmit)="login(f)">
+
     <div class="input">
-        <h6>Username:</h6>
-        <input type="text">
+      <h6>Email:</h6>
+      <input type="email" id="email" name="Email" required class="form-control" [ngModel]="credentials.Email" #email="ngModel" tmFocus validateEmail>
     </div>
+
     <div class="input">
-        <h6>Password:</h6>
-        <input type="text">
+      <h6>Password:</h6>
+      <input type="password" id="password" name="Password" required class="form-control" ngModel>
+    </div>
+
+    <div *ngIf="errors" class="alert alert-danger" role="alert">
+      <strong>Seems like we have some errors with logging in</strong> <!--{{errors}}-->
     </div>
 
     <div class="inline">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-        </div>
-        <label class="forgot-password-link" (click)="resetPassword()">Forgot Password</label>
-      </div>
-      
-  </div>
+      <button class="forgot-password-link, btn-primary" (click)="resetPassword()">Forgot Password</button>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid || isBusy">LOGIN</button>
+    </div>
 
-  <button type="button" class="btn btn-primary" (click)="login()">LOGIN</button>
+  </form>
 </div>

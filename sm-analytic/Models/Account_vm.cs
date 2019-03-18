@@ -23,8 +23,8 @@ namespace sm_analytic.Models
         public string Email { get; set; }
 
         [DisplayName("Date of Birth")]
-        [Required, DataType(DataType.Date)]
-        public string DOB { get; set; }
+        [Required]
+        public DateTime DOB { get; set; }
 
         //Should be limited to 20, later will be hashed
         [DisplayName("Password")]

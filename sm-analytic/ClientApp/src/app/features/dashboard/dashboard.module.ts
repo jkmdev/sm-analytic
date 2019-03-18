@@ -17,12 +17,18 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApiService } from '../../shared/services/api.service';
 import { ChartsModule } from 'ng2-charts';
 
+import { AuthGuard } from '../auth/auth.guard';
+import { FormsModule } from '@angular/forms';
+import { DashboardService } from './dashboard.service';
+import { UserService } from '../../shared/services/user.service';
+
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ],
   declarations: [
     FollowerComponent, 
@@ -36,7 +42,7 @@ import { ChartsModule } from 'ng2-charts';
     UserInfoComponent
   ],
   providers: [
-    ApiService
+    ApiService, AuthGuard, DashboardService, UserService
   ],
   exports: [
     DashboardComponent

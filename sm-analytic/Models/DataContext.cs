@@ -12,24 +12,24 @@ namespace sm_analytic.Models
 
         public virtual DbSet<Account> Accounts { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer("DefaultConnection");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    //optionsBuilder.UseSqlServer("DefaultConnection");
+        //}
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Account>()
-            //    .HasOne(i => i.IdentityCustomModel)
-            //    .IsRequired(true);
+        //    //modelBuilder.Entity<Account>()
+        //    //    .HasOne(i => i.IdentityCustomModel)
+        //    //    .IsRequired(true);
 
-            //modelBuilder.Entity<RequestTracker>()
-            //    .HasOne(i => i.Account)
-            //    .WithOne(i => i.RequestTracker)
-            //    .IsRequired(true);
+        //    //modelBuilder.Entity<RequestTracker>()
+        //    //    .HasOne(i => i.Account)
+        //    //    .WithOne(i => i.RequestTracker)
+        //    //    .IsRequired(true);
                 
-        }
+        //}
     }
 }
