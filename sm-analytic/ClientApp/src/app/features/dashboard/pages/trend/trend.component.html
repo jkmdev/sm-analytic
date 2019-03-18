@@ -10,7 +10,7 @@
 
     <div class="row charts">
 
-      <div class="col-md-6">
+      <div class="col-md-4">
         <app-base-chart [title]="mostCommonUserHashtags.title"
                         [subTitle]="mostCommonUserHashtags.subTitle"
                         [chartLabels]="mostCommonUserHashtags.chartLabels"
@@ -19,8 +19,14 @@
         </app-base-chart>
       </div>
 
-      <div class="col-md-4">
-
+      <div class="col-md-8">
+        <app-base-chart [title]="publicPostsWithHashtags.title"
+                        [subTitle]="publicPostsWithHashtags.subTitle"
+                        [chartLabels]="publicPostsWithHashtags.chartLabels"
+                        [chartData]="publicPostsWithHashtags.chartData"
+                        [chartType]="'bar'"
+                        [chartLegend]="false">
+        </app-base-chart>
       </div>
 
     </div>

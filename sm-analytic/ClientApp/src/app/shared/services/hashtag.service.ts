@@ -7,8 +7,6 @@ export class HashtagService {
 
   hashtagCount(tweets) {
 
-
-
     var hashtags = {};
 
     tweets.forEach((tweet) => {
