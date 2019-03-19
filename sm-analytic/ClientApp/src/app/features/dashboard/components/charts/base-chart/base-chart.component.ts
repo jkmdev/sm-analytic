@@ -58,7 +58,6 @@ export class BaseChartComponent {
       hasData = false;
     }
 
-
     return hasData;
 
   }

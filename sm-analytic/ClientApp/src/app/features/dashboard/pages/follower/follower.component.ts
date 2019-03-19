@@ -41,7 +41,7 @@ export class FollowerComponent implements OnInit {
     this.drawEngagementByHour();
     this.drawEngagementByDay();
     this.drawEngagementTotal();
-    this.drawFollowerJoinedAt();
+    this.followerJoinedAt = this.followersService.followerJoinedAtData(this.followers);
   }
 
   drawEngagementByHour() {
@@ -110,32 +110,6 @@ export class FollowerComponent implements OnInit {
       'chartLabels': Object.values(chartLabels),
       'chartData': chartData
     };
-
-  }
-
-  drawFollowerJoinedAt() {
-
-    const yearsFromCurrent = 8;
-    const currentYear = new Date().getFullYear();
-
-    var chartData = [];
-    var chartLabels = {};
-
-    if (this.followers) {
-      chartData = this.followersService.joinedAt(this.followers);
-      chartData[0].data.forEach((entry, index) => {
-        chartLabels[index] = (currentYear - yearsFromCurrent) + index;
-      });
-    }
-
-    this.followerJoinedAt = {
-      'title': "When Your Followers Joined Twitter",
-      'subTitle': "Shows given year a follower joined the Twitter site",
-      'chartLabels': Object.values(chartLabels),
-      'chartData': chartData
-    };
-
-    console.log(this.followerJoinedAt);
 
   }
 
