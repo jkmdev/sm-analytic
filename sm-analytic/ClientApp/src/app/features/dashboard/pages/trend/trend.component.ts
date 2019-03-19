@@ -10,8 +10,6 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class TrendComponent implements OnInit {
 
-  hashtagCount: object;
-  searchedHashtags: object;
   mostCommonUserHashtags: any;
   publicPostsWithHashtags: any;
   hasData: boolean = false;
@@ -24,6 +22,17 @@ export class TrendComponent implements OnInit {
 
   ngOnInit() {
 
+    var chartObject = {
+      title: '',
+      subTitle: '',
+      chartLabels: {},
+      chartData: [],
+      chartType: ''
+    };
+
+    this.mostCommonUserHashtags = Object.create(chartObject);
+    this.publicPostsWithHashtags = Object.create(chartObject);
+
     this.drawCharts();
 
     this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
@@ -33,53 +42,14 @@ export class TrendComponent implements OnInit {
   }
 
   drawCharts() {
-    this.hashtagCount = this.twitterDataService.hashtagCount;
-    this.searchedHashtags = this.twitterDataService.searchedHashtags;
-    this.drawMostCommonUserHashtags();
-    this.drawPublicPostsWithHashtags();
+    var hashtagCount = this.twitterDataService.hashtagCount;
+    var searchedHashtags = this.twitterDataService.searchedHashtags;
+
+    this.mostCommonUserHashtags = this.hashtagService.mostCommonUserHashtags(hashtagCount);
+    this.publicPostsWithHashtags = this.hashtagService.publicPostsWithHashtags(searchedHashtags);
   }
 
-  drawMostCommonUserHashtags() {
-
-    var chartData = [];
-    var chartLabels = [];
-    
-    if (this.hashtagCount) {
-      chartData = [{
-        data: Object.values(this.hashtagCount)
-      }];
-      chartLabels = Object.keys(this.hashtagCount);
-    }
-
-    this.mostCommonUserHashtags = {
-      'title': "Most Common Hashtags from User",
-      'subTitle': "Compares most used hashtags.",
-      'chartLabels': chartLabels,
-      'chartData': chartData
-    };
-
-  }
-
-  drawPublicPostsWithHashtags() {
-
-    var chartData = [];
-    var chartLabels = [];
-
-    if (this.searchedHashtags) {
-      chartData = [{
-        data: Object.values(this.searchedHashtags)
-      }];
-      chartLabels = Object.keys(this.searchedHashtags);
-    }
-
-    this.publicPostsWithHashtags = {
-      'title': "Amount of Posts that use Your Hashtags",
-      'subTitle': "Shows the amount of (popular) posts made by other users that use hashtags you commonly use.",
-      'chartLabels': chartLabels,
-      'chartData': chartData
-    };
-
-  }
+  
 
 
 

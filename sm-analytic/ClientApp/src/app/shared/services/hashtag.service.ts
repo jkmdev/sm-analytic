@@ -5,6 +5,52 @@ export class HashtagService {
 
   constructor() { }
 
+  mostCommonUserHashtags(hashtagCount) {
+
+    if (!hashtagCount) return {};
+
+    var chartData = [];
+    var chartLabels = [];
+
+    if (this.hashtagCount) {
+      chartData = [{
+        data: Object.values(hashtagCount)
+      }];
+      chartLabels = Object.keys(hashtagCount);
+    }
+
+    return {
+      'title': "Most Common Hashtags from User",
+      'subTitle': "Compares most used hashtags.",
+      'chartLabels': chartLabels,
+      'chartData': chartData
+    };
+
+  }
+
+  publicPostsWithHashtags(searchedHashtags) {
+
+    if (!searchedHashtags) return {};
+
+    var chartData = [];
+    var chartLabels = [];
+
+    if (searchedHashtags) {
+      chartData = [{
+        data: Object.values(searchedHashtags)
+      }];
+      chartLabels = Object.keys(searchedHashtags);
+    }
+
+    return {
+      'title': "Amount of Posts that use Your Hashtags",
+      'subTitle': "Shows the amount of (popular) posts made by other users that use hashtags you commonly use.",
+      'chartLabels': chartLabels,
+      'chartData': chartData
+    };
+
+  }
+
   hashtagCount(tweets) {
 
     var hashtags = {};

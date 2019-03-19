@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 
+Chart: {
+
+}
+
 @Injectable()
 export class FollowersService {
 

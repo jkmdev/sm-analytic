@@ -34,6 +34,8 @@ export class BaseChartComponent {
 
   chartDataHasData() {
 
+    if (!this.chartData) return false;
+
     var hasData = true;
 
     function elementHasData(ele) {
