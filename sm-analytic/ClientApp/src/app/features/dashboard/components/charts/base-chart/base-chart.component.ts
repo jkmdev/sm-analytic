@@ -40,8 +40,6 @@ export class BaseChartComponent {
 
       var hasData = true;
 
-      console.log(ele.data);
-
       if (ele.data.length == 0) {
         hasData = false;
       } else {
