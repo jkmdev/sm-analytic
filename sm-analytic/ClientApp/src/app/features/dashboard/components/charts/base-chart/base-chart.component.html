@@ -13,4 +13,7 @@
               [chartType]="chartType"></canvas>
     </div>
   </div>
+  <div *ngIf="!hasData">
+    <p>No data available</p>
+  </div>
 </div>

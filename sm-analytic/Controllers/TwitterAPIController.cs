@@ -141,6 +141,7 @@ namespace sm_analytic.Controllers
 
                 searchParameter.Lang = LanguageFilter.English;
                 searchParameter.SearchType = SearchResultType.Popular;
+
                 var tweets = Search.SearchTweets(searchParameter);
                 var tweetAmount = new List<ITweet>(tweets).Count;
 

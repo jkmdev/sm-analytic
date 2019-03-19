@@ -13,19 +13,21 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-12 chart-gutter">
-            <app-bar-chart [title]="engagementByDayData.title"
-                           [subTitle]="engagementByDayData.subTitle"
-                           [chartLabels]="engagementByDayData.chartLabels"
-                           [chartData]="engagementByDayData.chartData">
-            </app-bar-chart>
+            <app-base-chart [title]="engagementByDayData.title"
+                            [subTitle]="engagementByDayData.subTitle"
+                            [chartLabels]="engagementByDayData.chartLabels"
+                            [chartData]="engagementByDayData.chartData"
+                            [chartType]="'bar'">
+            </app-base-chart>
           </div>
           <div class="col-12">
-            <app-line-area-chart [title]="followerJoinedAt.title"
+            <app-base-chart [title]="followerJoinedAt.title"
                                  [subTitle]="followerJoinedAt.subTitle"
                                  [chartLabels]="followerJoinedAt.chartLabels"
                                  [chartData]="followerJoinedAt.chartData"
-                                 [chartLegend]="false">
-            </app-line-area-chart>
+                                 [chartLegend]="false"
+                                 [chartType]="'line'">
+            </app-base-chart>
           </div>
         </div>
       </div>
@@ -33,11 +35,12 @@
       <div class="col-md-4">
         <div class="row">
           <div class="col-12 chart-gutter">
-            <app-line-area-chart [title]="engagementByHourData.title"
+            <app-base-chart [title]="engagementByHourData.title"
                                  [subTitle]="engagementByHourData.subTitle"
                                  [chartLabels]="engagementByHourData.chartLabels"
-                                 [chartData]="engagementByHourData.chartData">
-            </app-line-area-chart>
+                                 [chartData]="engagementByHourData.chartData"
+                                 [chartType]="'line'">
+            </app-base-chart>
           </div>
           <div class="col-12">
             <app-base-chart [title]="engagementTotal.title"

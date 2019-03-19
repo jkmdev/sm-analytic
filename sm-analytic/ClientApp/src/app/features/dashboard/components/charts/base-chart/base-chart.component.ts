@@ -24,9 +24,42 @@ export class BaseChartComponent {
       responsive: true
     };
 
-    if (this.twitterDataService.userData) {
-      this.hasData = true;
+  }
+
+  ngOnInit() {
+
+    this.hasData = this.chartDataHasData();
+
+  }
+
+  chartDataHasData() {
+
+    var hasData = true;
+
+    function elementHasData(ele) {
+
+      var hasData = true;
+
+      console.log(ele.data);
+
+      if (ele.data.length == 0) {
+        hasData = false;
+      } else {
+        hasData = ele.data.every((x) => { return x.length == 0 });
+      }
+      
+      return hasData;
+
     }
+
+    if (this.chartData.length == 0) {
+      hasData = false;
+    } else if (this.chartData.every(elementHasData)) {
+      hasData = false;
+    }
+
+
+    return hasData;
 
   }
 
