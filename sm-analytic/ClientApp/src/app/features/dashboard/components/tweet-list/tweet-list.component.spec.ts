@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StarChartComponent } from './star-chart.component';
+import { TweetListComponent } from './tweet-list.component';
 
-describe('StarChartComponent', () => {
-  let component: StarChartComponent;
-  let fixture: ComponentFixture<StarChartComponent>;
+describe('TweetListComponent', () => {
+  let component: TweetListComponent;
+  let fixture: ComponentFixture<TweetListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StarChartComponent ]
+      declarations: [ TweetListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StarChartComponent);
+    fixture = TestBed.createComponent(TweetListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

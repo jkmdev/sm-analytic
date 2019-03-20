@@ -2,9 +2,26 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md">
-          <h2>Overview</h2>
-          <hr>
-      </div>  
-    </div>  
-  </div>
+        <h2>Overview</h2>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-12">
+            <app-base-chart [title]="followerJoinedAt.title"
+                            [subTitle]="followerJoinedAt.subTitle"
+                            [chartLabels]="followerJoinedAt.chartLabels"
+                            [chartData]="followerJoinedAt.chartData"
+                            [chartLegend]="false"
+                            [chartType]="'line'">
+            </app-base-chart>
+          </div>
+        </div>
+      </div>
+
+    </div>
 </div>

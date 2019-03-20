@@ -5,6 +5,66 @@ export class EngagementService {
 
   constructor() { }
 
+  engagementByHourData(tweets) {
+
+    var chartLabels = {};
+
+    for (var i = 0; i < 24; i++) {
+      chartLabels[i] = `${i}:00`;
+    }
+
+    var chartData = tweets ? this.calcEngagementByHour(tweets) : [];
+
+    return {
+      'title': "Posting Times vs. Engagement (Hourly)",
+      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has for a given hour.",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
+  engagementByDayData(tweets) {
+
+    var chartLabels = {
+      0: "Monday",
+      1: "Tuesday",
+      2: "Wednesday",
+      3: "Thursday",
+      4: "Friday",
+      5: "Saturday",
+      6: "Sunday"
+    };
+
+    var chartData = tweets ? this.calcEngagementByDay(tweets) : [];
+
+    return {
+      'title': "Posting Times vs. Engagement (Daily)",
+      'subTitle': "Shows a relationship between when a tweet was posted and how many likes, etc it has for a given day.",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
+  engagementTotalData(tweets) {
+
+    var chartLabels = {
+      0: "Tweets",
+      1: "Retweets"
+    };
+
+    var chartData = tweets ? this.calcEngagementTotal(tweets) : [];
+
+    return {
+      'title': "Total Engagement",
+      'subTitle': "",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
   calcEngagementByHour(tweets) {
     var daysInWeek = 24;
     return this.calcEngagement(tweets, daysInWeek, this.getHour);
@@ -33,8 +93,6 @@ export class EngagementService {
 
     var engagementData = [
       { data: [], label: 'Tweets' },
-      // { data: [], label: 'Quotes' },
-      // { data: [], label: 'Replies' },
       { data: [], label: 'Retweets' }
     ];
 
@@ -48,21 +106,21 @@ export class EngagementService {
 
       var timeTweeted: number = getTime(tweet.createdAt);
 
-      engagementData.forEach((type) => {
+      if (!tweet.retweetedTweet) {
 
-        switch (type.label) {
-          case 'Tweets': type.data[timeTweeted] += tweet.favoriteCount;
-            break;
-          // case 'Quotes': type.data[timeTweeted] += tweet.quoteCount;
-          //   break;
-          // case 'Replies': type.data[timeTweeted] += tweet.replyCount;
-          //   break;
-          case 'Retweets': type.data[timeTweeted] += tweet.retweetCount;
-            break;
-          default: break;
-        }
+        engagementData.forEach((type) => {
 
-      });
+          switch (type.label) {
+            case 'Tweets': type.data[timeTweeted] += tweet.favoriteCount;
+              break;
+            case 'Retweets': type.data[timeTweeted] += tweet.retweetCount;
+              break;
+            default: break;
+          }
+
+        });
+
+      }
 
     });
 
@@ -78,8 +136,12 @@ export class EngagementService {
 
     tweets.forEach((tweet) => {
 
-      engagementData[0].data[0] += tweet.favoriteCount;
-      engagementData[0].data[1] += tweet.retweetCount;
+      if (!tweet.retweetedTweet) {
+
+        engagementData[0].data[0] += tweet.favoriteCount;
+        engagementData[0].data[1] += tweet.retweetCount;
+
+      }
 
     });
 

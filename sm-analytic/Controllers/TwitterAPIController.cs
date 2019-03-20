@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.Extensions.Caching.Memory;
 using System.Net.Http;
 using System.Collections.Generic;
+using Tweetinvi.Parameters;
 
 namespace sm_analytic.Controllers
 {
@@ -79,14 +80,21 @@ namespace sm_analytic.Controllers
                 var userCreds = AuthFlow.CreateCredentialsFromVerifierCode(credentials.oauth_verifier, _authenticationContext);
                 var user = Tweetinvi.User.GetAuthenticatedUser(userCreds);
 
+                var allHashtagsUsed = CountHashtags(user.GetUserTimeline());
+                var publicPostsWithHashtags = SearchHashtags(allHashtagsUsed);
+
                 ObjectResult userInfo = new ObjectResult(user);
                 ObjectResult tweetTimeline = new ObjectResult(user.GetUserTimeline());
                 ObjectResult followers = new ObjectResult(user.GetFollowers());
+                ObjectResult hashtagCount = new ObjectResult(allHashtagsUsed);
+                ObjectResult searchedHashtags = new ObjectResult(publicPostsWithHashtags);
 
                 IEnumerable<ObjectResult> results = new List<ObjectResult>() {
                     userInfo,
                     tweetTimeline,
-                    followers
+                    followers,
+                    hashtagCount,
+                    searchedHashtags
                 };
 
                 return Ok(results);
@@ -97,13 +105,59 @@ namespace sm_analytic.Controllers
                 return StatusCode(500, "Internal server error: " + ex.Message);
             }
         }
- 
-        /*
-         * Function that authorizes our app to use Twitter API vs an individual user
-         * Uses credentials stored in environment variables 
-         */
-        private void AuthorizeOurApp()
+
+        private Dictionary<string, int> CountHashtags(IEnumerable<ITweet> tweets)
         {
+
+            var hashtags = new Dictionary<string, int>();
+
+            foreach (var tweet in tweets)
+            {
+                foreach (var hashtag in tweet.Hashtags)
+                {
+                    int value;
+
+                    if (hashtags.TryGetValue(hashtag.Text, out value)) {
+                        hashtags[hashtag.Text]++;
+                    }
+                    else {
+                        hashtags[hashtag.Text] = 1;
+                    }
+                }  
+            }
+
+            return hashtags;
+
+        }
+
+        private Dictionary<string, int> SearchHashtags(Dictionary<string, int> hashtags) {
+
+            var hashtagCount = new Dictionary<string, int>();
+
+            foreach (KeyValuePair<string, int> hashtag in hashtags)
+            {
+
+                var searchParameter = new SearchTweetsParameters("#" + hashtag.Key);
+
+                searchParameter.Lang = LanguageFilter.English;
+                searchParameter.SearchType = SearchResultType.Popular;
+
+                var tweets = Search.SearchTweets(searchParameter);
+                var tweetAmount = new List<ITweet>(tweets).Count;
+
+                hashtagCount[hashtag.Key] = tweetAmount;
+            
+            }
+
+            return hashtagCount;
+
+        }
+
+            /*
+             * Function that authorizes our app to use Twitter API vs an individual user
+             * Uses credentials stored in environment variables 
+             */
+        private void AuthorizeOurApp() {
             Auth.SetUserCredentials(
                 Environment.GetEnvironmentVariable("CONSUMER_KEY"),
                 Environment.GetEnvironmentVariable("CONSUMER_SECRET"),
@@ -116,17 +170,10 @@ namespace sm_analytic.Controllers
          * Model for the user credentials passed into
          * ValidateTwitterAuth()
          */
-        public class Credentials
-        {
+        public class Credentials {
             public string authorization_id { get; set; }
             public string oauth_token { get; set; }
             public string oauth_verifier { get; set; }
         }
     }
 }
-
-
-// get followers
-// get all their tweets
-// find in_response_to matching original id
-// getTweetReplies ... returns iterable of tweets

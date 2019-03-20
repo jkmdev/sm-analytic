@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   options: Object[] = [
     { 'title': 'Profile', 'path': 'dashboard/profile' },
     { 'title': 'FAQ', 'path': 'dashboard/faq' },
-    { 'title': 'Help', 'path': 'dashboard/help' },
+    { 'title': 'Help', 'path': 'dashboard/help' }
   ];
 
   gotoMenuPage(path) {

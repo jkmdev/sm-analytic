@@ -5,11 +5,37 @@ export class FollowersService {
 
   constructor() { }
 
+  followerJoinedAtData(followers) {
+
+    const yearsFromCurrent = 8;
+    const currentYear = new Date().getFullYear();
+
+    var chartData = [];
+    var chartLabels = {};
+
+    if (followers) {
+      chartData = this.joinedAt(followers);
+      chartData[0].data.forEach((entry, index) => {
+        chartLabels[index] = (currentYear - yearsFromCurrent) + index;
+      });
+    }
+
+    return {
+      'title': "When Your Followers Joined Twitter",
+      'subTitle': "Shows given year a follower joined the Twitter site",
+      'chartLabels': Object.values(chartLabels),
+      'chartData': chartData
+    };
+
+  }
+
   /**
    * Determines when each follower made their account
    * Return array of years counting when followers joined
    **/
   joinedAt(followers) {
+
+    console.log(followers);
 
     if (!followers) return [];
 
