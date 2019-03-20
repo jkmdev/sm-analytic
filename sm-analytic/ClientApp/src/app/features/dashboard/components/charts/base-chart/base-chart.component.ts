@@ -1,13 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges, OnInit, OnChanges } from '@angular/core';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { Subscription } from 'rxjs/Subscription';
-import {Observable} from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-base-chart',
   templateUrl: './base-chart.component.html'
 })
-export class BaseChartComponent {
+export class BaseChartComponent implements OnChanges, OnInit {
 
   @Input() title: string = '';
   @Input() subTitle: string = '';
@@ -30,13 +30,11 @@ export class BaseChartComponent {
   }
 
   ngOnInit() {
-
     this.hasData = this.chartDataHasData();
+  }
 
-    Observable.interval(1000).subscribe(x => {
-      this.ngOnInit();
-    });
-
+  ngOnChanges(changes: SimpleChanges) {
+    this.ngOnInit();
   }
 
   chartDataHasData() {
