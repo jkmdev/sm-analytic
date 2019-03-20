@@ -39,6 +39,8 @@ export class BaseChartComponent implements OnChanges, OnInit {
 
   chartDataHasData() {
 
+    console.log(this.chartData);
+
     if (!this.chartData) return false;
 
     var hasData = true;
@@ -50,7 +52,7 @@ export class BaseChartComponent implements OnChanges, OnInit {
       if (ele.data.length == 0) {
         hasData = false;
       } else {
-        hasData = ele.data.every((x) => { return x.length == 0 });
+        hasData = ele.data.every((x) => { return x[0] == 0 });
       }
       
       return hasData;
@@ -62,6 +64,8 @@ export class BaseChartComponent implements OnChanges, OnInit {
     } else if (this.chartData.every(elementHasData)) {
       hasData = false;
     }
+
+    console.log(hasData);
 
     return hasData;
 
