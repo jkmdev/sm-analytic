@@ -42,8 +42,8 @@ export class TrendComponent implements OnInit {
   }
 
   drawCharts() {
-    var hashtagCount = this.twitterDataService.hashtagCount;
-    var searchedHashtags = this.twitterDataService.searchedHashtags;
+    const hashtagCount = this.twitterDataService.hashtagCount;
+    const searchedHashtags = this.twitterDataService.searchedHashtags;
 
     this.mostCommonUserHashtags = this.hashtagService.mostCommonUserHashtags(hashtagCount);
     this.publicPostsWithHashtags = this.hashtagService.publicPostsWithHashtags(searchedHashtags);

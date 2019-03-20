@@ -40,8 +40,6 @@ export class BaseChartComponent implements OnChanges, OnInit {
 
   chartDataHasData() {
 
-    console.log(this.chartData);
-
     if (!this.chartData) return false;
 
     var hasData = true;

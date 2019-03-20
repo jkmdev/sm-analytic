@@ -4,14 +4,6 @@ import { FollowersService } from 'app/shared/services/followers.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { Subscription } from 'rxjs/Subscription';
 
-interface Chart {
-  title: string,
-  subTitle: string,
-  chartLabels: object,
-  chartData: Array<object>,
-  chartType: string
-}
-
 @Component({
   selector: 'app-follower',
   templateUrl: './follower.component.html',
@@ -19,17 +11,19 @@ interface Chart {
 })
 export class FollowerComponent implements OnInit {
 
-  private engagementByHourData: any;
-  private engagementByDayData: any;
-  private engagementTotal: any;
-  private followerJoinedAt: any;
-  private twitterDataUpdateRef: Subscription = null;
+  engagementByHourData: any;
+  engagementByDayData: any;
+  engagementTotal: any;
+  followerJoinedAt: any;
+  twitterDataUpdateRef: Subscription = null;
 
   constructor(
     private engagementService: EngagementService,
     private twitterDataService: TwitterDataService,
     private followersService: FollowersService
-  ) {
+  ) {}
+
+  ngOnInit() {
 
     var chartObject = {
       title: '',
@@ -45,10 +39,6 @@ export class FollowerComponent implements OnInit {
     this.followerJoinedAt = Object.create(chartObject);
 
     this.drawCharts();
-
-  }
-
-  ngOnInit() {
 
     this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
       this.drawCharts();

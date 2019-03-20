@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class OverviewComponent implements OnInit {
 
-  private followerJoinedAt: any;
-  private twitterDataUpdateRef: Subscription = null;
+  followerJoinedAt: any;
+  twitterDataUpdateRef: Subscription = null;
 
   constructor(
     private twitterDataService: TwitterDataService,
