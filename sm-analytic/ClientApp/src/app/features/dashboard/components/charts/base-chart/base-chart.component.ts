@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'app-base-chart',
-  templateUrl: './base-chart.component.html'
+  templateUrl: './base-chart.component.html',
+  styleUrls: ['./base-chart.component.scss']
 })
 export class BaseChartComponent implements OnChanges, OnInit {
 

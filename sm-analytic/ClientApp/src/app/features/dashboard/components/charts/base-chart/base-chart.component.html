@@ -1,4 +1,4 @@
-<div class="card shadow-sm border-0" style="min-height:250px;">
+<div class="chart card shadow-sm border-0" style="min-height:250px;">
   <div *ngIf="hasData">
     <div class="card-header bg-transparent text-center">
       <h5 class="card-title">{{title}}</h5>
@@ -13,7 +13,7 @@
               [chartType]="chartType"></canvas>
     </div>
   </div>
-  <div *ngIf="!hasData">
-    <p>No data available</p>
+  <div class="error-message" *ngIf="!hasData">
+    <h6>No data available</h6>
   </div>
 </div>
