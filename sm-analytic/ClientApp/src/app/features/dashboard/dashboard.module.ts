@@ -23,6 +23,7 @@ import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { ApiService } from '../../shared/services/api.service';
+import { TweetListComponent } from './components/tweet-list/tweet-list.component';
 
 @NgModule({
   imports: [
@@ -43,7 +44,8 @@ import { ApiService } from '../../shared/services/api.service';
     BaseChartComponent,
     FaqComponent,
     HelpComponent,
-    ProfileComponent
+    ProfileComponent,
+    TweetListComponent
   ],
   providers: [
     ApiService,
