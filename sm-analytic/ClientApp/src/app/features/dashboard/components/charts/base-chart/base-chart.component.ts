@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { Subscription } from 'rxjs/Subscription';
+import {Observable} from 'rxjs/Rx';
 
 @Component({
   selector: 'app-base-chart',
@@ -14,6 +16,7 @@ export class BaseChartComponent {
   @Input() chartLegend: boolean = true;
   @Input() chartType: string = '';
   @Input() chartOptions: Object = {};
+  private twitterDataUpdateRef: Subscription = null;
 
   hasData: boolean = false;
 
@@ -29,6 +32,10 @@ export class BaseChartComponent {
   ngOnInit() {
 
     this.hasData = this.chartDataHasData();
+
+    Observable.interval(1000).subscribe(x => {
+      this.ngOnInit();
+    });
 
   }
 
