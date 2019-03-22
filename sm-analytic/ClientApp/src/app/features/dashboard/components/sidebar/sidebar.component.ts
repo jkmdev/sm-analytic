@@ -6,6 +6,7 @@ import { DashboardUser } from '../../../../shared/models/dashboard-user';
 import { DashboardService } from '../../dashboard.service';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { UserService } from '../../../../shared/services/user.service';
+import { userInfo } from 'os';
 
 @Component({
   selector: 'app-sidebar',
@@ -35,25 +36,25 @@ export class SidebarComponent implements OnInit {
    * This function checks if there are Twitter auth parameters in the url
    * If so, it attempt to authorize a user with said credentials
    */
-  ngOnInit() {
-
+  ngOnInit()
+  {
+    
+    
     var queryParams = window.location.search;
-
-    if (queryParams) {
+    if (queryParams)
+    {
       this.authorizeUser(queryParams.substr(1));
     }
 
     this.dashboardService.getAuthDetails()
-      .subscribe((dU: DashboardUser) =>
-      {
-        this.dashboardUser = dU;
-        console.log(dU);
-        console.log(this.dashboardUser.Email);
+      .subscribe((dashboardUser: DashboardUser) => {
+        this.dashboardUser = dashboardUser;
+        console.log(dashboardUser);
+        console.log(this.dashboardUser.email);
+        this.userInfo.userName = this.dashboardUser.email;
       },
-      error => { console.log('EYY');});
+      error => { });
 
-    // console.log(this.dashboardUser);
-    // this.userInfo.userName = this.dashboardUser.Email;
   }
 
   /*

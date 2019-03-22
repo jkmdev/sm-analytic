@@ -60,11 +60,16 @@ namespace sm_analytic.Controllers
 
         public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
         {
-            return new ClaimsIdentity(new GenericIdentity(userName, "Token"),   new[]
+            
+            var claimIdentity = new ClaimsIdentity(new GenericIdentity(userName, "Token"),   new[]
                                                                                 {
                                                                                     new Claim(Manager.JwtClaimHelper.ClaimIdentifierId, id),
                                                                                     new Claim(Manager.JwtClaimHelper.ClaimIdentifierRole, Manager.JwtClaimHelper.ClaimValue)
                                                                                 });
+
+            Console.WriteLine("______!!!!_____ GenerateClaimsIdentity | ClaimsIdentity: auth?=" + claimIdentity.IsAuthenticated + " name="+claimIdentity.Name);
+
+            return claimIdentity;
         }
 
         /// <returns>

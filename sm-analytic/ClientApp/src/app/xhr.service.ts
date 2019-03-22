@@ -5,7 +5,6 @@ import 'rxjs/add/observable/throw';
 import { Injectable } from '@angular/core';
 
 // http://stackoverflow.com/questions/34934009/handling-401s-globally-with-angular-2
-// https://github.com/mmacneil/AngularASPNETCore2WebApiAuth/blob/master/src/src/app/dashboard/services/dashboard.service.ts
 
 @Injectable()
 export class AuthenticateXHRBackend extends XHRBackend {

@@ -1,7 +1,7 @@
 export interface DashboardUser
 {
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  DOB: Date;
+  firstName: string;
+  lastName: string;
+  email: string;
+  dob: string;
 }

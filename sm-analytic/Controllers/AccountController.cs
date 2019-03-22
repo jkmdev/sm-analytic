@@ -99,8 +99,6 @@ namespace sm_analytic.Controllers
 
         }
 
-       
-
         private async Task<ClaimsIdentity> GetClaimsIdentity(string email /*aka userName*/, string password)
         {
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))

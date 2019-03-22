@@ -13,9 +13,9 @@ namespace sm_analytic.Models
             LastLoginDate        = DateTime.Today;
             DOB                  = DateTime.Now.AddYears(-30);
             //TwoFactorEnabled     = false;
-            //EmailConfirmed       = false;
-            //PhoneNumberConfirmed = false;
-            //LockoutEnabled       = true;
+            EmailConfirmed       = true;
+            PhoneNumberConfirmed = true;
+            LockoutEnabled       = false;
             //LockoutEnd           = DateTimeOffset.Now.AddYears(10); // To be lifted after account confirmation
         }
 

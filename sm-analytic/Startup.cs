@@ -46,7 +46,8 @@ namespace sm_analytic
                                                             Configuration.GetConnectionString("DefaultConnection")/*, i => i.MigrationsAssembly("initialDB")*/));
 
             services.AddSingleton<IJwtManager, JwtManager>();
-            services.TryAddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));
@@ -66,7 +67,7 @@ namespace sm_analytic
                 ValidateIssuer           = true,
                 ValidIssuer              = jwtAppSettingProps[nameof(JwtIssuerProps.Issuer)],
 
-                ValidateAudience         = true,
+                ValidateAudience         = false,
                 ValidAudience            = Environment.GetEnvironmentVariable("baseURL"),
 
                 ValidateIssuerSigningKey = true,

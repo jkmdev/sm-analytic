@@ -28,7 +28,6 @@ export class DashboardService extends BaseService
   }
 
   getAuthDetails(): Observable<DashboardUser> {
-    console.log("In GET!");
     let headers = new Headers();
     let authToken = localStorage.getItem('auth_token');
 
@@ -38,11 +37,7 @@ export class DashboardService extends BaseService
     console.log("AuthToken = " + authToken);
 
     return this.http.get(this.currUrl + 'dashboard/getuserdetails', { headers })
-      .map(response =>
-      {
-        response.json();
-        console.log("response JSON"+ response.json());
-      })
+      .map(response => response.json())
       .catch(this.handleError);
   }
 

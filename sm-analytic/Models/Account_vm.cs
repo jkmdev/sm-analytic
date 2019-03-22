@@ -95,4 +95,24 @@ namespace sm_analytic.Models
         [DataType(DataType.Password)]
         public string PasswordConfirm { get; set; }
     }
+
+    public class AccountBaseInfo
+    {
+        [DisplayName("First Name")]
+        [Required, StringLength(40)]
+        public string FirstName { get; set; }
+
+        [DisplayName("Last Name")]
+        [Required, StringLength(40)]
+        public string LastName { get; set; }
+
+        [DisplayName("Email")]
+        [Required, StringLength(50)]
+        [DataType(DataType.EmailAddress)]
+        public string Email { get; set; }
+
+        [DisplayName("Date of Birth")]
+        [Required]
+        public DateTime DOB { get; set; }
+    }
 }

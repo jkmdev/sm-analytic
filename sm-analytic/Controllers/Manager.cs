@@ -197,6 +197,7 @@ namespace sm_analytic.Models
                 };
 
                 return JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.Indented});
+                
             }
         }
 
