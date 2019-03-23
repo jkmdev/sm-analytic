@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tweet-list',
@@ -7,12 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TweetListComponent implements OnInit {
 
-  title: string = 'Top Posts';
-  subTitle: string = 'Your posts with the most combined likes and retweets.';
+  @Input() title: string = 'Most Liked Posts';
+  @Input() subTitle: string = '';
+  @Input() tweets: any;
 
   constructor() { }
 
   ngOnInit() {
+
+    this.tweets = [
+      { text: "Doodlee doo", score: 45, user: "Bob", handle: "bobboy", link: "https://twitter.com/jack/status/20", date: "March 21, 2006" },
+      { text: "Heidi who", score: 89, user: "Bob", handle: "bobboy", link: "https://twitter.com/jack/status/20", date: "March 21, 2006" }
+    ];
+
   }
 
 }
