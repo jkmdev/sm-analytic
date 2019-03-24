@@ -80,4 +80,12 @@ export class TwitterDataService {
     window.location.reload();
   }
 
+  hasData() {
+    return this.userData;
+  }
+
+  hasNoData() {
+    return !this.userData;
+  }
+
 }

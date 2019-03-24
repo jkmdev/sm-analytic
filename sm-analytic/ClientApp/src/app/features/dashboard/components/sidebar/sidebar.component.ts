@@ -26,10 +26,6 @@ export class SidebarComponent {
     { 'title':'Followers', 'path':'dashboard/follower' },
   ];
 
-  twitterAuth() {
-    this.twitterDataService.twitterAuth();
-  }
-
   /*
    * This component controls the routing to the various dashboard pages
    * This function handles the page redirection
