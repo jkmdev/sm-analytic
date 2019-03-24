@@ -1,19 +1,19 @@
 <div class="tweet-list ">
 
-  <div class="title card text-center">
+  <div class="title card text-center shadow-sm">
     <div class="card-body">
       <h5 class="">{{title}}</h5>
       <small class="card-subtitle text-muted">{{subTitle}}</small>
     </div>
   </div>
 
-  <div class="card">
+  <div class="card shadow-sm">
     <div class="card-header bg-transparent header">
       <div class="text">
-        Tweet
+        {{header.text}}
       </div>
       <div class="score">
-        # of Likes
+        {{header.score}}
       </div>
     </div>
     <div class="twitter-tweet" *ngFor="let tweet of tweets">

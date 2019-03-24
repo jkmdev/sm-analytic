@@ -1,18 +1,18 @@
 .tweet-list {
 
   .title {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .header {
     display: flex;
     font-weight: bold;
     .text {
-      flex: 5;
+      flex: 4;
     }
     .score {
       flex: 1;
-      text-align: center;
+      align-self: flex-end;
     }
   }
 
