@@ -24,6 +24,7 @@ import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { ApiService } from '../../shared/services/api.service';
 import { TweetListComponent } from './components/tweet-list/tweet-list.component';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 
 @NgModule({
   imports: [
@@ -46,7 +47,7 @@ import { TweetListComponent } from './components/tweet-list/tweet-list.component
     HelpComponent,
     ProfileComponent,
     TweetListComponent,
-    NgbdModalContent
+    AuthModalComponent
   ],
   providers: [
     ApiService,
@@ -59,7 +60,7 @@ import { TweetListComponent } from './components/tweet-list/tweet-list.component
     DashboardComponent
   ],
   entryComponents: [
-    NgbdModalContent
+    AuthModalComponent
   ]
 })
 export class DashboardModule { }

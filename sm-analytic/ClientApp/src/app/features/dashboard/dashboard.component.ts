@@ -1,36 +1,8 @@
 import { Component, OnInit, SimpleChanges, Input } from '@angular/core';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
-import { NgbActiveModal, NgbModal, NgbModalRef, NgbModalOptions, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs/Subscription';
-
-
-@Component({
-  selector: 'ngbd-modal-content',
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Hi there!</h4>
-    </div>
-    <div class="modal-body">
-      <p>To get started, authorize our app to use one of the following:</p>
-      <button (click)="twitterAuth()" type="button" class="btn btn-warning">Authorize Twitter</button>
-    </div>
-  `
-})
-export class NgbdModalContent {
-
-  @Input() name;
-
-  constructor(
-    public activeModal: NgbActiveModal,
-    private twitterDataService: TwitterDataService
-  ) { }
-
-  twitterAuth() {
-    this.twitterDataService.twitterAuth();
-  }
-
-}
-
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -74,8 +46,17 @@ export class DashboardComponent implements OnInit {
     this.modalOption.keyboard = false;
     this.modalOption.centered = true;
     this.modalOption.backdropClass = 'light-blue-backdrop';
-    this.modalRef = this.modalService.open(NgbdModalContent, this.modalOption);
+    this.modalRef = this.modalService.open(AuthModalComponent, this.modalOption);
     this.modalRef.componentInstance.name = 'World';
+  }
+
+  getFilter() {
+    if (this.twitterDataService.hasNoData()) {
+      return 'blur(5px)';
+    } else {
+      return ''; 
+    }
+    
   }
 
 }
