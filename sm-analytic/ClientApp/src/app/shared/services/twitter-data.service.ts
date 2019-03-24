@@ -88,4 +88,8 @@ export class TwitterDataService {
     return !this.userData;
   }
 
+  isAuthorize() {
+
+  }
+
 }
