@@ -13,6 +13,7 @@ export class OverviewComponent implements OnInit {
 
   followerJoinedAt: any;
   topUserTweets: any;
+  topMentions: any;
   twitterDataUpdateRef: Subscription = null;
 
   constructor(
@@ -48,8 +49,10 @@ export class OverviewComponent implements OnInit {
 
     const followers = this.twitterDataService.followers;
     const tweets = this.twitterDataService.tweets;
+    const mentions = this.twitterDataService.mentions;
     this.followerJoinedAt = this.followersService.followerJoinedAtData(followers);
-    this.topUserTweets = this.engagementService.topUserTweets(tweets);
+    this.topUserTweets = this.engagementService.topTweets(tweets);
+    this.topMentions = this.engagementService.topTweets(mentions);
 
   }
 

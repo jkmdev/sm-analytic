@@ -65,9 +65,7 @@ export class EngagementService {
 
   }
 
-  topUserTweets(tweets) {
-
-    console.log(tweets);
+  topTweets(tweets) {
 
     var simplerTweets = [];
 
@@ -88,7 +86,7 @@ export class EngagementService {
         const year = date.getFullYear();
 
         simplerTweets.push({
-          text: tweet.text,
+          text: tweet.fullText,
           score: tweet.favoriteCount,
           user: tweet.createdBy.name,
           handle: tweet.createdBy.screenName,
@@ -99,18 +97,8 @@ export class EngagementService {
 
     }
 
-    console.log(simplerTweets);
-
     return simplerTweets;
  
-  }
-
-  calcTopUserTweets(userTweets) {
-    this.calcTopTweets(userTweets);
-  }
-
-  calcTopMentions(mentions) {
-
   }
 
   calcEngagementByHour(tweets) {
@@ -194,10 +182,6 @@ export class EngagementService {
     });
 
     return engagementData;
-
-  }
-
-  calcTopTweets(tweets) {
 
   }
 

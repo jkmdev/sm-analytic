@@ -10,6 +10,7 @@ export class TwitterDataService {
   public followers;
   public hashtagCount;
   public searchedHashtags;
+  public mentions;
   public updated = new Subject<void>();
 
   constructor(private apiService: ApiService) { }
@@ -58,6 +59,7 @@ export class TwitterDataService {
           this.followers = val[2].value;
           this.hashtagCount = val[3].value;
           this.searchedHashtags = val[4].value;
+          this.mentions = val[5].value;
           this.updated.next();
           localStorage.setItem('userData', JSON.stringify(this.userData));
           localStorage.setItem('tweets', JSON.stringify(this.tweets));

@@ -16,14 +16,14 @@
             <app-tweet-list [title]="'Most Liked Posts'"
                             [subTitle]="'Your most liked posts of all time.'"
                             [tweets]="topUserTweets">
-
             </app-tweet-list>
           </div>
         </div>
         <div class="row">
           <div class="col-12">
-            <app-tweet-list>
-
+            <app-tweet-list [title]="'Most Liked Mentions'"
+                            [subTitle]="'Posts mentioning you with the most liked tweets of all time.'"
+                            [tweets]="topMentions">
             </app-tweet-list>
           </div>
         </div>
