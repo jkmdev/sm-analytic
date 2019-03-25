@@ -156,13 +156,13 @@ namespace sm_analytic
             {
                 app.UseDeveloperExceptionPage();
                 Environment.SetEnvironmentVariable("baseURL", "http://127.0.0.1:5000/");
-                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/landing");
+                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
             }
             else
             {
                 app.UseExceptionHandler("/Error");
                 Environment.SetEnvironmentVariable("baseURL", "http://myvmlab.senecacollege.ca:6448/");
-                Environment.SetEnvironmentVariable("redirectURL", "http://myvmlab.senecacollege.ca:6448/landing");
+                Environment.SetEnvironmentVariable("redirectURL", "http://myvmlab.senecacollege.ca:6448/dashboard");
 
                 // app.UseHsts(); don't know what this is for, leaving it just in case
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
