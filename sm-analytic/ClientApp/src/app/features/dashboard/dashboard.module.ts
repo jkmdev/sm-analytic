@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
+import { SharedModule } from '../../shared/shared.module';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { FollowerComponent } from './pages/follower/follower.component';
@@ -10,12 +12,18 @@ import { DashboardComponent } from './dashboard.component';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { BarComponent } from './components/charts/bar-chart/bar-chart.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { BaseChartComponent } from './components/charts/base-chart/base-chart.component';
+import { FaqComponent } from './pages/faq/faq.component';
+import { HashtagService } from 'app/shared/services/hashtag.service';
+import { HelpComponent } from './pages/help/help.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { TweetListComponent } from './components/tweet-list/tweet-list.component';
 
-import { SharedModule } from '../../shared/shared.module';
+import { EngagementService } from 'app/shared/services/engagement.service';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
+import { FollowersService } from 'app/shared/services/followers.service';
 import { ApiService } from '../../shared/services/api.service';
-import { ChartsModule } from 'ng2-charts';
 
 import { AuthGuard } from '../auth/auth.guard';
 import { FormsModule } from '@angular/forms';
@@ -38,11 +46,22 @@ import { UserService } from '../../shared/services/user.service';
     DashboardComponent,
     SidebarComponent,
     NavbarComponent,
-    BarComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    BaseChartComponent,
+    FaqComponent,
+    HelpComponent,
+    ProfileComponent,
+    TweetListComponent
   ],
   providers: [
-    ApiService, AuthGuard, DashboardService, UserService
+    ApiService, 
+    AuthGuard, 
+    DashboardService, 
+    UserService,
+    EngagementService,
+    TwitterDataService,
+    FollowersService,
+    HashtagService
   ],
   exports: [
     DashboardComponent

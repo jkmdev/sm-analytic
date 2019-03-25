@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from "@angular/router";
-import { ApiService } from '../../../../shared/services/api.service';
+import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
 import { DashboardUser } from '../../../../shared/models/dashboard-user';
 import { DashboardService } from '../../dashboard.service';
@@ -17,11 +17,17 @@ export class SidebarComponent implements OnInit {
 
   dashboardUser: DashboardUser;
 
-  constructor(private router: Router, private apiService: ApiService, private dashboardService: DashboardService) { }
+  constructor(
+    private router: Router, 
+    //private apiService: ApiService, 
+    private dashboardService: DashboardService,
+    private twitterDataService: TwitterDataService
+    ) { }
+
 
   userInfo = {
     userName: "userName",
-    profileImageUrl: ""
+    profileImageUrl: "../../../../assets/img/tmp.jpg"
   };
 
   options : Object[] = [
@@ -42,7 +48,7 @@ export class SidebarComponent implements OnInit {
     var queryParams = window.location.search;
     if (queryParams)
     {
-      this.authorizeUser(queryParams.substr(1));
+      this.twitterDataService.authorizeUser();
     }
 
     this.dashboardService.getAuthDetails()
@@ -51,7 +57,11 @@ export class SidebarComponent implements OnInit {
         this.userInfo.userName = this.dashboardUser.email;
       },
       error => { });
+    }
 
+
+  twitterAuth() {
+    this.twitterDataService.twitterAuth();
   }
 
   /*
@@ -60,49 +70,6 @@ export class SidebarComponent implements OnInit {
    */
   gotoDashboardPage(path) {
     this.router.navigate([path]);
-  }
-
-  /*
-   * Sends request to 'TwitterAuth' endpoint in our API
-   * which returns a url that this function will redirect to
-   * so that the user can authorize our app to use their credentials
-   */
-  twitterAuth() {
-    this.apiService.get('TwitterAuth')
-      .subscribe(
-        val => window.location.href = val,
-        error => console.log(error)
-      );
-  }
-
-  /* 
-   * After the user authorizes our app to use their Twitter account
-   * this function will run and send a new request to our .NET API at
-   * the 'ValidateTwitterAuth' endpoint, and returns the user's Twitter info
-   * if they've successfully been authenticated
-   */
-  authorizeUser(queryParams) {
-
-    var args = queryParams.split("&");
-    var requestBody = {};
-
-    args.forEach((arg) => {
-      var argPair = arg.split("=");
-      requestBody[argPair[0]] = argPair[1];
-    });
-    
-    this.apiService.post('ValidateTwitterAuth', requestBody)
-      .subscribe(
-        val => {
-          console.log(val)
-          this.userInfo.userName = val.name;
-          this.userInfo.profileImageUrl = val.profileImageUrl;
-        },
-        error => {
-          console.log(error)
-        }
-      );
-
   }
 
 }

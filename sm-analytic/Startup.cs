@@ -144,7 +144,7 @@ namespace sm_analytic
                 options.IdleTimeout = TimeSpan.FromMinutes(1);
             });
 
-            
+            services.AddHttpClient();
         }
 
 
@@ -210,11 +210,9 @@ namespace sm_analytic
                 spa.Options.SourcePath     = "ClientApp";
                 spa.Options.StartupTimeout = new TimeSpan(0, 1, 30);
 
-                //spa.UseAngularCliServer(npmScript: "start");
-
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                   spa.UseAngularCliServer(npmScript: "start");
                 }
 
             });

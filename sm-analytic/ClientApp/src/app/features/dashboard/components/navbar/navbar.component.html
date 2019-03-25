@@ -1,8 +1,12 @@
-<div class="nav">
-  <img class="logo" src="../../../../assets/img/tmp.jpg">
+<div class="nav sticky-top shadow-sm">
+  <div class="logo-cont">
+    <img class="logo" src="../../../../assets/img/logo.png">
+  </div>
   <div class="links">
-    <h6>Profile</h6>
-    <h6>FAQ</h6>
-    <h6>Help</h6>
+    <div class="option"
+         (click)="gotoMenuPage(option.path)"
+         *ngFor="let option of options">
+      <h6>{{option.title}}</h6>
+    </div>
   </div>
 </div>

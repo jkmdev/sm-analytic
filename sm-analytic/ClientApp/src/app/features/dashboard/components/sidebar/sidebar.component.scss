@@ -1,14 +1,25 @@
 .side-nav {
+  height: 100%;
+  padding: 30px;
+  background-image: linear-gradient(#43cea2, #185a9d);
+  display: flex;
+  flex-direction: column;
+  color: white;
 
-    height: 100%;
-    padding: 30px;
-    background-image: linear-gradient(#43cea2, #185a9d);
-    display: flex;
-    flex-direction: column;
-    color: white;
+  h6 {
+    padding: 5px;
 
-    h6 {
-        margin-bottom: 20px;
+    &:hover {
+      background: rgba(255,255,255,0.1);
     }
+  }
 
+  .btn-container {
+    display: flex;
+    justify-content: center;
+
+    button {
+      margin-bottom: 450px;
+    }
+  }
 }
