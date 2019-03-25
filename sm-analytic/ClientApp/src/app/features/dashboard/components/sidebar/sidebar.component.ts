@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 
@@ -15,12 +15,10 @@ import { UserService } from '../../../../shared/services/user.service';
 
 export class SidebarComponent implements OnInit {
 
-  dashboardUser: DashboardUser;
+  
 
   constructor(
     private router: Router, 
-    //private apiService: ApiService, 
-    private dashboardService: DashboardService,
     private twitterDataService: TwitterDataService
     ) { }
 
@@ -51,13 +49,7 @@ export class SidebarComponent implements OnInit {
       this.twitterDataService.authorizeUser();
     }
 
-    this.dashboardService.getAuthDetails()
-      .subscribe((dashboardUser: DashboardUser) => {
-        this.dashboardUser = dashboardUser;
-        this.userInfo.userName = this.dashboardUser.email;
-      },
-      error => { });
-    }
+  }
 
 
   twitterAuth() {
