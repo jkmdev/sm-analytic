@@ -6,7 +6,6 @@ import { DashboardUser } from '../../../../shared/models/dashboard-user';
 import { DashboardService } from '../../dashboard.service';
 import { UserInfoComponent } from '../user-info/user-info.component';
 import { UserService } from '../../../../shared/services/user.service';
-import { userInfo } from 'os';
 
 @Component({
   selector: 'app-sidebar',
@@ -49,8 +48,6 @@ export class SidebarComponent implements OnInit {
     this.dashboardService.getAuthDetails()
       .subscribe((dashboardUser: DashboardUser) => {
         this.dashboardUser = dashboardUser;
-        console.log(dashboardUser);
-        console.log(this.dashboardUser.email);
         this.userInfo.userName = this.dashboardUser.email;
       },
       error => { });
