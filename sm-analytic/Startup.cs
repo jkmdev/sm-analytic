@@ -132,10 +132,12 @@ namespace sm_analytic
 
             services.AddCors(o => o.AddPolicy("AllowMyOrigin", i =>
             {
-                      i.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
+                i.AllowAnyOrigin()
+                 .AllowAnyMethod()
+                 .AllowAnyHeader();
             }));
+
+
 
             services.AddSession(options => {
                 options.IdleTimeout = TimeSpan.FromMinutes(1);
@@ -155,8 +157,8 @@ namespace sm_analytic
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                Environment.SetEnvironmentVariable("baseURL", "http://localhost:5000/");
-                Environment.SetEnvironmentVariable("redirectURL", "http://localhost:5000/dashboard");
+                Environment.SetEnvironmentVariable("baseURL", "http://127.0.0.1:5000/");
+                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
             }
             else
             {
@@ -168,7 +170,7 @@ namespace sm_analytic
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             }
 
-            //Adds "Access-Control-Allow-Origin" header to the requester of unknown origin (otherwise, raises annoing CORP exception) 
+            //Adds "Access-Control-Allow-Origin" header to the requester of unknown origin(otherwise, raises annoing CORP exception)
             app.UseExceptionHandler(builder =>
             {
                 builder.Run(async item =>
@@ -181,6 +183,7 @@ namespace sm_analytic
                     {
                         item.Response.Headers.Add("Application-Error", item.Features.Get<IExceptionHandlerFeature>().Error.Message);
                         item.Response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
+                        Console.WriteLine("____!!!  CORS Policy Excepption happened");
                         await item.Response.WriteAsync(item.Features.Get<IExceptionHandlerFeature>().Error.Message).ConfigureAwait(false);
                     }
                 });
@@ -191,6 +194,7 @@ namespace sm_analytic
             app.UseSession();
             app.UseAuthentication();
             app.UseStaticFiles();
+            app.UseCors("AllowMyOrigin");
 
             app.UseMvc(routes =>
             {

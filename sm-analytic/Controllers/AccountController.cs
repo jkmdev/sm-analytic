@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ using sm_analytic.Models;
 namespace sm_analytic.Controllers
 {
     [ApiController]
+    [EnableCors("AllowMyOrigin")]
     public class AccountController : ControllerBase
     {
         private readonly DataDbContext                    _dataDbContext;

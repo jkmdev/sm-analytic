@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ using sm_analytic.Models;
 namespace sm_analytic.Controllers
 {
     [ApiController]
+    [EnableCors("AllowMyOrigin")]
     public class DashboardController : ControllerBase
     {
         private readonly DataDbContext _dataDbContext;
