@@ -155,8 +155,8 @@ namespace sm_analytic
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                Environment.SetEnvironmentVariable("baseURL", "http://127.0.0.1:5000/");
-                Environment.SetEnvironmentVariable("redirectURL", "http://127.0.0.1:5000/dashboard");
+                Environment.SetEnvironmentVariable("baseURL", "http://localhost:5000/");
+                Environment.SetEnvironmentVariable("redirectURL", "http://localhost:5000/dashboard");
             }
             else
             {
