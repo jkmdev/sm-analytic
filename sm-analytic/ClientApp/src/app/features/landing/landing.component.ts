@@ -9,7 +9,9 @@ import { Router } from "@angular/router";
 })
 export class LandingComponent implements OnInit {
 
-  constructor() {}
+  constructor() {
+    // console.log(json);
+  }
 
   ngOnInit() {
   }

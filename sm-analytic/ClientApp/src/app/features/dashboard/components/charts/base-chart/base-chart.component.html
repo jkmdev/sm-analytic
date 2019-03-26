@@ -1,0 +1,19 @@
+<div class="chart card shadow-sm border-0" style="min-height:250px;">
+  <div>
+    <div class="card-header bg-transparent text-center">
+      <h5 class="card-title">{{title}}</h5>
+      <small class="card-subtitle text-muted">{{subTitle}}</small>
+    </div>
+    <div class="card-body" *ngIf="hasData">
+      <canvas baseChart aspectRatio=4
+              [datasets]="chartData"
+              [labels]="chartLabels"
+              [options]="chartOptions"
+              [legend]="chartLegend"
+              [chartType]="chartType"></canvas>
+    </div>
+  </div>
+  <div class="error-message" *ngIf="!hasData">
+    <h6>No data available</h6>
+  </div>
+</div>
