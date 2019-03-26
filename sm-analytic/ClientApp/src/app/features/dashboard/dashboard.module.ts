@@ -18,25 +18,31 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { HashtagService } from 'app/shared/services/hashtag.service';
 import { HelpComponent } from './pages/help/help.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { TweetListComponent } from './components/tweet-list/tweet-list.component';
 
 import { EngagementService } from 'app/shared/services/engagement.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { ApiService } from '../../shared/services/api.service';
-import { TweetListComponent } from './components/tweet-list/tweet-list.component';
+
+import { AuthGuard } from '../auth/auth.guard';
+import { FormsModule } from '@angular/forms';
+import { DashboardService } from './dashboard.service';
+import { UserService } from '../../shared/services/user.service';
 
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ],
   declarations: [
-    FollowerComponent,
-    TrendComponent,
-    SentimentComponent,
-    OverviewComponent,
+    FollowerComponent, 
+    TrendComponent, 
+    SentimentComponent, 
+    OverviewComponent, 
     DashboardComponent,
     SidebarComponent,
     NavbarComponent,
@@ -48,7 +54,10 @@ import { TweetListComponent } from './components/tweet-list/tweet-list.component
     TweetListComponent
   ],
   providers: [
-    ApiService,
+    ApiService, 
+    AuthGuard, 
+    DashboardService, 
+    UserService,
     EngagementService,
     TwitterDataService,
     FollowersService,
