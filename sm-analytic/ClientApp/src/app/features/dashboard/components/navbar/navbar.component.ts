@@ -1,10 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { DashboardUser } from '../../../../shared/models/dashboard-user';
-import { DashboardService } from '../../dashboard.service';
-import { UserInfoComponent } from '../user-info/user-info.component';
-import { UserService } from '../../../../shared/services/user.service';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-navbar',
@@ -13,34 +8,11 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class NavbarComponent implements OnInit {
 
+  constructor(private router: Router) { }
+
   appTitle: string = "Social Media Analytics";
-  dashboardUser: DashboardUser;
-  dashboardUserFN: string = "";
-  dashboardUserLN: string = "";
 
-  private dashboardUserSubscr: Subscription = null;
-  
-  constructor(private router: Router,
-    private dashboardService: DashboardService
-  ) { }
-
-  ngOnInit()
-  {
-    this.dashboardUserSubscr = this.dashboardService.getAuthDetails().subscribe((dashboardUser: DashboardUser) =>
-    {
-      this.dashboardUser   = dashboardUser;
-      this.dashboardUserFN = dashboardUser.firstName;
-      this.dashboardUserLN = dashboardUser.lastName;
-
-    },
-        error => { });
-
-
-  }
-
-  ngOnDestroy()
-  {
-    this.dashboardUserSubscr.unsubscribe();
+  ngOnInit() {
   }
 
   faq() {

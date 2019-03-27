@@ -9,12 +9,10 @@ import { FaqComponent } from './pages/faq/faq.component';
 import { HelpComponent } from './pages/help/help.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
-import { AuthGuard } from '../auth/auth.guard';
-
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent, canActivate: [AuthGuard],
+    component: DashboardComponent,
     children: [
       {
         path: '',

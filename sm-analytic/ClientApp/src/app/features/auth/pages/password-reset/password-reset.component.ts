@@ -13,9 +13,7 @@ export class PasswordResetComponent implements OnInit {
   ngOnInit() {
   }
 
-  resetRequest() {
-
-
+  redirectToLogin() {
     this.router.navigate(['auth']);
   }
 
