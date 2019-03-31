@@ -18,7 +18,7 @@ namespace sm_analytic.Models
         public int Id { get; set; }
 
         public string IdentityCustomModelId { get; set; } //FK in the DB (should be used by Entity Framework)
-        
+
         public IdentityCustomModel IdentityCustomModel { get; set; } //Nav property
 
         //Request Tracking part of the acc
@@ -37,3 +37,4 @@ namespace sm_analytic.Models
         public DateTime LastRequest { get; set; }
 
     }
+}
