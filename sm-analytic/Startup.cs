@@ -36,11 +36,11 @@ namespace sm_analytic
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer()
-
             //Dependency Injection to 
             services.AddDbContext<DataDbContext>(options => options.UseSqlServer(
-                                                            Configuration.GetConnectionString("DefaultConnection")/*, i => i.MigrationsAssembly("initialDB")*/));
+                                                            Configuration.GetConnectionString("AzureConnection"/*"DefaultConnection"*/)));
+            services.BuildServiceProvider().GetService<DataDbContext>().Database.Migrate();
+            
 
             services.AddSingleton<IJwtManager, JwtManager>();
             services.AddHttpContextAccessor();

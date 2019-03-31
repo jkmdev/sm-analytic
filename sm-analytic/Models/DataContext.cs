@@ -6,19 +6,11 @@ namespace sm_analytic.Models
 {
     public partial class DataDbContext : IdentityDbContext<IdentityCustomModel>
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public DataDbContext(DbContextOptions<DataDbContext> dbContextOptions, IHttpContextAccessor httpContextAccessor) 
+        public DataDbContext(DbContextOptions<DataDbContext> dbContextOptions) 
             : base(dbContextOptions)
         {
-            _httpContextAccessor = httpContextAccessor;
+            
         }
-        public string GetUser()
-        {
-            return _httpContextAccessor.HttpContext.User.Identity.Name;
-        }
-
-        //public virtual DbSet<RequestTracker> RequestTrackers { get; set; }
 
         public virtual DbSet<Account> Accounts { get; set; }
 
