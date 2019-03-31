@@ -215,10 +215,7 @@ namespace sm_analytic
                 {
                    spa.UseAngularCliServer(npmScript: "start");
                 }
-
             });
-
-            
         }
     }
 }

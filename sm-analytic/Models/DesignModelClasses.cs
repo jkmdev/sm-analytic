@@ -1,4 +1,4 @@
-﻿using sm_analytic.Models;
+using sm_analytic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -36,27 +36,4 @@ namespace sm_analytic.Models
 
         public DateTime LastRequest { get; set; }
 
-        //public virtual RequestTracker RequestTracker { get; set; }
-
     }
-
-    //[Table("RequestTracker")]
-
-    //public partial class RequestTracker
-    //{
-    //    public RequestTracker()
-    //    {
-    //        LastRequest = DateTime.Now;
-    //        //Account = new Account();
-    //    }
-
-    //    //PK and FK
-    //    [Key]
-    //    public int AccountId { get; set; }
-
-
-
-    //    public virtual Account Account { get; set; }
-    //}
-
-}
