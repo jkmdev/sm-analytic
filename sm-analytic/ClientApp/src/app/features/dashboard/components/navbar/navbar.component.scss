@@ -2,22 +2,30 @@
   background-color: white;
   display: flex;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+  .logo-cont {
+    flex: 1;
+    background-color: #E8E8E8;
+    min-width: 212px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  .logo {
-    padding-left: 50px;
-    padding-top: 5px;
-    width: 190px;
-    height: 33px;
+    .logo {
+      margin: 10px 0px 10px 0px;
+      width: 160px;
+      height: 30px;
+    }
   }
 
   .links {
     flex: 4;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 
     h6 {
-      margin: 15px 15px 10px 10px;
-
+      margin-bottom: 0px;
+      margin-right: 20px;
       &:hover {
         color: grey;
       }

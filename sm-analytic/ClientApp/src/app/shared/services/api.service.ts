@@ -3,7 +3,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { _throw as throwError } from 'rxjs/observable/throw';
-import { environment } from '../../../environments/environment';
+import { environment } from 'environments/environment';
 
 /*
  * Service for interacting for out out .NET Core API
