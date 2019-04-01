@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FluentEmail.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -64,6 +65,25 @@ namespace sm_analytic.Controllers
 
             return new OkObjectResult(toReturn);
 
+        }
+
+        /// <summary>
+        /// Sends email to SMAnalytic's email box
+        /// </summary>
+        /// <param name="message">Email body message</param>
+        /// <returns>Success message if sent</returns>
+        public async Task<IActionResult> SendEmail([FromBody]string message, [FromServices]IFluentEmail email)
+        {
+            var result = await email
+                               .To("smanalyticjmv@gmail.com")
+                               .Subject("HELP ME")
+                               .Body(message, false)
+                               .SendAsync();
+
+            if (result.Successful)
+                return new OkObjectResult("The email has been sent");
+            else
+                return new BadRequestObjectResult("Couldn't sent the email");
         }
     }
 }

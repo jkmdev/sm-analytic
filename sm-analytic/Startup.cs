@@ -41,10 +41,10 @@ namespace sm_analytic
                                                             Configuration.GetConnectionString("AzureConnection"/*"DefaultConnection"*/)));
             services.BuildServiceProvider().GetService<DataDbContext>().Database.Migrate();
             
-
             services.AddSingleton<IJwtManager, JwtManager>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddFluentEmail("smanalyticjmv@gmail.com").AddSmtpSender("localhost", 25);
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));
@@ -55,10 +55,8 @@ namespace sm_analytic
                 props.Issuer             = jwtAppSettingProps[nameof(JwtIssuerProps.Issuer)];
                 props.Audience           = Environment.GetEnvironmentVariable("baseURL");
                 props.SigningCredentials = new SigningCredentials(_signKey, SecurityAlgorithms.HmacSha256);
-                
             });
 
-            
             var tokenValidationParams = new TokenValidationParameters
             {
                 ValidateIssuer           = true,
@@ -188,13 +186,11 @@ namespace sm_analytic
                     }
                 });
             });
-
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            
             app.UseSession();
             app.UseAuthentication();
-            app.UseStaticFiles();
             app.UseCors("AllowMyOrigin");
+            app.UseReferrerPolicy(opts => opts.UnsafeUrl()); // Must be regestered before static files to always set header
 
             app.UseMvc(routes =>
             {
@@ -216,6 +212,9 @@ namespace sm_analytic
                    spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
         }
     }
 }
