@@ -88,15 +88,13 @@ namespace sm_analytic.Controllers
                 ObjectResult followers = new ObjectResult(user.GetFollowers());
                 ObjectResult hashtagCount = new ObjectResult(allHashtagsUsed);
                 ObjectResult searchedHashtags = new ObjectResult(publicPostsWithHashtags);
-                ObjectResult mentions = new ObjectResult(user.GetMentionsTimeline());
 
                 IEnumerable<ObjectResult> results = new List<ObjectResult>() {
                     userInfo,
                     tweetTimeline,
                     followers,
                     hashtagCount,
-                    searchedHashtags,
-                    mentions
+                    searchedHashtags
                 };
 
                 return Ok(results);

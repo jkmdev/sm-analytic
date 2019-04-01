@@ -65,42 +65,6 @@ export class EngagementService {
 
   }
 
-  topTweets(tweets) {
-
-    var simplerTweets = [];
-
-    if (tweets) {
-
-      tweets.sort((a, b) => { //sort descending by favourites
-        return b.favoriteCount - a.favoriteCount;
-      });
-
-      if (tweets.length > 3) tweets = tweets.slice(0, 3);
-
-      tweets.forEach((tweet, index) => {
-
-        const monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        const date = new Date(tweet.createdAt);
-        const day = date.getDate();
-        const month = monthList[date.getMonth()];
-        const year = date.getFullYear();
-
-        simplerTweets.push({
-          text: tweet.fullText,
-          score: tweet.favoriteCount,
-          user: tweet.createdBy.name,
-          handle: tweet.createdBy.screenName,
-          link: tweet.url,
-          date: `${month} ${day}, ${year}`
-        });
-      });
-
-    }
-
-    return simplerTweets;
- 
-  }
-
   calcEngagementByHour(tweets) {
     var daysInWeek = 24;
     return this.calcEngagement(tweets, daysInWeek, this.getHour);
@@ -186,5 +150,3 @@ export class EngagementService {
   }
 
 }
-
-

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FollowersService } from 'app/shared/services/followers.service';
 import { TwitterDataService } from 'app/shared/services/twitter-data.service';
 import { Subscription } from 'rxjs/Subscription';
-import { EngagementService } from 'app/shared/services/engagement.service';
 
 @Component({
   selector: 'app-overview',
@@ -12,14 +11,11 @@ import { EngagementService } from 'app/shared/services/engagement.service';
 export class OverviewComponent implements OnInit {
 
   followerJoinedAt: any;
-  topUserTweets: any;
-  topMentions: any;
   twitterDataUpdateRef: Subscription = null;
 
   constructor(
     private twitterDataService: TwitterDataService,
-    private followersService: FollowersService,
-    private engagementService: EngagementService
+    private followersService: FollowersService
   ) {
 
     var chartObject = {
@@ -31,7 +27,6 @@ export class OverviewComponent implements OnInit {
     };
 
     this.followerJoinedAt = Object.create(chartObject);
-    this.topUserTweets = Object.create(chartObject);
 
     this.drawCharts();
 
@@ -41,6 +36,7 @@ export class OverviewComponent implements OnInit {
   
     this.twitterDataUpdateRef = this.twitterDataService.updated.subscribe(() => {
       this.drawCharts();
+
     });
 
   }
@@ -48,11 +44,7 @@ export class OverviewComponent implements OnInit {
   drawCharts() {
 
     const followers = this.twitterDataService.followers;
-    const tweets = this.twitterDataService.tweets;
-    const mentions = this.twitterDataService.mentions;
     this.followerJoinedAt = this.followersService.followerJoinedAtData(followers);
-    this.topUserTweets = this.engagementService.topTweets(tweets);
-    this.topMentions = this.engagementService.topTweets(mentions);
 
   }
 
