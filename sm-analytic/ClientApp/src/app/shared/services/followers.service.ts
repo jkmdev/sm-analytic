@@ -35,8 +35,6 @@ export class FollowersService {
    **/
   joinedAt(followers) {
 
-    console.log(followers);
-
     if (!followers) return [];
 
     var data = [];
