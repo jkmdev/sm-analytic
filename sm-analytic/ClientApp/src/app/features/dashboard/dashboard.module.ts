@@ -29,6 +29,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { FormsModule } from '@angular/forms';
 import { DashboardService } from './dashboard.service';
 import { UserService } from '../../shared/services/user.service';
+import { AuthModalComponent } from './components/auth-modal/auth-modal.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { UserService } from '../../shared/services/user.service';
     FaqComponent,
     HelpComponent,
     ProfileComponent,
-    TweetListComponent
+    TweetListComponent,
+    AuthModalComponent
   ],
   providers: [
     ApiService, 
@@ -65,6 +67,9 @@ import { UserService } from '../../shared/services/user.service';
   ],
   exports: [
     DashboardComponent
+  ],
+  entryComponents: [
+    AuthModalComponent
   ]
 })
 export class DashboardModule { }

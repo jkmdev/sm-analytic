@@ -72,6 +72,9 @@ namespace sm_analytic.Controllers
         /// </summary>
         /// <param name="message">Email body message</param>
         /// <returns>Success message if sent</returns>
+        [Route("~/api/Dashboard/SendEmail")]
+        [Authorize(Policy = "SMAnalytic")]
+        [HttpPost]
         public async Task<IActionResult> SendEmail([FromBody]string message, [FromServices]IFluentEmail email)
         {
             var result = await email

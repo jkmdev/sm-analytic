@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy
         .subscribe(
         result =>
         {
+          console.log("result of the log in = " + result);
           if (result)
           {
               this.router.navigate(['dashboard']);

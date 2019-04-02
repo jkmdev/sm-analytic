@@ -20,6 +20,13 @@ namespace sm_analytic.Controllers
         ClaimsIdentity GenerateClaimsIdentity(string userName, string id);
     }
 
+    public class Jwt
+    {
+        public string id;
+        public string auth_token;
+        public int    expires_in;
+    }
+
     /// <summary>
     /// Manages tokens distribution
     /// </summary>

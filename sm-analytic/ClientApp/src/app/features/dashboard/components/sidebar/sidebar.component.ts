@@ -13,7 +13,7 @@ import { UserService } from '../../../../shared/services/user.service';
   styleUrls: ['./sidebar.component.scss']
 })
 
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   
 
@@ -34,27 +34,6 @@ export class SidebarComponent implements OnInit {
     { 'title':'Trends', 'path':'dashboard/trend' },
     { 'title':'Followers', 'path':'dashboard/follower' },
   ];
-
-  /*
-   * This function checks if there are Twitter auth parameters in the url
-   * If so, it attempt to authorize a user with said credentials
-   */
-  ngOnInit()
-  {
-    
-    
-    var queryParams = window.location.search;
-    if (queryParams)
-    {
-      this.twitterDataService.authorizeUser();
-    }
-
-  }
-
-
-  twitterAuth() {
-    this.twitterDataService.twitterAuth();
-  }
 
   /*
    * This component controls the routing to the various dashboard pages

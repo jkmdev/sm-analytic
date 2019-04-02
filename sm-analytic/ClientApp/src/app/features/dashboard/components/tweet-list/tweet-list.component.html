@@ -1,29 +1,38 @@
-<div class="tweet-list card shadow-sm">
+<div class="tweet-list ">
 
-  <div class="card-header bg-transparent text-center">
-    <h5 class="card-title">{{title}}</h5>
-    <small class="card-subtitle text-muted">{{subTitle}}</small>
+  <div class="title card text-center shadow-sm">
+    <div class="card-body">
+      <h5 class="">{{title}}</h5>
+      <small class="card-subtitle text-muted">{{subTitle}}</small>
+    </div>
   </div>
 
-  <blockquote class="twitter-tweet" data-lang="en">
-    <div class="card-body">
-      <p lang="en" dir="ltr">just setting up my twttr</p>
-      <a href="https://twitter.com/jack/status/20">March 21, 2006</a>
+  <div class="card shadow-sm">
+    <div class="card-header bg-transparent header">
+      <div class="text">
+        {{header.text}}
+      </div>
+      <div class="score">
+        {{header.score}}
+      </div>
     </div>
-  </blockquote>
-
-  <blockquote class="twitter-tweet" data-lang="en">
-    <div class="card-body">
-      <p lang="en" dir="ltr">just setting up my twttr</p>
-      <a href="https://twitter.com/jack/status/20">March 21, 2006</a>
+    <div class="twitter-tweet" *ngFor="let tweet of tweets">
+      <div class="text card-body">
+        <h6>
+          {{tweet.text}}
+        </h6>
+        <small class="text-muted">
+          - {{tweet.user}} (@{{tweet.handle}}) <a href="{{tweet.link}}">{{tweet.date}}</a>
+        </small>
+      </div>
+      <div class="score">
+        <h4 class="number ">{{tweet.score}}</h4>
+      </div>
+      <hr />
     </div>
-  </blockquote>
-
-  <blockquote class="twitter-tweet" data-lang="en">
-    <div class="card-body">
-      <p lang="en" dir="ltr">just setting up my twttr</p>
-      <a href="https://twitter.com/jack/status/20">March 21, 2006</a>
+    <div class="twitter-tweet" *ngIf="!tweets || tweets.length == 0">
+      No data available
     </div>
-  </blockquote>
+  </div>
 
 </div>

@@ -191,6 +191,8 @@ namespace sm_analytic
             app.UseAuthentication();
             app.UseCors("AllowMyOrigin");
             app.UseReferrerPolicy(opts => opts.UnsafeUrl()); // Must be regestered before static files to always set header
+            //app.UseReferrerPolicy(opts => opts.Origin());
+            //app.UseReferrerPolicy(opts => opts.OriginWhenCrossOrigin());
 
             app.UseMvc(routes =>
             {

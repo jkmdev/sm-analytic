@@ -96,9 +96,11 @@ namespace sm_analytic.Controllers
             }
 
             var jwt = await Manager.TokenGenerator.GenerateJwt(identity, _jwtManager, account.Email, _jwtProps);
+            var toReturn1 = JsonConvert.SerializeObject(jwt);
+            var toReturn2 = JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.Indented });
+            var toReturn3 = JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.None });
 
-            return new OkObjectResult(jwt);
-
+            return new OkObjectResult(toReturn1);
         }
 
         private async Task<ClaimsIdentity> GetClaimsIdentity(string email /*aka userName*/, string password)

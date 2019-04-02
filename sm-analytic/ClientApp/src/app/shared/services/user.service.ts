@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, enableProdMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 import { RegisterCredentials } from '../models/register-credentials';
 import { ConfigService } from '../services/utils/config.service';
 import { environment } from '../../../environments/environment';
+import { Jwt } from '../models/jwt'
 
 import { BaseService } from "./base.service";
 
@@ -37,6 +38,7 @@ export class UserService extends BaseService {
       this.loggedIn = !!localStorage.getItem('auth_token');
       this._authNavStatusSource.next(this.loggedIn);
       this.baseUrl = configService.getApiURI();
+      console.log("Environment URL = " + this.baseUrl);//////
   }
 
   register(FirstName: string, LastName: string, Email: string, DOB: Date, Password: string, PasswordConfirm: string)
@@ -51,23 +53,26 @@ export class UserService extends BaseService {
           .catch(this.handleError); 
   }  
 
-   login(Email, Password) {
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+  login(Email, Password){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('Accept', 'text/plain');
+    //let options = new RequestOptions({ headers: headers });
 
-    return this.http.post(
-        this.baseUrl + 'account/login',
-        JSON.stringify({ Email, Password }),{ headers }
-        )
-        .map(res => res.json())
-        .map(res =>
-        {
-          localStorage.setItem('auth_token', res.auth_token);
-          this.loggedIn = true;
-          this._authNavStatusSource.next(true);
-          return true;
-        })
-        .catch(this.handleError);
+     return this.http.post(
+       this.baseUrl + 'account/login',
+       JSON.stringify({ Email, Password }),
+       { headers }
+     )
+       .do(res => console.log(res))
+       .map(res => res.json())
+       .map(res => {
+         console.log(res);
+         localStorage.setItem('auth_token', res.auth_token);
+         this.loggedIn = true;
+         this._authNavStatusSource.next(true);
+         return true;
+       })
+       .catch(this.handleError);
   }
 
   logout() {

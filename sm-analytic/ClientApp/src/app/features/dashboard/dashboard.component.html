@@ -1,10 +1,14 @@
-<app-navbar></app-navbar>
+<div [ngStyle]="{'filter': getFilter()}">
 
-<div class='dashboard'>
+  <app-navbar></app-navbar>
+
+  <div class='dashboard'>
     <div class="sidebar">
-        <app-sidebar></app-sidebar>
+      <app-sidebar></app-sidebar>
     </div>
     <div class='content'>
       <router-outlet></router-outlet>
     </div>
+  </div>
+
 </div>

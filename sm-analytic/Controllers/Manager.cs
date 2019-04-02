@@ -187,16 +187,16 @@ namespace sm_analytic.Models
         /// </summary>
         public static class TokenGenerator
         {
-            public static async Task<string> GenerateJwt(ClaimsIdentity identity, IJwtManager jwtManager, string email /*aka userName in IdentityCustomModel*/, JwtIssuerProps jwtProps)
+            public static async Task<Jwt> GenerateJwt(ClaimsIdentity identity, IJwtManager jwtManager, string email /*aka userName in IdentityCustomModel*/, JwtIssuerProps jwtProps)
             {
-                var jwt = new
+                var jwt = new Jwt
                 {
                     id         = identity.Claims.Single(i => i.Type == JwtClaimHelper.ClaimIdentifierId).Value,
                     auth_token = await jwtManager.GenerateEncodedToken(email, identity),
                     expires_in = (int)jwtProps.ValidFor.TotalSeconds
                 };
 
-                return JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.Indented});
+                return jwt;
                 
             }
         }
