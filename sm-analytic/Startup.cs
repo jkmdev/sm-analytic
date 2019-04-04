@@ -187,12 +187,15 @@ namespace sm_analytic
                 });
             });
             
+
             app.UseSession();
             app.UseAuthentication();
             app.UseCors("AllowMyOrigin");
             //app.UseReferrerPolicy(opts => opts.UnsafeUrl()); // Must be regestered before static files to always set header
             //app.UseReferrerPolicy(opts => opts.Origin());
             //app.UseReferrerPolicy(opts => opts.OriginWhenCrossOrigin());
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.UseMvc(routes =>
             {
@@ -214,9 +217,6 @@ namespace sm_analytic
                    spa.UseAngularCliServer(npmScript: "start");
                 }
             });
-
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
         }
     }
 }
