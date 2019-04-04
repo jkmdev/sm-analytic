@@ -44,7 +44,7 @@ namespace sm_analytic
             services.AddSingleton<IJwtManager, JwtManager>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddFluentEmail("smanalyticjmv@gmail.com").AddSmtpSender("localhost", 25);
+            //services.AddFluentEmail("smanalyticjmv@gmail.com").AddSmtpSender("localhost", 25);
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));
@@ -190,7 +190,7 @@ namespace sm_analytic
             app.UseSession();
             app.UseAuthentication();
             app.UseCors("AllowMyOrigin");
-            app.UseReferrerPolicy(opts => opts.UnsafeUrl()); // Must be regestered before static files to always set header
+            //app.UseReferrerPolicy(opts => opts.UnsafeUrl()); // Must be regestered before static files to always set header
             //app.UseReferrerPolicy(opts => opts.Origin());
             //app.UseReferrerPolicy(opts => opts.OriginWhenCrossOrigin());
 

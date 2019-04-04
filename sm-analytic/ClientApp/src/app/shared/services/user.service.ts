@@ -55,7 +55,7 @@ export class UserService extends BaseService {
 
   login(Email, Password){
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    headers.append('Accept', 'text/plain');
+    //headers.append('Accept', 'text/plain');
     //let options = new RequestOptions({ headers: headers });
 
      return this.http.post(
