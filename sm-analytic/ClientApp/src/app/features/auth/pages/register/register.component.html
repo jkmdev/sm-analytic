@@ -2,7 +2,6 @@
   <h1>Social Media Analytics</h1>
     <h5>Please complete the form below to create your account.</h5>
 
-
     <form #f="ngForm" novalidate (ngSubmit)="f.form.valid && register(f)">
 
       <div class="row">
@@ -71,9 +70,9 @@
         </div>
       </div>
 
-
-
-      <button class="btn btn-primary" type="submit" [disabled]="isBusy">Register</button>
-      <button class="btn btn-primary" (click)="login()" title="Already have an account? Click here to login.">Login</button>
+      <div class="inline">
+        <button class="btn btn-primary " type="submit" [disabled]="isBusy">Register</button>
+        <button class="btn btn-primary" (click)="login()" title="Already have an account? Click here to login.">Login</button>
+      </div>
     </form>    
 </div>
