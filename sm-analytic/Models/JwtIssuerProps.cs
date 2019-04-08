@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Threading.Tasks;
 
@@ -57,3 +57,4 @@ namespace sm_analytic.Models
         public SigningCredentials SigningCredentials { get; set; }
     }
 }
+

@@ -3,7 +3,7 @@
 
     <div class="row">
       <div class="col-md">
-        <h2>Help</h2>
+        <h2>Send a Help Email to Our Team</h2>
         <hr>
       </div>
     </div>
@@ -14,13 +14,16 @@
           <div class="card-header bg-transparent text-center">
             <h5>Ask a Question</h5>
           </div>
-          <div class="card-body form">
+          <form #f="ngForm" novalidate (ngSubmit)="sendHelpEmail(f)">
             Leave your message here and our help desk will contact you as soon as possible!
-            <div class="input-group">
-              <textarea class="form-control" aria-label="With textarea"></textarea>
+            <div class="form-group">
+              <input type="text" name="Message" aria-label="With textarea" class="form-control" required tmFocus ngModel #Message="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Message.invalid }">
+              <div *ngIf="f.submitted && Message.invalid" class="invalid-feedback">
+                <div *ngIf="Message.errors.required">Message is required to be submitted with the request</div>
+              </div>
             </div>
-            <button type="button" class="btn btn-primary" (click)="sendHelpEmail()">SUBMIT</button>
-          </div>
+            <button type="submit" class="btn btn-primary" [disabled]="isBusy">Submit</button>
+          </form>
         </div>
       </div>
     </div>

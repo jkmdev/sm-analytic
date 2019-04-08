@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,12 +6,10 @@ namespace sm_analytic.Models
 {
     public partial class DataDbContext : IdentityDbContext<IdentityCustomModel>
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public DataDbContext(DbContextOptions<DataDbContext> dbContextOptions, IHttpContextAccessor httpContextAccessor) 
+        public DataDbContext(DbContextOptions<DataDbContext> dbContextOptions) 
             : base(dbContextOptions)
         {
-            _httpContextAccessor = httpContextAccessor;
+            
         }
 
         public virtual DbSet<Account> Accounts { get; set; }

@@ -1,4 +1,4 @@
-﻿using sm_analytic.Models;
+using sm_analytic.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +18,7 @@ namespace sm_analytic.Models
         public int Id { get; set; }
 
         public string IdentityCustomModelId { get; set; } //FK in the DB (should be used by Entity Framework)
-        
+
         public IdentityCustomModel IdentityCustomModel { get; set; } //Nav property
 
         //Request Tracking part of the acc
@@ -36,27 +36,12 @@ namespace sm_analytic.Models
 
         public DateTime LastRequest { get; set; }
 
-        //public virtual RequestTracker RequestTracker { get; set; }
-
     }
 
-    //[Table("RequestTracker")]
+    public class EmailMessage
+    {
+        public string Destination { get; set; }
 
-    //public partial class RequestTracker
-    //{
-    //    public RequestTracker()
-    //    {
-    //        LastRequest = DateTime.Now;
-    //        //Account = new Account();
-    //    }
-
-    //    //PK and FK
-    //    [Key]
-    //    public int AccountId { get; set; }
-
-
-
-    //    public virtual Account Account { get; set; }
-    //}
-
+        public string Message { get; set; }
+    }
 }
