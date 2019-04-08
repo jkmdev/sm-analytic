@@ -75,12 +75,12 @@ namespace sm_analytic.Controllers
         [Route("~/api/Dashboard/SendEmail")]
         [Authorize(Policy = "SMAnalytic")]
         [HttpPost]
-        public async Task<IActionResult> SendEmail([FromBody]string message, [FromServices]IFluentEmail email)
+        public async Task<IActionResult> SendEmail([FromServices]IFluentEmail email, [FromBody]EmailMessage emailMessage)
         {
             var result = await email
-                               .To("smanalyticjmv@gmail.com")
+                               .To(emailMessage.Destination)
                                .Subject("HELP ME")
-                               .Body(message, false)
+                               .Body(emailMessage.Message, false)
                                .SendAsync();
 
             if (result.Successful)

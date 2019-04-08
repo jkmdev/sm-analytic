@@ -1,68 +1,79 @@
-<div class="register">
+<div class="register container">
   <h1>Social Media Analytics</h1>
     <h5>Please complete the form below to create your account.</h5>
 
+
     <form #f="ngForm" novalidate (ngSubmit)="f.form.valid && register(f)">
-      <div class="input">
-        <div class="form-group">
-          <h6>First Name:</h6>
-          <input type="text" class="form-control" id="first-name" name="FirstName" required tmFocus ngModel #FirstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && FirstName.invalid }">
-          <div *ngIf="f.submitted && FirstName.invalid" class="invalid-feedback">
-            <div *ngIf="FirstName.errors.required">First Name is required</div>
+
+      <div class="row">
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>First Name:</h6>
+            <input type="text" class="form-control" id="first-name" name="FirstName" required tmFocus ngModel #FirstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && FirstName.invalid }">
+            <div *ngIf="f.submitted && FirstName.invalid" class="invalid-feedback">
+              <div *ngIf="FirstName.errors.required">First Name is required</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="input">
-        <div class="form-group">
-          <h6>Last Name:</h6>
-          <input type="text" class="form-control" id="last-name" name="LastName" required ngModel #LastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && LastName.invalid }">
-          <div *ngIf="f.submitted && LastName.invalid" class="invalid-feedback">
-            <div *ngIf="LastName.errors.required">Last Name is required</div>
-          </div>
-        </div>
-      </div>
-      <div class="input">
-        <div class="form-group">
-          <h6>Date of Birth:</h6>
-          <input type="date" class="form-control" id="dob" name="DOB" max="{{dobMax | date:'yyyy-MM-dd'}}" min="{{dobMin | date:'yyyy-MM-dd'}}" [ngModel]="dobMax | date:'yyyy-MM-dd'" required ngModel #DOB="ngModel" [ngClass]="{ 'is-invalid': f.submitted && DOB.invalid }">
-          <div *ngIf="f.submitted && DOB.invalid" class="invalid-feedback">
-            <div>You are allowed to use the application only if you are 18+ years old</div>
-          </div>
-        </div>
-      </div>
-      <div class="input">
-        <div class="form-group">
-          <h6>Email:</h6>
-          <input type="text" class="form-control" id="email" name="Email" validateEmail required #Email="ngModel" ngModel [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }">
-          <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
-            <div *ngIf="Email.errors.required">Email is required</div>
-            <div *ngIf="Email.errors.email">Email must be a valid email address</div>
-          </div>
-        </div> 
-      </div>
-      <div class="input">
-        <div class="form-group">
-          <h6>Password:</h6>
-          <input type="password" class="form-control" id="password" name="Password" minlength="6" required ngModel #Password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Password.invalid }" title="Password must contain upper- and lower-case letters, and at least one digit. It cannot be shorter than 6 characters">
-          <div *ngIf="f.submitted && Password.invalid" class="invalid-feedback">
-            <div *ngIf="Password.errors.required">Password is required</div>
-            <div *ngIf="Password.errors.minlength">Password must be at least 6 characters long</div>
-          </div>
-        </div>
-      </div>
-      <div class="input">
-        <div class="form-group">
-          <h6>Confirm Password:</h6>
-          <input type="password" class="form-control" id="confirm-password" name="PasswordConfirm" required ngModel #PasswordConfirm="ngModel" [ngClass]="{ 'is-invalid': f.submitted && PasswordConfirm.invalid }" pattern="{{Password.value}}">
-          <div *ngIf="f.submitted && PasswordConfirm.invalid" class="invalid-feedback">
-            <div *ngIf="PasswordConfirm.errors.required">Password confirmation is required</div>
-            <div *ngIf="PasswordConfirm.errors.pattern">Passwords must match</div>
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>Last Name:</h6>
+            <input type="text" class="form-control" id="last-name" name="LastName" required ngModel #LastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && LastName.invalid }">
+            <div *ngIf="f.submitted && LastName.invalid" class="invalid-feedback">
+              <div *ngIf="LastName.errors.required">Last Name is required</div>
+            </div>
           </div>
         </div>
       </div>
 
+      <div class="row">
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>Date of Birth:</h6>
+            <input type="date" class="form-control" id="dob" name="DOB" max="{{dobMax | date:'yyyy-MM-dd'}}" min="{{dobMin | date:'yyyy-MM-dd'}}" [ngModel]="dobMax | date:'yyyy-MM-dd'" required ngModel #DOB="ngModel" [ngClass]="{ 'is-invalid': f.submitted && DOB.invalid }" title="You must be 18+ years old in order to use the application">
+            <div *ngIf="f.submitted && DOB.invalid" class="invalid-feedback">
+              <div>You are allowed to use the application only if you are 18+ years old</div>
+            </div>
+          </div>
+        </div>
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>Email:</h6>
+            <input type="text" class="form-control" id="email" name="Email" validateEmail required #Email="ngModel" ngModel [ngClass]="{ 'is-invalid': f.submitted && Email.invalid }">
+            <div *ngIf="f.submitted && Email.invalid" class="invalid-feedback">
+              <div *ngIf="Email.errors.required">Email is required</div>
+              <div *ngIf="Email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>Password:</h6>
+            <input type="password" class="form-control" id="password" name="Password" minlength="6" required ngModel #Password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Password.invalid }" title="Password must contain upper- and lower-case letters, and at least one digit. It cannot be shorter than 6 characters">
+            <div *ngIf="f.submitted && Password.invalid" class="invalid-feedback">
+              <div *ngIf="Password.errors.required">Password is required</div>
+              <div *ngIf="Password.errors.minlength">Password must be at least 6 characters long</div>
+            </div>
+          </div>
+        </div>
+        <div class="input col-6">
+          <div class="form-group">
+            <h6>Confirm Password:</h6>
+            <input type="password" class="form-control" id="confirm-password" name="PasswordConfirm" required ngModel #PasswordConfirm="ngModel" [ngClass]="{ 'is-invalid': f.submitted && PasswordConfirm.invalid }" pattern="{{Password.value}}">
+            <div *ngIf="f.submitted && PasswordConfirm.invalid" class="invalid-feedback">
+              <div *ngIf="PasswordConfirm.errors.required">Password confirmation is required</div>
+              <div *ngIf="PasswordConfirm.errors.pattern">Passwords must match</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
       <button class="btn btn-primary" type="submit" [disabled]="isBusy">Register</button>
-      <button class="btn btn-primary" (click)="login()" (mouseover)="hover=true" (mouseout)="hover=false">Login</button>
-      <div *ngIf="hover" class="forgot-password-link">Already have an account? Click here to login.</div>
-</form>    
+      <button class="btn btn-primary" (click)="login()" title="Already have an account? Click here to login.">Login</button>
+    </form>    
 </div>

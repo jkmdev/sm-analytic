@@ -37,4 +37,11 @@ namespace sm_analytic.Models
         public DateTime LastRequest { get; set; }
 
     }
+
+    public class EmailMessage
+    {
+        public string Destination { get; set; }
+
+        public string Message { get; set; }
+    }
 }

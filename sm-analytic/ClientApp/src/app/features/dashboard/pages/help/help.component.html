@@ -14,12 +14,15 @@
           <div class="card-header bg-transparent text-center">
             <h5>Ask a Question</h5>
           </div>
-          <form #f="ngForm" novalidate (ngSubmit)="sendHelpEmail()">
+          <form #f="ngForm" novalidate (ngSubmit)="sendHelpEmail(f)">
             Leave your message here and our help desk will contact you as soon as possible!
-            <div class="input-group">
-              <input type="text" aria-label="With textarea">
+            <div class="form-group">
+              <input type="text" name="Message" aria-label="With textarea" class="form-control" required tmFocus ngModel #Message="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Message.invalid }">
+              <div *ngIf="f.submitted && Message.invalid" class="invalid-feedback">
+                <div *ngIf="Message.errors.required">Message is required to be submitted with the request</div>
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary">SUBMIT</button>
+            <button type="submit" class="btn btn-primary" [disabled]="isBusy">Submit</button>
           </form>
         </div>
       </div>

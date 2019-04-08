@@ -63,7 +63,6 @@ export class UserService extends BaseService {
      )
        .map(res => res.json())
        .map(res => {
-         console.log(res);
          localStorage.setItem('auth_token', res.auth_token);
          this.loggedIn = true;
          this._authNavStatusSource.next(true);
@@ -80,5 +79,17 @@ export class UserService extends BaseService {
 
   isLoggedIn() {
     return this.loggedIn;
+  }
+
+  sendEmail(Destination: string, Message: string) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+
+    return this.http.post(
+      this.baseUrl + 'dashboard/sendemail',
+      JSON.stringify({ Destination, Message }),
+      { headers }
+    )
+      .map(res => true)
+      .catch(this.handleError);
   }
 }
