@@ -38,7 +38,7 @@ export class UserService extends BaseService {
       this.loggedIn = !!localStorage.getItem('auth_token');
       this._authNavStatusSource.next(this.loggedIn);
       this.baseUrl = configService.getApiURI();
-      console.log("Environment URL = " + this.baseUrl);//////
+      console.log("Environment URL = " + this.baseUrl);
   }
 
   register(FirstName: string, LastName: string, Email: string, DOB: Date, Password: string, PasswordConfirm: string)
@@ -55,15 +55,12 @@ export class UserService extends BaseService {
 
   login(Email, Password){
     let headers = new Headers({ 'Content-Type': 'application/json' });
-    //headers.append('Accept', 'text/plain');
-    //let options = new RequestOptions({ headers: headers });
 
      return this.http.post(
        this.baseUrl + 'account/login',
        JSON.stringify({ Email, Password }),
        { headers }
      )
-       .do(res => console.log(res))
        .map(res => res.json())
        .map(res => {
          console.log(res);
