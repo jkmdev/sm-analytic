@@ -84,12 +84,14 @@ export class UserService extends BaseService {
   sendEmail(Destination: string, Message: string) {
     let headers = new Headers({ 'Content-Type': 'application/json' });
 
+    console.log("Object to be sent: " + JSON.stringify({ Destination, Message }));
     return this.http.post(
       this.baseUrl + 'dashboard/sendemail',
       JSON.stringify({ Destination, Message }),
       { headers }
     )
-      .map(res => true)
+      .map(res => res.json())
+      .map(res => { console.log(".NET returned: " + res); })
       .catch(this.handleError);
   }
 }

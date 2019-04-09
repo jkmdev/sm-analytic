@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from 'app/shared/services/api.service';
 import { Subject } from 'rxjs/Subject';
-import { request } from 'http';
 
 @Injectable()
 export class TwitterDataService {

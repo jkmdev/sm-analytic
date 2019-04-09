@@ -44,7 +44,7 @@ namespace sm_analytic
             services.AddSingleton<IJwtManager, JwtManager>();
             services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddFluentEmail("helpme@smanalytic.ca").AddSmtpSender("localhost", 25);
+            services.AddFluentEmail("vladimir.rozin.1618@gmail.com").AddSmtpSender("localhost", 25);
 
             //Getting config data from appsettings.json
             var jwtAppSettingProps = Configuration.GetSection(nameof(JwtIssuerProps));

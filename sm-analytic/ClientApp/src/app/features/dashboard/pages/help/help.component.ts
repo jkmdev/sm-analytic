@@ -25,9 +25,10 @@ export class HelpComponent implements OnInit {
     this.errors = '';
     this.isBusy = true;
     this.messageBack = false;
-
+    console.log("IN sendHelpEmail()");
+    console.log("EmailMessage: " + value.Message);
     if (valid) {
-      this.userService.sendEmail("vladimir.rozin.1618@gmail.com", value.Message)
+      this.userService.sendEmail('vladimir.rozin.1618@gmail.com', value.Message)
         .finally(() => this.isBusy = false)
         .subscribe(result => {
           if (result) {
