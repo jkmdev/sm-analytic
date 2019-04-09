@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
 import { UserService } from '../../../../shared/services/user.service';
+import { EmailMessage } from 'app/shared/models/email-message';
+
 
 @Component({
   selector: 'app-help',
@@ -9,24 +10,36 @@ import { UserService } from '../../../../shared/services/user.service';
 })
 export class HelpComponent implements OnInit {
 
-  errors: string;
+  errors: string = '';
   submitted: boolean = false;
-  isBusy: boolean;
+  isBusy: boolean = false;
+  messageBack: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {}
 
   // SHOULD ACCEPT USER'S REGISTERED EMAIL
-  //sendHelpEmail({ value, valid }: { value: EmailMessage, valid: boolean }) {
-  //  this.submitted = true;
-  //  this.errors = '';
-  //  this.isBusy = true;
+  sendHelpEmail({ value, valid }: { value: EmailMessage, valid: boolean }) {
+    this.submitted = true;
+    this.errors = '';
+    this.isBusy = true;
+    this.messageBack = false;
 
-  //  if (valid) {
-  //    this.userService.sendEmail("vladimir.rozin.1618@hmail.com", Message)
-  //      .finally()
-  //  }
-  //}
+    if (valid) {
+      this.userService.sendEmail("vladimir.rozin.1618@gmail.com", value.Message)
+        .finally(() => this.isBusy = false)
+        .subscribe(result => {
+          if (result) {
+            this.messageBack = true;
+          }
+
+        },
+        error => console.log(error));
+
+    }
+
+
+  }
 
 }
