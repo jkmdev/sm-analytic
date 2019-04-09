@@ -1,6 +1,5 @@
 .landing {
   //max-width: 100%;
-
   .content {
 
     .image {
@@ -10,25 +9,34 @@
     }
 
     .description {
-      padding: 50px;
-      //height: 1050px;
-      max-width: 100%;
+      padding: 50px 175px 0px 175px;
 
       .info {
-        margin: 1px;
-        //height: 200px;
-        //padding-bottom: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 50px;
       }
 
       .card-img {
-        width: 240px;
-        padding-left: 50px;
+        width: 150px;
         object-fit: cover;
         padding-bottom: 50px;
-        padding-top: 20px;
-        //margin: 0 auto;
-        //text-align: center;
-        //display: inline-block;
+        padding-top: 30px;
+      }
+    }
+
+    .faq {
+      background-color: #FEB22B;
+      padding: 50px 200px 100px 200px;
+
+      .faq-header {
+        margin-bottom: 40px;
+      }
+
+      .faq-item {
+        opacity: 0.8;
+        margin-bottom: 10px;
       }
     }
   }
