@@ -6,7 +6,9 @@ import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-import { UserInfoComponent } from '../dashboard/components/user-info/user-info.component';
+import { FaqComponent } from './pages/faq/faq.component';
+
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { UserService } from '../../shared/services/user.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +28,9 @@ import { EmailValidator } from '../../shared/services/utils/email-validation.dir
   declarations: [
     AuthComponent, 
     RegisterComponent, 
-    LoginComponent, 
+    LoginComponent,
+    FaqComponent,
+    NavbarComponent,
     PasswordResetComponent,
     EmailValidator
   ],
@@ -34,7 +38,8 @@ import { EmailValidator } from '../../shared/services/utils/email-validation.dir
     UserService
   ],
   exports: [
-    AuthComponent
+    AuthComponent,
+    NavbarComponent
   ]
 })
 export class AuthModule { }
