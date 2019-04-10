@@ -17,6 +17,7 @@ export class BaseChartComponent implements OnChanges, OnInit {
   @Input() chartLegend: boolean = true;
   @Input() chartType: string = '';
   @Input() chartOptions: Object = {};
+  @Input() errorMessage: string = 'No data available';
   private twitterDataUpdateRef: Subscription = null;
 
   hasData: boolean = false;
