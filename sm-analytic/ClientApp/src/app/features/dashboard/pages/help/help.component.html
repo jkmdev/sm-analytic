@@ -15,17 +15,26 @@
             <h5>Ask a Question</h5>
           </div>
           <form #f="ngForm" novalidate (ngSubmit)="sendHelpEmail(f)">
-            Leave your message here and our help desk will contact you as soon as possible!
+            <div class="card-header bg-transparent text-center">
+              Leave your message here and our help desk will contact you as soon as possible!
+            </div>
             <div class="form-group">
               <input type="text" name="Message" aria-label="With textarea" class="form-control" required tmFocus ngModel #Message="ngModel" [ngClass]="{ 'is-invalid': f.submitted && Message.invalid }">
               <div *ngIf="f.submitted && Message.invalid" class="invalid-feedback">
                 <div *ngIf="Message.errors.required">Message is required to be submitted with the request</div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="isBusy">Submit</button>
+            <div class="inline">
+              <button type="submit" class="btn btn-primary" [disabled]="isBusy">Submit</button>
+            </div>
           </form>
         </div>
       </div>
+
+      <div *ngIf="messageBack" class="alert alert-success" role="alert">
+        <strong>The email has been sent! Our team will contact you as soon as possible!</strong>
+      </div>
+
     </div>
 
   </div>

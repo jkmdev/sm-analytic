@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using FluentEmail.Core;
@@ -46,15 +47,6 @@ namespace sm_analytic.Controllers
 
             var user = await _dataDbContext.Accounts.Include(i => i.IdentityCustomModel).SingleAsync(i => i.IdentityCustomModelId == userId);
 
-            // Structure as in "dashboard.service.ts"
-            //var toReturn = new OkObjectResult(new
-            //{
-            //    user.IdentityCustomModel.FirstName,
-            //    user.IdentityCustomModel.LastName,
-            //    user.IdentityCustomModel.Email
-            //    //user.IdentityCustomModel.DOB
-            //});
-
             var toReturn = new AccountBaseInfo
             {
                 FirstName = user.IdentityCustomModel.FirstName,
@@ -70,23 +62,30 @@ namespace sm_analytic.Controllers
         /// <summary>
         /// Sends email to SMAnalytic's email box
         /// </summary>
-        /// <param name="message">Email body message</param>
+        /// <param name="EmailMessage">Email body message and its destination</param>
         /// <returns>Success message if sent</returns>
         [Route("~/api/Dashboard/SendEmail")]
-        [Authorize(Policy = "SMAnalytic")]
+        //[Authorize(Policy = "SMAnalytic")]
         [HttpPost]
         public async Task<IActionResult> SendEmail([FromServices]IFluentEmail email, [FromBody]EmailMessage emailMessage)
         {
             var result = await email
                                .To(emailMessage.Destination)
                                .Subject("HELP ME")
-                               .Body(emailMessage.Message, false)
+                               .Body(emailMessage.Message)
                                .SendAsync();
 
+            //SmtpClient myclient = new SmtpClient
+            //{
+            //    UseDefaultCredentials = true,
+            //    Credentials = new System.Net.NetworkCredential("username", "user password"),
+            //    DeliveryMethod = SmtpDeliveryMethod.Network
+            //};
+
             if (result.Successful)
-                return new OkObjectResult("The email has been sent");
+                return new OkObjectResult(new {result = "The email has been sent"});
             else
-                return new BadRequestObjectResult("Couldn't sent the email");
+                return new BadRequestObjectResult(new { result = "Couldn't sent the email" });
         }
     }
 }

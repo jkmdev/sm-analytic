@@ -37,18 +37,29 @@ export class TwitterDataService {
    * if they've successfully been authenticated
    */
   authorizeUser() {
+    var requestBody = {};
+    if (localStorage.getItem("authorization_id") == null) {
+      var queryParams = window.location.search;
 
-    var queryParams = window.location.search;
+      if (queryParams) {
 
-    if (queryParams) {
+        var args = queryParams.split("&");
 
-      var args = queryParams.split("&");
-      var requestBody = {};
+        args.forEach((arg) => {
+          var argPair = arg.split("=");
+          requestBody[argPair[0]] = argPair[1];
 
-      args.forEach((arg) => {
-        var argPair = arg.split("=");
-        requestBody[argPair[0]] = argPair[1];
-      });
+          localStorage.setItem(argPair[0].replace('?', ''), argPair[1]);
+        });
+      }
+    }
+    else {
+      requestBody = {
+        "authorization_id": localStorage.getItem("authorization_id"),
+        "oauth_token": localStorage.getItem("oauth_token"),
+        "oauth_verifier": localStorage.getItem("oauth_verifier")
+      };
+    }
 
       this.apiService.post('ValidateTwitterAuth', requestBody)
         .subscribe(
@@ -68,8 +79,6 @@ export class TwitterDataService {
             console.log(error)
           }
         );
-
-    }
 
   }
 

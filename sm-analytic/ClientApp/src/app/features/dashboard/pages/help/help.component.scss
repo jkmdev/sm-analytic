@@ -1,6 +1,8 @@
 .page {
   height: 100%;
   padding: 25px 50px 20px 50px;
+  justify-content: center;
+  align-items: center;
 
   hr {
     border-top: 2px solid rgba(0, 0, 0, 0.1);
@@ -9,6 +11,7 @@
   .text {
     height: 500px;
     margin: 20px 0px 20px 0px;
+    justify-content: center;
   }
 
   .form {
@@ -18,8 +21,13 @@
     align-items: center;
   }
 
-  button {
-    width: 150px;
-  }
+  .inline {
+    display: flex;
+    justify-content: center;
 
+    .btn {
+      width: 150px;
+      margin: 10px 0px 20px 0px;
+    }
+  }
 }

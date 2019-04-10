@@ -22,7 +22,6 @@ export class AuthModalComponent {
     if (queryParams) {
       this.authorized = true;
     }
-
   }
 
   twitterAuth() {

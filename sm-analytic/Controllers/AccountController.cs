@@ -85,7 +85,7 @@ namespace sm_analytic.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new BadRequestObjectResult(ModelState);
+                return new BadRequestObjectResult(ModelState); 
             }
 
             var identity = await GetClaimsIdentity(account.Email, account.Password);
@@ -96,11 +96,9 @@ namespace sm_analytic.Controllers
             }
 
             var jwt = await Manager.TokenGenerator.GenerateJwt(identity, _jwtManager, account.Email, _jwtProps);
-            var toReturn1 = JsonConvert.SerializeObject(jwt);
-            var toReturn2 = JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.Indented });
-            var toReturn3 = JsonConvert.SerializeObject(jwt, new JsonSerializerSettings { Formatting = Formatting.None });
+            var toReturn = JsonConvert.SerializeObject(jwt);
 
-            return new OkObjectResult(toReturn1);
+            return new OkObjectResult(toReturn);
         }
 
         private async Task<ClaimsIdentity> GetClaimsIdentity(string email /*aka userName*/, string password)

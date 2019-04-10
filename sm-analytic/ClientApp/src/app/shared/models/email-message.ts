@@ -1,4 +1,3 @@
 export interface EmailMessage {
-  destination: string;
-  message: string;
+  Message: string;
 }
