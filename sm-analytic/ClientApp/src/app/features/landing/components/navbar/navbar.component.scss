@@ -1,15 +1,47 @@
 .nav {
+  background-color: white;
+  display: flex;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 
-    height: 60px;
-    padding: 10px;
+  .logo-cont {
+    flex: 1;
     display: flex;
-    justify-content: flex-end;
+    padding-left: 20px;
+
 
     .logo {
-      padding-left: 40px;
+      margin: 10px 0px 10px 0px;
+      width: 160px;
+      height: 30px;
+    }
+  }
+
+  .links {
+    flex: 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;
+
+    h6 {
+      margin-bottom: 0px;
+      margin-right: 20px;
+
+      &:hover {
+        color: grey;
+      }
     }
 
     .btn {
-        margin-left: 10px;
+      margin-left: 20px;
+      width: 100px;
     }
+
+  }
+
+  .greeting {
+    align-items: center;
+    display: flex;
+    margin-left: 10px;
+  }
 }
